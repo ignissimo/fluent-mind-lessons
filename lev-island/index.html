@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lev's Island Adventure</title>
+<style>
+:root{--ink:#173c49;--blue:#176c80;--paper:#fffaf0;--gold:#f8cd72}
+*{box-sizing:border-box}body{margin:0;background:#dff1f1;color:var(--ink);font:18px system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer;border:2px solid #bdd6d8;border-radius:14px;background:white;color:var(--ink);padding:12px 18px}button:hover{border-color:var(--blue);background:#eefafa}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible{outline:3px solid #eaaa32;outline-offset:3px}.primary{background:var(--blue);color:white;border-color:var(--blue)}.primary:hover{background:#125568;color:white}
+header{padding:18px 24px;background:var(--ink);color:white;display:flex;justify-content:space-between;align-items:center;gap:12px}header strong{font-size:22px}header button{padding:6px 12px}nav{display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:16px auto;padding:0 16px}nav button{padding:8px 12px;font-size:14px}nav .active{background:var(--gold);border-color:#c7983c}main{max-width:1100px;margin:auto;padding:0 16px 30px}.panel{background:var(--paper);border-radius:24px;padding:24px;box-shadow:0 8px 28px #20434c12}h1{margin:0 0 12px;font-size:clamp(27px,4vw,38px)}h2{font-size:24px;margin:0 0 12px}p{line-height:1.55}.sub{color:#507079}.layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:20px 12px;text-align:center}.icon{font-size:50px;display:block;margin-bottom:10px}.selected{border-color:var(--blue);background:#d5eee9}.message{background:#e7f2ef;border-radius:15px;padding:18px;font-size:24px;line-height:1.5}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0}.feedback{min-height:40px;font-weight:650;line-height:1.5;color:#176655}.talk{margin-top:18px;padding:14px 18px;border-left:5px solid #d5a342;background:#fff0c9;border-radius:8px;line-height:1.5}.map{position:relative;aspect-ratio:1.2;background:#bde5ee;border-radius:20px;overflow:hidden;border:3px solid #9bcfdc}.island{position:absolute;inset:8% 12%;background:#f7e6ad;border:12px solid #a0cf8b;border-radius:46% 40% 43% 38%;transform:rotate(-5deg)}.grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr)}.cell{padding:0;background:transparent;border:1px solid #ffffff30;border-radius:0;font-size:30px;position:relative}.cell:hover{background:#ffffff45}.cell small{position:absolute;top:3px;left:5px;font-size:11px;color:#386779}.cell .label{display:block;font-size:10px;background:#ffffffe0;width:max-content;max-width:100%;margin:auto;border-radius:3px}.choices{display:grid;gap:10px;margin:18px 0}.choices button{text-align:left}.counter{font-size:14px;letter-spacing:1px;color:#56797f;margin-bottom:12px}.word{font-size:38px;letter-spacing:3px;background:white;padding:18px;text-align:center;border-radius:16px;min-height:85px}.big{font-size:70px;text-align:center;margin:20px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tools button{padding:8px 10px}.tools .selected{background:#cdebe5}canvas{width:100%;height:auto;background:#bde5ee;touch-action:none;border-radius:16px;border:2px solid #95c6d2;display:block}input{border:2px solid #b4cfd1;padding:10px;border-radius:12px;width:100%;background:white;color:var(--ink)}footer{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px}.hint{font-size:14px;color:#547377}.badge{display:inline-block;background:#f6df99;border-radius:20px;padding:6px 12px;margin:4px;font-size:16px}details{font-size:15px;margin-top:14px}summary{cursor:pointer}.progress{height:6px;background:#bdd7d7}.progress div{height:100%;background:#f3c66c;transition:width .2s}@media(max-width:740px){.layout{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.panel{padding:18px}header{padding:14px;font-size:14px}.cell{font-size:26px}nav button{font-size:12px}.message{font-size:21px}}
+</style>
+</head>
+<body>
+<header><strong>🧭 Island Adventure</strong><div id="islandName">Your island is waiting</div><button id="sound">🔊 Sound: ON</button></header>
+<div class="progress"><div id="bar"></div></div>
+<nav id="nav" aria-label="Chapters"></nav>
+<main><section id="app" class="panel"></section><footer><button id="back">← Back</button><span id="chapter" class="hint"></span><button id="next" class="primary">Next chapter →</button></footer></main>
+<script>
+const $=id=>document.getElementById(id);
+const titles=['Choose','Build a map','Fix mistakes','Pack','Word machine','Explorer break','Treasure','Draw'];
+const S={stage:0,island:'',sound:true,build:0,placed:{},fix:0,fixed:false,pack:[],word:0,parts:[],move:0,clue:0,treasure:0,found:false,reward:'',tool:'pen',color:'#173c49',art:null,name:''};
+const build=[
+ {text:'There is a mountain in the middle.',icon:'⛰️',label:'mountain',at:12,hint:'Find C3: the middle of the map.'},
+ {text:'There is a forest to the left of the mountain.',icon:'🌲',label:'forest',at:11,hint:'Find B3: left of the mountain.'},
+ {text:'There is a cave to the right of the mountain.',icon:'🕳️',label:'cave',at:13,hint:'Find D3: right of the mountain.'},
+ {text:'There is a river below the mountain.',icon:'💧',label:'river',at:17,hint:'Find C4: below the mountain.'},
+ {text:'There is a bridge over the river.',icon:'🌉',label:'bridge',at:17,hint:'Put it in C4, on the river.'},
+ {text:'There is a town to the left of the river.',icon:'🏘️',label:'town',at:16,hint:'Find B4: left of the river.'},
+ {text:'There is a beach below the river.',icon:'🏖️',label:'beach',at:22,hint:'Find C5: below the river.'},
+ {text:'There is a boat in the sea, in the top-left corner.',icon:'⛵',label:'boat',at:0,hint:'Find A1: the top-left corner.'}
+];
+const fixes=[
+ {text:'The boat is on the mountain.',choices:['The boat is in the sea.','The boat is in the cave.','The boat is in the forest.'],a:0},
+ {text:'The forest is to the right of the mountain.',choices:['The forest is above the boat.','The forest is to the left of the mountain.','The forest is below the beach.'],a:1},
+ {text:'The town is to the right of the river.',choices:['The town is on the bridge.','The town is in the sea.','The town is to the left of the river.'],a:2},
+ {text:'The cave is to the left of the mountain.',choices:['The cave is to the right of the mountain.','The cave is below the beach.','The cave is in the town.'],a:0},
+ {text:'The beach is above the river.',choices:['The beach is in the cave.','The beach is below the river.','The beach is on the boat.'],a:1},
+ {text:'The bridge is under the river.',choices:['The bridge is behind the boat.','The bridge is over the river.','The bridge is in the forest.'],a:1}
+];
+const items=[['🪢','rope'],['🔦','torch'],['💧','water'],['🥾','boots'],['🗺️','map'],['☂️','umbrella'],['🧸','teddy bear'],['🥄','spoon']];
+const words=[
+ ['mountain',['moun','tain'],'⛰️'],['river',['riv','er'],'💧'],['forest',['for','est'],'🌲'],['island',['is','land'],'🏝️'],['bridge',['bri','dge'],'🌉'],['treasure',['trea','sure'],'💎'],['explorer',['ex','plor','er'],'🧭'],['backpack',['back','pack'],'🎒']
+];
+const moves=[['Step over the river.','🚶'],['Duck under a branch.','🌿'],['Row your boat.','🚣'],['Climb the mountain.','🧗'],['Freeze! A dragon is here!','🐉']];
+const treasures=[
+ {clues:['It is not in the town.','It is below the river.','You can hear the sea.'],at:22,name:'beach'},
+ {clues:['It is not near the beach.','It is to the right of the mountain.','It is dark inside.'],at:13,name:'cave'},
+ {clues:['It is not in the cave.','It is to the left of the mountain.','There are trees all around you.'],at:11,name:'forest'}
+];
+function esc(t){return String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function speak(t){if(!S.sound)return;if(!('speechSynthesis'in window)){feedback('Read this together with your teacher.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.82;speechSynthesis.speak(u);}
+function feedback(t){const e=$('feedback');if(e)e.textContent=t;}
+function listen(t){return `<button id="listen">🔊 Listen</button>`;}
+function mapHTML(){let cells='';for(let i=0;i<25;i++){const p=S.placed[i]||[];cells+=`<button class="cell" data-cell="${i}" aria-label="${String.fromCharCode(65+i%5)}${Math.floor(i/5)+1}${p.length?', '+p.map(x=>x.label).join(', '):''}"><small>${String.fromCharCode(65+i%5)}${Math.floor(i/5)+1}</small>${p.map(x=>`<span>${x.icon}</span><span class="label">${x.label}</span>`).join('')}</button>`}return `<div class="map"><div class="island"></div><div class="grid">${cells}</div></div>`;}
+function bindMap(fn){document.querySelectorAll('[data-cell]').forEach(b=>b.onclick=()=>fn(+b.dataset.cell));}
+function bindListen(t){if($('listen'))$('listen').onclick=()=>speak(t);}
+function talk(t){return `<div class="talk">💬 ${t}</div>`;}
+function go(i){if(S.stage===7)saveArt();if('speechSynthesis'in window)speechSynthesis.cancel();S.stage=Math.max(0,Math.min(7,i));render();}
+$('sound').onclick=()=>{S.sound=!S.sound;$('sound').textContent='🔊 Sound: '+(S.sound?'ON':'OFF');if(!S.sound&&'speechSynthesis'in window)speechSynthesis.cancel();};
+$('back').onclick=()=>go(S.stage-1);$('next').onclick=()=>go(S.stage+1);
+function render(){
+ $('nav').innerHTML=titles.map((t,i)=>`<button data-stage="${i}" class="${i===S.stage?'active':''}">${i+1}. ${t}</button>`).join('');
+ document.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>go(+b.dataset.stage));
+ $('bar').style.width=((S.stage+1)/8*100)+'%';$('chapter').textContent=`Chapter ${S.stage+1} of 8`;
+ $('back').disabled=S.stage===0;$('next').disabled=S.stage===7||!S.island;$('next').textContent=S.stage===7?'Adventure complete':'Next chapter →';
+ $('islandName').textContent=S.name||S.island||'Your island is waiting';
+ const a=$('app');
+ if(S.stage===0){
+ a.innerHTML=`<h1>An island is missing from the map!</h1><p>You are the explorer. Choose your island, build its map and find three hidden treasures.</p><div class="cards">${[['🐉','Dragon Island'],['🙃','Upside-Down Island'],['🍦','Ice-Cream Island']].map(([e,n])=>`<button class="card ${S.island===n?'selected':''}" data-island="${n}"><span class="icon">${e}</span><strong>${n}</strong></button>`).join('')}</div><div class="feedback" id="feedback">${S.island?'Ready to explore '+S.island+'!':''}</div>${talk('Who lives on your island? What might you find there?')}<details><summary>Для учителя</summary><p>Примерно 45 минут: выбор 4, карта 7, ошибки 6, рюкзак 4, слова 5, пауза 2, сокровища 5, рисунок 12. Переходы свободные: задерживайтесь на интересных заданиях. Читайте вместе, просите объяснить выбор. Таймера и штрафов нет. Озвучивание зависит от браузера. На общей демонстрации экрана нажимает учитель; при отдельном открытии — ученик.</p></details>`;
+ document.querySelectorAll('[data-island]').forEach(b=>b.onclick=()=>{S.island=b.dataset.island;render();});
+ }else if(S.stage===1){
+ const q=build[S.build];
+ a.innerHTML=`<h1>Build the explorer’s map</h1><div class="layout"><div>${q?`<div class="counter">MESSAGE ${S.build+1} / ${build.length}</div><div class="message">${q.text}</div><div class="row">${listen(q.text)}<button id="hint">Show a hint</button></div><p>Place the ${q.label}: click a square.</p>`:`<div class="message">Your map is ready! 🗺️</div><p>Describe three places on your island.</p>`}<div id="feedback" class="feedback"></div>${talk('What else should live here? Tell your teacher one new idea.')}</div>${mapHTML()}</div>`;
+ if(q){bindListen(q.text);$('hint').onclick=()=>feedback(q.hint);bindMap(i=>{if(i!==q.at){feedback('Try another square. You can ask for a hint.');return}(S.placed[i]??=[]).push({icon:q.icon,label:q.label});S.build++;render();feedback('Added to your map!');});}
+ }else if(S.stage===2){
+ const q=fixes[S.fix];
+ a.innerHTML=`<h1>The mapmaker got it wrong!</h1><div class="layout"><div>${q?`<div class="counter">MISTAKE ${S.fix+1} / ${fixes.length}</div><div class="message">${q.text}</div><div class="row">${listen(q.text)}</div><p>Choose the correct message.</p><div class="choices">${q.choices.map((x,i)=>`<button data-answer="${i}" ${S.fixed?'disabled':''}>${x}</button>`).join('')}</div><button id="another" class="primary" ${S.fixed?'':'disabled'}>Next mistake →</button>`:`<div class="message">You rescued the map! 🎉</div>`}<div id="feedback" class="feedback"></div>${talk('Your turn: say something wrong about the map. Can your teacher fix it?')}</div>${mapHTML()}</div>`;
+ if(q){bindListen(q.text);document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{if(+b.dataset.answer===q.a){S.fixed=true;render();feedback('Exactly! Read your new message aloud.');}else feedback('Look at the map and try again.');});$('another').onclick=()=>{S.fix++;S.fixed=false;render();};}
+ }else if(S.stage===3){
+ a.innerHTML=`<h1>Pack your expedition bag</h1><p>Choose exactly four things. You decide what is useful!</p><div class="cards">${items.map(([e,n])=>`<button class="card ${S.pack.includes(n)?'selected':''}" data-item="${n}"><span class="icon">${e}</span>${n}</button>`).join('')}</div><div class="row"><strong>🎒 ${S.pack.length} / 4</strong>${S.pack.map(x=>`<span class="badge">${x}</span>`).join('')}</div><div id="feedback" class="feedback"></div>${talk('I need a … because …<br>What can you do with a spoon? Would a dragon need an umbrella?')}<button id="baglisten">🔊 Read my bag</button>`;
+ document.querySelectorAll('[data-item]').forEach(b=>b.onclick=()=>{let n=b.dataset.item;if(S.pack.includes(n))S.pack=S.pack.filter(x=>x!==n);else if(S.pack.length<4)S.pack.push(n);else{feedback('Your bag is full. Remove one thing to swap it.');return}render();if(S.pack.length===4)feedback('Your bag is ready. Explain your four choices!');});
+ $('baglisten').onclick=()=>speak('In my bag I have '+(S.pack.join(', ')||'nothing yet'));
+ }else if(S.stage===4){
+ const q=words[S.word],finished=S.parts.length===q[1].length;
+ const order=q[1].map((t,i)=>({t,i})).reverse();
+ a.innerHTML=`<h1>The secret word machine</h1><div class="counter">WORD ${S.word+1} / ${words.length}</div><div class="big">${q[2]}</div><div class="word">${S.parts.map(i=>q[1][i]).join('')||'…'}</div><p>Click the pieces in order. These are word pieces, not syllables.</p><div class="row">${order.map(({t,i})=>`<button data-part="${i}" ${S.parts.includes(i)?'disabled':''}>${t}</button>`).join('')}<button id="undo">↶ Undo</button></div><div class="row"><button id="wordlisten">🔊 Hear the word</button><button id="wordnext" class="primary" ${finished?'':'disabled'}>${S.word===words.length-1?'Play again':'Next word →'}</button></div><div id="feedback" class="feedback">${finished?'Word unlocked! Read it and use it in a sentence.':''}</div>${talk('There is a … on my island.<br>For “explorer”: I am an explorer. For “backpack”: In my backpack, I have …')}`;
+ document.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>{let i=+b.dataset.part;if(i!==S.parts.length){feedback('Try a different beginning. Listen to the word if you need help.');return}S.parts.push(i);render();});
+ $('undo').onclick=()=>{S.parts.pop();render();};$('wordlisten').onclick=()=>speak(q[0]);$('wordnext').onclick=()=>{S.word=(S.word+1)%words.length;S.parts=[];render();};
+ }else if(S.stage===5){
+ const q=moves[S.move];
+ a.innerHTML=`<h1>Explorer break</h1><p>You can stay in your chair. Use your hands and imagination!</p><div class="big">${q[1]}</div><div class="message">${q[0]}</div><div class="row">${listen(q[0])}<button id="movenext" class="primary">Next move →</button></div>${talk('Now you are the leader. Give your teacher three explorer commands.')}`;
+ bindListen(q[0]);$('movenext').onclick=()=>{S.move=(S.move+1)%moves.length;render();};
+ }else if(S.stage===6){
+ const q=treasures[S.treasure];
+ a.innerHTML=`<h1>Find the hidden treasure</h1><div class="layout"><div><div class="counter">TREASURE ${S.treasure+1} / 3</div><div class="message">${q.clues.slice(0,S.clue+1).map(x=>`<div>${x}</div>`).join('')}</div><div class="row">${listen(q.clues.slice(0,S.clue+1).join(' '))}<button id="clue" ${S.clue===2||S.found?'disabled':''}>Another clue</button></div><p>Click a place on the map.</p><div id="feedback" class="feedback">${S.found?'Found at the '+q.name+'! Choose what is inside.':''}</div>${S.found?`<div class="choices">${['🗝️ A golden key','🥚 A dragon egg','🛸 A tiny spaceship'].map(x=>`<button data-reward="${x}" class="${S.reward===x?'selected':''}">${x}</button>`).join('')}</div><button id="treasurenext" class="primary">${S.treasure===2?'Explore again':'Next treasure →'}</button>`:''}${talk('What can your treasure do? Then hide something in your mind. Let your teacher ask yes/no questions.')}</div>${mapHTML()}</div>`;
+ bindListen(q.clues.slice(0,S.clue+1).join(' '));$('clue').onclick=()=>{S.clue++;render();};bindMap(i=>{if(S.found)return;if(i===q.at){S.found=true;render();}else feedback('Not here. Read the clues and try another place.');});
+ if(S.found){document.querySelectorAll('[data-reward]').forEach(b=>b.onclick=()=>{S.reward=b.dataset.reward;render();});$('treasurenext').onclick=()=>{S.treasure=(S.treasure+1)%3;S.clue=0;S.found=false;S.reward='';render();};}
+ }else{
+ a.innerHTML=`<h1>Draw your own secret island</h1><p>Draw with the pen or choose a stamp and click the canvas. Give your island one impossible place!</p><div class="tools">${[['pen','✏️ Pen'],['eraser','🧽 Eraser'],['⛰️','Mountain'],['🌲','Forest'],['💧','River'],['🏘️','Town'],['🌉','Bridge'],['🏖️','Beach'],['🕳️','Cave'],['🐉','Dragon'],['🍕','Pizza'],['⭐','Star']].map(([v,t])=>`<button data-tool="${v}" class="${S.tool===v?'selected':''}">${t}</button>`).join('')}</div><div class="row"><label>Colour <input id="colour" type="color" value="${S.color}" style="width:65px;padding:3px;vertical-align:middle"></label><button id="artundo">↶ Undo</button><button id="clear">Clear drawing</button><button id="download">Save picture ↓</button></div><canvas id="canvas" width="1000" height="650" aria-label="Draw your island" tabindex="0"></canvas><div class="row"><label style="flex:1">Island name<input id="name" placeholder="My Secret Island" value="${esc(S.name)}"></label><button id="finish" class="primary">Open my exhibition ✨</button></div><div id="feedback" class="feedback"></div>${talk('Welcome to …<br>There is a … next to …<br>You can … but you mustn’t …')}<div id="exhibit"></div>`;
+ initCanvas();
+ }
+}
+let ctx,canvas,down=false,history=[];
+function saveArt(){if(canvas&&S.stage===7)S.art=canvas.toDataURL();}
+function initCanvas(){
+ canvas=$('canvas');ctx=canvas.getContext('2d');history=[];down=false;
+ function base(){ctx.fillStyle='#bde5ee';ctx.fillRect(0,0,1000,650);ctx.beginPath();ctx.ellipse(500,325,370,240,-.1,0,Math.PI*2);ctx.fillStyle='#eee0a8';ctx.fill();ctx.strokeStyle='#9bc980';ctx.lineWidth=18;ctx.stroke();}
+ base();if(S.art){let img=new Image();img.onload=()=>ctx.drawImage(img,0,0);img.src=S.art;}
+ const point=e=>{const r=canvas.getBoundingClientRect();return[(e.clientX-r.left)*1000/r.width,(e.clientY-r.top)*650/r.height];};
+ canvas.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();history.push(ctx.getImageData(0,0,1000,650));if(history.length>30)history.shift();const[x,y]=point(e);canvas.setPointerCapture(e.pointerId);
+ if(!['pen','eraser'].includes(S.tool)){ctx.font='48px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(S.tool,x,y);saveArt();return}
+ down=true;ctx.beginPath();ctx.moveTo(x,y);ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=S.tool==='eraser'?'#eee0a8':S.color;ctx.lineWidth=S.tool==='eraser'?30:5;ctx.lineTo(x+.1,y+.1);ctx.stroke();};
+ canvas.onpointermove=e=>{if(!down)return;const[x,y]=point(e);ctx.lineTo(x,y);ctx.stroke();};
+ const stop=()=>{if(down){down=false;saveArt();}};canvas.onpointerup=stop;canvas.onpointercancel=stop;
+ document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{S.tool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('selected',x===b));});
+ $('colour').oninput=e=>S.color=e.target.value;
+ $('artundo').onclick=()=>{if(history.length){ctx.putImageData(history.pop(),0,0);saveArt();}};
+ $('clear').onclick=()=>{if(confirm('Clear this drawing?')){history.push(ctx.getImageData(0,0,1000,650));base();saveArt();}};
+ $('name').oninput=e=>{S.name=e.target.value;$('islandName').textContent=S.name||S.island;};
+ $('download').onclick=()=>{let out=document.createElement('canvas');out.width=1000;out.height=720;let c=out.getContext('2d');c.fillStyle='#fffaf0';c.fillRect(0,0,1000,720);c.fillStyle='#173c49';c.font='bold 30px system-ui';c.fillText(S.name||S.island||'My Secret Island',25,45);c.drawImage(canvas,0,70);let link=document.createElement('a');link.download='my-secret-island.png';link.href=out.toDataURL();link.click();feedback('Your picture is ready to save.');};
+ $('finish').onclick=()=>{$('exhibit').innerHTML=`<div class="message" style="margin-top:18px">✨ Welcome to ${esc(S.name||S.island)}!</div><p>You are the island expert. Give your visitor a tour.</p><div class="choices"><button data-tour="Where shall I go first?">Where shall I go first?</button><button data-tour="How can I get there?">How can I get there?</button><button data-tour="What must I take?">What must I take?</button><button data-tour="Can I bring my dragon?">Can I bring my dragon?</button></div>`;document.querySelectorAll('[data-tour]').forEach(b=>b.onclick=()=>speak(b.dataset.tour));$('exhibit').scrollIntoView({behavior:'smooth',block:'nearest'});saveArt();};
+}
+render();
+</script>
+</body>
+</html>
