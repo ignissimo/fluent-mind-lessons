@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escape to Half-Blood Hill</title>
+  <meta name="description" content="An interactive English reading quest based on the first four chapters of Percy Jackson and the Lightning Thief." />
+  <style>
+    :root{--ink:#efe7d0;--muted:#b9c7d5;--night:#07101b;--panel:#111f2dcc;--blue:#48a9c5;--gold:#f0bd5b;--red:#d85f56;--green:#63ba8a;--line:#ffffff1d;--shadow:0 18px 60px #0009}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,#173952 0,#08131f 42%,#050a11 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+    button,textarea{font:inherit}.shell{width:min(1080px,100%);margin:auto;min-height:100vh;padding:18px}.topbar{display:flex;gap:16px;align-items:center;position:sticky;top:0;z-index:20;padding:10px 12px;margin-bottom:14px;background:#07111de8;border:1px solid var(--line);backdrop-filter:blur(14px);border-radius:18px;box-shadow:0 10px 30px #0005}.brand{font-family:Georgia,serif;font-weight:700;color:var(--gold);white-space:nowrap}.progress{height:8px;flex:1;background:#ffffff12;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--gold));transition:.45s}.score{font-weight:800;color:var(--gold);min-width:72px;text-align:right}
+    .screen{display:none;animation:rise .45s ease}.screen.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .hero,.card{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}.hero{position:relative;min-height:620px;display:grid;align-items:end;background-position:center;background-size:cover}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#07101bf5 6%,#07101baa 48%,#07101b22 100%)}.hero-content{position:relative;padding:clamp(26px,6vw,68px);max-width:780px}h1,h2,h3{font-family:Georgia,serif;margin:0 0 14px}h1{font-size:clamp(42px,8vw,82px);line-height:.96}h2{font-size:clamp(30px,5vw,50px)}h3{font-size:24px}p{line-height:1.6;color:var(--muted);font-size:17px}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--gold);font-weight:900}.btn{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(135deg,var(--gold),#d98c36);color:#15100a;font-weight:900;cursor:pointer;box-shadow:0 8px 26px #0006;transition:.18s}.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.btn.secondary{background:#152a3b;color:var(--ink);border:1px solid #ffffff2b}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .card{padding:clamp(20px,4vw,40px)}.scene-img{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:18px;margin:0 0 22px;box-shadow:0 12px 35px #0006}.instructions{border-left:3px solid var(--gold);padding:8px 14px;margin:18px 0;color:#d9e5ed}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.option{width:100%;text-align:left;padding:15px;border-radius:14px;border:1px solid var(--line);background:#0c1926;color:var(--ink);cursor:pointer;transition:.2s;min-height:64px}.option:hover{border-color:#55b7d5;background:#11273a}.option.selected{border-color:var(--gold);box-shadow:0 0 0 2px #f0bd5b33}.option.correct{background:#143728;border-color:var(--green)}.option.wrong{background:#3d1b20;border-color:var(--red)}.feedback{min-height:58px;margin-top:14px;padding:12px 15px;border-radius:12px;background:#ffffff0b;color:#dce8ef}.feedback.good{border:1px solid #63ba8a88}.feedback.bad{border:1px solid #d85f5688}
+    .sequence{display:grid;gap:10px}.event{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;padding:14px;background:#0c1926;border:1px solid var(--line);border-radius:14px;cursor:pointer}.event .num{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#1b3448;font-weight:900;color:var(--gold)}.event.chosen{opacity:.48}.chips{display:flex;flex-wrap:wrap;gap:9px}.chip{padding:10px 13px;border-radius:999px;background:#102436;border:1px solid var(--line);cursor:pointer}.chip.correct{background:#16392a;border-color:var(--green)}.chip.wrong{background:#431c22;border-color:var(--red)}
+    .question{margin:22px 0;padding-top:20px;border-top:1px solid var(--line)}.question:first-of-type{border-top:0}.question b{display:block;margin-bottom:10px;font-size:18px}.myth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.myth-card{min-height:180px;padding:18px;border-radius:18px;border:1px solid var(--line);background:#0c1926;display:flex;flex-direction:column;justify-content:space-between}.myth-card .symbol{font-size:38px}.myth-card button{margin-top:14px}
+    textarea{width:100%;min-height:130px;padding:15px;border-radius:14px;border:1px solid #ffffff2b;background:#081522;color:var(--ink);resize:vertical}.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#f0bd5b18;border:1px solid #f0bd5b55;color:var(--gold);font-weight:800}.result{font-size:68px;font-family:Georgia,serif;color:var(--gold);margin:10px 0}.small{font-size:14px;color:#9eb0bf}.footer{text-align:center;color:#738595;padding:18px 0 4px;font-size:12px}
+    @media(max-width:720px){.shell{padding:8px}.topbar{border-radius:12px}.brand{display:none}.grid,.myth-grid{grid-template-columns:1fr}.hero{min-height:76vh;border-radius:18px}.card{border-radius:18px}.scene-img{aspect-ratio:16/9}.score{min-width:58px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <div class="topbar" aria-label="Game progress">
+    <div class="brand">⚡ Half-Blood Files</div><div class="progress"><i id="bar"></i></div><div class="score" id="score">0 / 20</div>
+  </div>
+
+  <section class="screen active" id="s0">
+    <div class="hero" style="background-image:url('assets/museum.webp')">
+      <div class="hero-content"><div class="eyebrow">English reading quest · Chapters 1–4</div><h1>Escape to Half-Blood Hill</h1><p>Reality has begun to crack. A teacher vanished. Three women cut a thread. Grover has hooves. Now something with horns is following you through the storm.</p><div class="badge">Mission: reach the farmhouse alive</div><div class="actions"><button class="btn" onclick="go(1)">Begin the escape</button></div></div>
+    </div>
+  </section>
+
+  <section class="screen" id="s1"><div class="card">
+    <img class="scene-img" src="assets/fountain.webp" alt="Percy, Nancy and the mysterious fountain" />
+    <div class="eyebrow">Mission 1 · Restore the case file</div><h2>What happened first?</h2><p class="instructions">Click the four events in chronological order. A wrong choice does not end the mission—try again.</p>
+    <div class="sequence" id="timeline"></div><div class="feedback" id="timelineFb">The file is scrambled.</div><div class="actions"><button class="btn" id="timelineNext" disabled onclick="go(2)">Open the next file</button></div>
+  </div></section>
+
+  <section class="screen" id="s2"><div class="card">
+    <img class="scene-img" src="assets/fates.webp" alt="Three old women knitting enormous blue socks beside a road" />
+    <div class="eyebrow">Mission 2 · Mythology detector</div><h2>Ordinary… or mythological?</h2><p class="instructions">Decide what each clue really means in Percy’s world.</p>
+    <div id="myths"></div><div class="actions"><button class="btn" id="mythNext" disabled onclick="go(3)">Follow Grover</button></div>
+  </div></section>
+
+  <section class="screen" id="s3"><div class="card">
+    <img class="scene-img" src="assets/grover.webp" alt="Grover reveals his goat legs during a storm" />
+    <div class="eyebrow">Mission 3 · Language under pressure</div><h2>Choose the exact expression</h2><p class="instructions">Use the chapter vocabulary. You need six correct answers to unlock the hill.</p>
+    <div id="vocab"></div><div class="feedback" id="vocabFb">0 of 6 correct</div><div class="actions"><button class="btn" id="vocabNext" disabled onclick="go(4)">Run to the hill</button></div>
+  </div></section>
+
+  <section class="screen" id="s4"><div class="card">
+    <img class="scene-img" src="assets/minotaur.webp" alt="Percy fighting the Minotaur on a stormy hill" />
+    <div class="eyebrow">Final mission · Bullfighting</div><h2>Survive the charge</h2><p class="instructions">Choose one action at each moment. Think like Percy: the Minotaur is powerful, fast, and bad at changing direction.</p>
+    <div id="battle"></div><div class="feedback" id="battleFb">The Minotaur is on your trail.</div><div class="actions"><button class="btn" id="battleNext" disabled onclick="go(5)">Reach the farmhouse</button></div>
+  </div></section>
+
+  <section class="screen" id="s5"><div class="card">
+    <div class="eyebrow">Final report</div><h2>You crossed the property line</h2><p>Write 3–5 sentences. Use at least two expressions from the quest:</p><div class="chips" style="margin:14px 0 18px"><span class="chip">keep tabs on</span><span class="chip">on someone’s trail</span><span class="chip">hold your ground</span><span class="chip">with all your might</span><span class="chip">haul someone up</span></div>
+    <p><b>Was Percy brave, reckless, or both? Explain his most important decision.</b></p><textarea id="report" placeholder="I think Percy was both brave and reckless because…"></textarea><div class="actions"><button class="btn" onclick="finish()">Complete the quest</button><button class="btn secondary" onclick="saveReport()">Save my writing</button></div><div class="feedback" id="reportFb">Your teacher can read the report before you finish.</div>
+  </div></section>
+
+  <section class="screen" id="s6"><div class="hero" style="background-image:url('assets/minotaur.webp')"><div class="hero-content"><div class="eyebrow">Quest complete</div><div class="result" id="finalScore">20 / 20</div><h2 id="rank">Mythology Detective</h2><p id="finalText">You followed the clues, understood the language and survived the Minotaur.</p><div class="actions"><button class="btn" onclick="restart()">Play again</button><button class="btn secondary" onclick="go(5)">Read my report</button></div></div></div></section>
+  <div class="footer">Unofficial educational activity · Original lesson artwork · Progress is stored only in this browser</div>
+</main>
+<script>
+const state={screen:0,score:0,timeline:0,myths:0,vocab:0,vocabDone:0,battle:0,reportScored:false};
+const timeline=[
+  ['The three old women cut the blue yarn.','2'],['The Minotaur follows Percy through the storm.','4'],['Mrs Dodds turns into a winged creature.','1'],['Grover reveals his cloven hooves.','3']
+];
+const mythQs=[
+ {q:'The “Kindly Ones” are…',a:['friendly forest spirits','the Furies, goddesses of revenge','three teachers'],c:1,n:'A pleasant name hides something terrifying.'},
+ {q:'The blue yarn represents…',a:['a road map','a person’s life','Grover’s clothes'],c:1,n:'The Fates spin, measure and cut the thread of life.'},
+ {q:'Grover is really…',a:['a centaur','a satyr','a Cyclops'],c:1,n:'A satyr is human above the waist and goat below it.'},
+ {q:'“Pasiphae’s son” is…',a:['the Minotaur','Zeus','Charon'],c:0,n:'The Minotaur is the bull-headed son of Pasiphae.'}
+];
+const vocabQs=[
+ {q:'Grover secretly watches Percy and checks that he is safe.',a:['keeps tabs on him','holds his ground','tears through him'],c:0},
+ {q:'The monster is following them.',a:['wedged in the mud','on their trail','shaking off the daze'],c:1},
+ {q:'Sally suddenly turns the car to avoid something.',a:['swerves','staggers','hauls'],c:0},
+ {q:'The frightening shape gives Percy a horrible feeling.',a:['wraps his mind around it','makes his skin crawl','keeps tabs on him'],c:1},
+ {q:'Percy stays in place while the Minotaur charges.',a:['holds his ground','makes a beeline for it','falls behind'],c:0},
+ {q:'Percy pulls the horn using all his strength.',a:['in the long run','with all his might','every so often'],c:1}
+];
+const battleQs=[
+ {q:'The Minotaur lowers its head and charges. What do you do?',a:['Run straight ahead','Hold your ground','Close your eyes'],c:1,ok:'You wait. It gets closer…'},
+ {q:'It is almost on top of you.',a:['Jump directly sideways','Try to explain the myth','Lie down'],c:0,ok:'It storms past and cannot turn quickly.'},
+ {q:'It charges again, too fast to dodge.',a:['Leap up and use its head as a springboard','Ask Grover for food','Throw away the red jacket'],c:0,ok:'You land on its neck and grip the horns.'},
+ {q:'The Minotaur is turning toward Grover.',a:['Let go and run','Pull one horn with all your might','Wait for an adult'],c:1,ok:'Snap! You now have a weapon.'}
+];
+function addScore(n=1){state.score=Math.min(20,state.score+n);document.querySelector('#score').textContent=`${state.score} / 20`;}
+function go(n){state.screen=n;document.querySelectorAll('.screen').forEach((e,i)=>e.classList.toggle('active',i===n));document.querySelector('#bar').style.width=`${n/6*100}%`;window.scrollTo({top:0});localStorage.setItem('hb-screen',n);}
+function renderTimeline(){const box=document.querySelector('#timeline');timeline.forEach(([t,n],i)=>{let b=document.createElement('button');b.className='event';b.innerHTML=`<span class="num">?</span><span>${t}</span>`;b.onclick=()=>{if(b.classList.contains('chosen'))return;if(+n===state.timeline+1){state.timeline++;b.classList.add('chosen','correct');b.querySelector('.num').textContent=n;addScore(1);document.querySelector('#timelineFb').textContent=state.timeline===4?'Case file restored. The clues form one continuous threat.':'Correct. What happened next?';if(state.timeline===4)document.querySelector('#timelineNext').disabled=false}else{b.classList.add('wrong');document.querySelector('#timelineFb').textContent='That event belongs somewhere else in the story. Try another.';setTimeout(()=>b.classList.remove('wrong'),650)}};box.appendChild(b)})}
+function renderMyths(){const box=document.querySelector('#myths');mythQs.forEach((x,qi)=>{let q=document.createElement('div');q.className='question';q.innerHTML=`<b>${qi+1}. ${x.q}</b><div class="grid"></div><div class="feedback" id="mf${qi}">Choose one answer.</div>`;x.a.forEach((a,ai)=>{let b=document.createElement('button');b.className='option';b.textContent=a;b.onclick=()=>{if(q.dataset.done)return;q.dataset.done=1;q.querySelectorAll('button').forEach((z,j)=>z.classList.add(j===x.c?'correct':j===ai?'wrong':''));document.querySelector('#mf'+qi).textContent=(ai===x.c?'Correct. ':'Not quite. ')+x.n;if(ai===x.c)addScore(1);state.myths++;if(state.myths===mythQs.length)document.querySelector('#mythNext').disabled=false};q.querySelector('.grid').appendChild(b)});box.appendChild(q)})}
+function renderVocab(){const box=document.querySelector('#vocab');vocabQs.forEach((x,qi)=>{let q=document.createElement('div');q.className='question';q.innerHTML=`<b>${qi+1}. ${x.q}</b><div class="grid"></div>`;x.a.forEach((a,ai)=>{let b=document.createElement('button');b.className='option';b.textContent=a;b.onclick=()=>{if(q.dataset.done)return;q.dataset.done=1;state.vocabDone++;q.querySelectorAll('button').forEach((z,j)=>z.classList.add(j===x.c?'correct':j===ai?'wrong':''));if(ai===x.c){state.vocab++;addScore(1)}document.querySelector('#vocabFb').textContent=`${state.vocab} of 6 correct`;if(state.vocabDone===vocabQs.length)document.querySelector('#vocabNext').disabled=false};q.querySelector('.grid').appendChild(b)});box.appendChild(q)})}
+function renderBattle(){const box=document.querySelector('#battle');showBattle(0);function showBattle(i){box.innerHTML='';let x=battleQs[i],q=document.createElement('div');q.className='question';q.innerHTML=`<b>${i+1}. ${x.q}</b><div class="grid"></div>`;x.a.forEach((a,ai)=>{let b=document.createElement('button');b.className='option';b.textContent=a;b.onclick=()=>{q.querySelectorAll('button').forEach(z=>z.disabled=true);b.classList.add(ai===x.c?'correct':'wrong');if(ai===x.c){addScore(1);document.querySelector('#battleFb').textContent=x.ok}else{q.querySelectorAll('button')[x.c].classList.add('correct');document.querySelector('#battleFb').textContent='That would be dangerous. Sally’s plan gives you a better chance.'}setTimeout(()=>{if(i<battleQs.length-1)showBattle(i+1);else document.querySelector('#battleNext').disabled=false},900)};q.querySelector('.grid').appendChild(b)});box.appendChild(q)}}
+function saveReport(){localStorage.setItem('hb-report',document.querySelector('#report').value);document.querySelector('#reportFb').textContent='Saved in this browser.'}
+function finish(){saveReport();if(!state.reportScored&&document.querySelector('#report').value.trim().length>=30){addScore(2);state.reportScored=true}go(6);document.querySelector('#finalScore').textContent=`${state.score} / 20`;let rank=state.score>=18?'Child of Athena':state.score>=14?'Mythology Detective':state.score>=10?'Camp Half-Blood Recruit':'Brave Mortal';document.querySelector('#rank').textContent=rank;document.querySelector('#finalText').textContent=state.score>=14?'You followed the clues, used the language and survived the Minotaur.':'You reached safety. Replay the files to uncover the clues you missed.'}
+function restart(){localStorage.removeItem('hb-screen');state.score=state.timeline=state.myths=state.vocab=state.vocabDone=0;state.reportScored=false;document.querySelector('#score').textContent='0 / 20';document.querySelector('#timeline').innerHTML='';document.querySelector('#myths').innerHTML='';document.querySelector('#vocab').innerHTML='';renderTimeline();renderMyths();renderVocab();renderBattle();go(0)}
+renderTimeline();renderMyths();renderVocab();renderBattle();document.querySelector('#report').value=localStorage.getItem('hb-report')||'';
+</script>
+</body>
+</html>
