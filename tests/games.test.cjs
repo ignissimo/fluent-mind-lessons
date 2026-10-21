@@ -169,3 +169,9 @@ test('Azeroth: all published illustration files exist as JPEGs',()=>{
   const bytes=fs.readFileSync(path.join(base,name));assert.ok(bytes.length>10000,name);assert.equal(bytes.readUInt16BE(0),0xffd8,name);
  }
 });
+
+test('Azeroth: class follows best score and exclusions preserve the remaining ranking',()=>{
+ const g=game('who-are-you-in-azeroth');
+ const report=g.w.eval(`(()=>{let state=71231,draw=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296};for(let k=0;k<1000;k++){answers=Array.from({length:24},()=>Math.floor(draw()*4));excluded=new Set();mode='surprise';let first=compute();let scores=D.classes.map((c,j)=>(answers.reduce((s,a,i)=>s+D.cw[i][a][j],0)-D.cm[j])/D.cs[j]/1.2+D.cb[j]);if(Math.max(...scores)-scores[D.classes.indexOf(first.cls)]>1e-9)return 'Class is not the best match';mode='decide';if(JSON.stringify(compute())!==JSON.stringify(first))return 'Mode changes result without exclusions';excluded=new Set(D.classes.filter(c=>c!==first.cls));if(compute().cls!==first.cls)return 'Exclusions remove the winner';excluded=new Set([D.classes.find(c=>c!==first.cls)]);if(JSON.stringify(compute())!==JSON.stringify(first))return 'Excluding another class changes the winner';excluded=new Set([first.cls]);let second=compute();if(second.cls===first.cls)return 'Excluded class returned';let remaining=scores.filter((s,j)=>D.classes[j]!==first.cls);if(Math.max(...remaining)-scores[D.classes.indexOf(second.cls)]>1e-9)return 'Fallback is not the next best match'}return 'ok'})()`);
+ assert.equal(report,'ok');g.clean();
+});
