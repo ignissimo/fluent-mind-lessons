@@ -145,3 +145,27 @@ test('Azeroth: long mode titles are not constrained to answer-letter circles',()
  g.d.querySelector('[data-action="start"]').click();
  assert.equal(g.w.getComputedStyle(g.d.querySelector('[data-choice] b')).width,'30px');g.clean();
 });
+test('Azeroth: every answer has its own illustrated panel and accessible selection',()=>{
+ const g=game('who-are-you-in-azeroth');g.d.querySelector('[data-action="start"]').click();const pictures=new Set();
+ for(let i=0;i<24;i++){
+  const options=[...g.d.querySelectorAll('[data-choice]')];assert.equal(options.length,4);
+  for(const b of options){const art=b.querySelector('.answer-art');assert.ok(art,`question ${i+1}`);assert.equal(art.getAttribute('aria-hidden'),'true');pictures.add(art.getAttribute('style'));assert.ok(b.querySelector('.answer-copy').textContent.trim());}
+  options[i%4].click();assert.equal(g.d.querySelector(`[data-choice="${i%4}"]`).getAttribute('aria-pressed'),'true');g.d.querySelector('[data-action="next"]').click();
+ }
+ assert.equal(pictures.size,96);
+ assert.ok(g.d.querySelector('.race-portrait[role="img"]'));assert.ok(g.d.querySelector('.class-emblem[role="img"]'));g.clean();
+});
+test('Azeroth: result export includes race and class art and a reusable download link',async()=>{
+ const g=game('who-are-you-in-azeroth');g.w.eval('answers=Array(24).fill(0);step=24;render()');
+ const draws=[];g.w.Image=class{constructor(){this.width=1536;this.height=1024}set src(v){this.path=v;queueMicrotask(()=>this.onload())}};
+ const context=new Proxy({drawImage(...args){draws.push(args)},measureText(t){return{width:t.length*12}},createLinearGradient(){return{addColorStop(){}}}},{get(o,k){return k in o?o[k]:()=>{}},set(o,k,v){o[k]=v;return true}});
+ g.w.HTMLCanvasElement.prototype.getContext=()=>context;g.w.HTMLCanvasElement.prototype.toDataURL=()=> 'data:image/png;base64,dGVzdA==';g.w.HTMLAnchorElement.prototype.click=()=>{};
+ await g.w.saveResultCard();assert.equal(draws.length,2);assert.match(draws[0][0].path,/races.jpg$/);assert.match(draws[1][0].path,/classes.jpg$/);
+ const link=g.d.querySelector('#feedback a[download]');assert.ok(link);assert.equal(link.download,'fluent-mind-azeroth-result.png');g.clean();
+});
+test('Azeroth: all published illustration files exist as JPEGs',()=>{
+ const path=require('node:path');const base=path.join('who-are-you-in-azeroth','assets');
+ for(const name of ['hero.jpg','races.jpg','classes.jpg','choices-01-04.jpg','choices-05-08.jpg','choices-09-12.jpg','choices-13-16.jpg','choices-17-20.jpg','choices-21-24.jpg']){
+  const bytes=fs.readFileSync(path.join(base,name));assert.ok(bytes.length>10000,name);assert.equal(bytes.readUInt16BE(0),0xffd8,name);
+ }
+});
