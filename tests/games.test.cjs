@@ -143,7 +143,7 @@ test('Azeroth: long mode titles are not constrained to answer-letter circles',()
  for(const b of g.d.querySelectorAll('[data-mode] b'))assert.notEqual(g.w.getComputedStyle(b).width,'30px',b.textContent);
  for(const b of g.d.querySelectorAll('[data-mode]'))assert.equal(g.w.getComputedStyle(b).display,'block');
  g.d.querySelector('[data-action="start"]').click();
- assert.equal(g.w.getComputedStyle(g.d.querySelector('[data-choice] b')).width,'30px');g.clean();
+ assert.equal(g.d.querySelector('[data-choice] b'),null);g.clean();
 });
 test('Azeroth: every answer has its own illustrated panel and accessible selection',()=>{
  const g=game('who-are-you-in-azeroth');g.d.querySelector('[data-action="start"]').click();const pictures=new Set();
