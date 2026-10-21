@@ -138,3 +138,10 @@ test('Azeroth: both modes complete all 24 choices, preserve answers, and reset',
  g.d.querySelector('[data-action="reset"]').click();assert.ok(g.d.querySelector('[data-action="start"]'));g.clean();
  }
 });
+test('Azeroth: long mode titles are not constrained to answer-letter circles',()=>{
+ const g=game('who-are-you-in-azeroth');
+ for(const b of g.d.querySelectorAll('[data-mode] b'))assert.notEqual(g.w.getComputedStyle(b).width,'30px',b.textContent);
+ for(const b of g.d.querySelectorAll('[data-mode]'))assert.equal(g.w.getComputedStyle(b).display,'block');
+ g.d.querySelector('[data-action="start"]').click();
+ assert.equal(g.w.getComputedStyle(g.d.querySelector('[data-choice] b')).width,'30px');g.clean();
+});
