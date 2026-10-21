@@ -119,3 +119,22 @@ test('Percy: complete escape and report, then play again',()=>{
  for(const a of [1,0,0,1]){g.d.querySelectorAll('#battle button')[a].click();g.flush();}g.d.querySelector('#battleNext').click();
  g.d.querySelector('#report').value='Percy held his ground, jumped sideways and pulled the horn.';g.w.finish();assert.equal(g.d.querySelector('#finalScore').textContent,'20 / 20');g.w.restart();assert.equal(g.d.querySelector('#mythNext').disabled,true);assert.match(g.d.querySelector('#report').value,/Percy held/);g.clean();
 });
+test('Azeroth: both modes complete all 24 choices, preserve answers, and reset',()=>{
+ for(const mode of ['surprise','decide']){
+ const g=game('who-are-you-in-azeroth');g.d.querySelector(`[data-mode="${mode}"]`).click();
+ if(mode==='decide'){
+  for(const name of [...g.d.querySelectorAll('[data-exclude]')].map(n=>n.dataset.exclude)){const input=[...g.d.querySelectorAll('[data-exclude]')].find(n=>n.dataset.exclude===name);input.checked=true;input.dispatchEvent(new g.w.Event('change',{bubbles:true}));}
+  assert.equal(g.d.querySelector('[data-action="start"]').disabled,true);
+  const input=g.d.querySelector('[data-exclude]');input.checked=false;input.dispatchEvent(new g.w.Event('change',{bubbles:true}));
+ }
+ g.d.querySelector('[data-action="start"]').click();
+ for(let i=0;i<24;i++){
+  assert.equal(g.d.querySelector('[data-action="next"]').disabled,true);
+  g.d.querySelector(`[data-choice="${i%4}"]`).click();assert.ok(g.d.querySelector('.opt.selected'));
+  g.d.querySelector('[data-action="next"]').click();
+ }
+ assert.match(g.d.querySelector('#app').textContent,/YOUR CHARACTER REVEALED/);
+ assert.equal(JSON.parse(g.w.localStorage.getItem('fma-azeroth-v22')).answers.length,24);
+ g.d.querySelector('[data-action="reset"]').click();assert.ok(g.d.querySelector('[data-action="start"]'));g.clean();
+ }
+});
