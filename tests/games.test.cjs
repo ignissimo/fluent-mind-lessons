@@ -149,7 +149,7 @@ test('Azeroth: every answer has its own illustrated panel and accessible selecti
  const g=game('who-are-you-in-azeroth');g.d.querySelector('[data-action="start"]').click();const pictures=new Set();
  for(let i=0;i<24;i++){
   const options=[...g.d.querySelectorAll('[data-choice]')];assert.equal(options.length,4);
-  for(const b of options){const art=b.querySelector('.answer-art');assert.ok(art,`question ${i+1}`);assert.equal(art.getAttribute('aria-hidden'),'true');pictures.add(art.getAttribute('style'));assert.ok(b.querySelector('.answer-copy').textContent.trim());}
+  for(const b of options){const art=b.querySelector('.answer-art');assert.ok(art,`question ${i+1}`);assert.equal(art.getAttribute('aria-hidden'),'true');const svg=art.querySelector('svg'),image=art.querySelector('image');assert.ok(svg);assert.ok(image);assert.equal(svg.getAttribute('preserveAspectRatio'),'xMidYMid slice');pictures.add(image.getAttribute('href')+'|'+svg.getAttribute('viewBox'));assert.ok(b.querySelector('.answer-copy').textContent.trim());}
   options[i%4].click();assert.equal(g.d.querySelector(`[data-choice="${i%4}"]`).getAttribute('aria-pressed'),'true');g.d.querySelector('[data-action="next"]').click();
  }
  assert.equal(pictures.size,96);
