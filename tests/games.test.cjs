@@ -175,3 +175,31 @@ test('Azeroth: class follows best score and exclusions preserve the remaining ra
  const report=g.w.eval(`(()=>{let state=71231,draw=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296};for(let k=0;k<1000;k++){answers=Array.from({length:24},()=>Math.floor(draw()*4));excluded=new Set();mode='surprise';let first=compute();let scores=D.classes.map((c,j)=>(answers.reduce((s,a,i)=>s+D.cw[i][a][j],0)-D.cm[j])/D.cs[j]/1.2+D.cb[j]);if(Math.max(...scores)-scores[D.classes.indexOf(first.cls)]>1e-9)return 'Class is not the best match';mode='decide';if(JSON.stringify(compute())!==JSON.stringify(first))return 'Mode changes result without exclusions';excluded=new Set(D.classes.filter(c=>c!==first.cls));if(compute().cls!==first.cls)return 'Exclusions remove the winner';excluded=new Set([D.classes.find(c=>c!==first.cls)]);if(JSON.stringify(compute())!==JSON.stringify(first))return 'Excluding another class changes the winner';excluded=new Set([first.cls]);let second=compute();if(second.cls===first.cls)return 'Excluded class returned';let remaining=scores.filter((s,j)=>D.classes[j]!==first.cls);if(Math.max(...remaining)-scores[D.classes.indexOf(second.cls)]>1e-9)return 'Fallback is not the next best match'}return 'ok'})()`);
  assert.equal(report,'ok');g.clean();
 });
+
+test('Avatar Day: all sections, answers, writing, export and reset work',async()=>{
+ const g=game('avatar-day');let downloads=[];g.w.URL.createObjectURL=b=>(downloads.push(b),'blob:test');g.w.URL.revokeObjectURL=()=>{};g.w.HTMLAnchorElement.prototype.click=function(){assert.equal(this.download,'avatar_day_answers.txt')};g.w.confirm=()=>true;
+ const correct=[[0,2],[1,0],[2],[1,2],[],[1]];
+ for(let i=0;i<6;i++){
+  g.d.querySelectorAll('#nav button')[i].click();
+  assert.ok(g.d.querySelector('#page img').getAttribute('src').startsWith('assets/'));
+  for(let j=0;j<correct[i].length;j++){
+   let cards=[...g.d.querySelectorAll('.card')].filter(c=>c.querySelector('.choice'));
+   cards[j].querySelectorAll('.choice')[(correct[i][j]+1)%4].click();
+   cards=[...g.d.querySelectorAll('.card')].filter(c=>c.querySelector('.choice'));
+   assert.match(cards[j].textContent,/Not quite/);
+   cards[j].querySelectorAll('.choice')[correct[i][j]].click();
+  }
+  const area=g.d.querySelector('textarea');if(area){area.value='My evidence </textarea><img src=x onerror=alert(1)> & conclusion';area.dispatchEvent(new g.w.Event('input',{bubbles:true}));g.w.render();assert.equal(g.d.querySelector('textarea').value,area.value);assert.equal(g.d.querySelector('img[src="x"]'),null)}
+ }
+ assert.equal(Object.keys(JSON.parse(g.w.localStorage.getItem('avatar_day_answers'))).length,13);
+ g.click('⬇ Save my written answers (.txt)');assert.equal(downloads.length,1);const exported=await new Promise(resolve=>{const reader=new g.w.FileReader();reader.onload=()=>resolve(reader.result);reader.readAsText(downloads[0])});assert.match(exported,/My final verdict:/);assert.match(exported,/Case: Why are the villagers angry\?: Option A/);g.click('Reset');assert.equal(g.w.localStorage.getItem('avatar_day_answers'),null);assert.equal(g.d.querySelector('textarea').value,'');g.clean();
+});
+
+test('Avatar Day: corrupt or unavailable storage does not block the lesson',()=>{
+ const html=fs.readFileSync('avatar-day/index.html','utf8');
+ for(const blocked of [false,true]){
+  const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e.message));
+  const dom=new JSDOM(html,{runScripts:'dangerously',url:'https://example.test',virtualConsole:vc,beforeParse(w){w.scrollTo=()=>{};if(blocked){Object.defineProperty(w,'localStorage',{get(){throw Error('Storage blocked')}})}else w.localStorage.setItem('avatar_day_answers','{broken')}});
+  assert.equal(dom.window.document.querySelectorAll('#nav button').length,6);dom.window.document.querySelector('.choice').click();assert.ok(dom.window.document.querySelector('.selected'));assert.deepEqual(errors,[]);dom.window.close();
+ }
+});
