@@ -203,3 +203,20 @@ test('Avatar Day: corrupt or unavailable storage does not block the lesson',()=>
   assert.equal(dom.window.document.querySelectorAll('#nav button').length,6);dom.window.document.querySelector('.choice').click();assert.ok(dom.window.document.querySelector('.selected'));assert.deepEqual(errors,[]);dom.window.close();
  }
 });
+
+test('Eclipse Lake: all three routes, grammar, writing, export, print and restoration',async()=>{
+ for(const character of ['Amity','Hunter','Eda']){
+ const g=game('eclipse-lake');g.click('Continue →');let t=g.d.querySelector('textarea');t.value='Literal &lt; and </textarea><img src=x> evidence';t.dispatchEvent(new g.w.Event('input',{bubbles:true}));g.click('Continue →');g.click(({Amity:'💜',Hunter:'🗝️',Eda:'🦉'})[character]+' '+character);g.click('Continue →');assert.match(g.d.querySelector('h2').textContent,new RegExp(character));assert.match(g.d.querySelector('img').src,new RegExp(character.toLowerCase()+'.jpg'));
+ for(const [i,t] of [...g.d.querySelectorAll('textarea')].entries()){t.value=character+' response '+i;t.dispatchEvent(new g.w.Event('input',{bubbles:true}))}
+ g.click('← Back');g.click('← Back');assert.equal(g.d.querySelector('textarea').value,'Literal &lt; and </textarea><img src=x> evidence');assert.equal(g.d.querySelector('img[src=x]'),null);g.click('Continue →');g.click('Continue →');g.click('Continue →');
+ for(const [i,value] of ['wants','of','travel','meets'].entries()){g.d.querySelectorAll('.question')[i].querySelectorAll('button').forEach(b=>{if(b.textContent!==value)b.click()});g.click(value)}assert.equal([...g.d.querySelectorAll('.feedback')].filter(e=>e.textContent==='✓ Correct!').length,4);
+ t=g.d.querySelector('textarea');t.value='Amity wants to help Luz, but she is afraid.';t.dispatchEvent(new g.w.Event('input',{bubbles:true}));g.click('Continue →');t=g.d.querySelector('textarea');t.value='My magical object can help.';t.dispatchEvent(new g.w.Event('input',{bubbles:true}));
+ let blob;g.w.URL.createObjectURL=b=>(blob=b,'blob:test');g.w.URL.revokeObjectURL=()=>{};g.w.HTMLAnchorElement.prototype.click=function(){assert.equal(this.download,'Eclipse_Lake_Writing.txt')};g.click('⬇ Save my writing (.txt)');const text=await new Promise(resolve=>{let r=new g.w.FileReader();r.onload=()=>resolve(r.result);r.readAsText(blob)});assert.match(text,new RegExp(character));assert.match(text,/My magical object can help/);
+ let printed=false;g.w.print=()=>printed=true;g.click('🖨 Print');assert.equal(printed,true);assert.match(g.d.querySelector('#print-report').textContent,/response 0/);
+ const answers=g.w.localStorage.getItem('eclipse_answers'),progress=g.w.localStorage.getItem('eclipse_progress');assert.ok(progress);g.clean();const restored=new JSDOM(fs.readFileSync('eclipse-lake/index.html','utf8'),{runScripts:'dangerously',url:'https://example.test',beforeParse(w){w.localStorage.setItem('eclipse_answers',answers);w.localStorage.setItem('eclipse_progress',progress)}});assert.match(restored.window.document.querySelector('h2').textContent,/Creative Finale/);assert.match(restored.window.document.querySelector('#app').textContent,new RegExp(character));restored.window.close();
+ }
+});
+test('Eclipse Lake: invalid and unavailable storage remain usable',()=>{
+ for(const data of ['null','[]','{broken','{"warm":42}']){const g=new JSDOM(fs.readFileSync('eclipse-lake/index.html','utf8'),{runScripts:'dangerously',url:'https://example.test',beforeParse(w){w.scrollTo=()=>{};w.localStorage.setItem('eclipse_answers',data)}});g.window.go(1);assert.ok(g.window.document.querySelector('textarea'));g.window.close()}
+ const g=new JSDOM(fs.readFileSync('eclipse-lake/index.html','utf8'),{runScripts:'dangerously',url:'https://example.test',beforeParse(w){w.scrollTo=()=>{};Object.defineProperty(w,'localStorage',{get(){throw Error('Blocked')}})}});g.window.go(1);let t=g.window.document.querySelector('textarea');t.value='Answer';t.dispatchEvent(new g.window.Event('input',{bubbles:true}));assert.equal(g.window.document.querySelector('#storage-note').hidden,false);g.window.close();
+});
