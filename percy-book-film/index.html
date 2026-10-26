@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Escape to Half-Blood Hill — Book & Film Quest</title>
+  <meta name="description" content="An interactive A2 English quest based on chapters 1–4 of The Lightning Thief and the opening scenes (approximately 20 minutes) of the 2010 film.">
+  <style>
+    :root{--ink:#f3ead5;--muted:#b9c8d5;--night:#06101a;--panel:#101f2de8;--blue:#4fb6d5;--gold:#f2bd58;--red:#d9655d;--green:#65c38d;--line:#ffffff20;--shadow:0 20px 65px #0009}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -10%,#173d58 0,#08131f 44%,#04080e 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+    button,textarea{font:inherit}.shell{width:min(1080px,100%);margin:auto;min-height:100vh;padding:18px}.topbar{display:flex;gap:14px;align-items:center;position:sticky;top:0;z-index:20;padding:10px 12px;margin-bottom:14px;background:#06101be8;border:1px solid var(--line);backdrop-filter:blur(14px);border-radius:18px;box-shadow:0 10px 30px #0005}.brand{font-family:Georgia,serif;font-weight:700;color:var(--gold);white-space:nowrap}.progress{height:8px;flex:1;background:#ffffff12;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--gold));transition:.45s}.score{font-weight:900;color:var(--gold);min-width:75px;text-align:right}
+    .screen{display:none;animation:rise .42s ease}.screen.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}.hero,.card{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}.hero{position:relative;min-height:620px;display:grid;align-items:end;background-position:center;background-size:cover}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#06101bf7 5%,#06101bad 50%,#06101b24 100%)}.hero-content{position:relative;padding:clamp(26px,6vw,68px);max-width:820px}
+    h1,h2,h3{font-family:Georgia,serif;margin:0 0 14px}h1{font-size:clamp(42px,8vw,82px);line-height:.96}h2{font-size:clamp(30px,5vw,50px)}h3{font-size:24px}p{line-height:1.6;color:var(--muted);font-size:17px}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--gold);font-weight:900}.badge{display:inline-flex;padding:8px 12px;border-radius:999px;background:#f2bd5818;border:1px solid #f2bd5855;color:var(--gold);font-weight:800}.btn{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(135deg,var(--gold),#db8f37);color:#171108;font-weight:900;cursor:pointer;box-shadow:0 8px 26px #0006;transition:.18s}.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.btn.secondary{background:#152b3d;color:var(--ink);border:1px solid #ffffff2b}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .card{padding:clamp(20px,4vw,40px)}.scene-img{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:18px;margin:0 0 22px;box-shadow:0 12px 35px #0006}.instructions{border-left:3px solid var(--gold);padding:8px 14px;margin:18px 0;color:#dbe6ec}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.option{width:100%;text-align:left;padding:15px;border-radius:14px;border:1px solid var(--line);background:#0b1926;color:var(--ink);cursor:pointer;transition:.2s;min-height:62px}.option:hover{border-color:var(--blue);background:#11283a}.option.correct{background:#143829;border-color:var(--green)}.option.wrong{background:#421c22;border-color:var(--red)}.option:disabled{cursor:default;color:var(--ink)}.feedback{min-height:56px;margin-top:14px;padding:12px 15px;border-radius:12px;background:#ffffff0b;color:#dce8ef}.question{margin:22px 0;padding-top:20px;border-top:1px solid var(--line)}.question:first-child{border-top:0}.question b{display:block;margin-bottom:10px;font-size:18px}.sequence{display:grid;gap:10px}.event{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;padding:14px;background:#0b1926;border:1px solid var(--line);border-radius:14px;cursor:pointer;color:var(--ink);text-align:left}.event .num{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#1a3449;font-weight:900;color:var(--gold)}.event.chosen{opacity:.52}.chips{display:flex;flex-wrap:wrap;gap:9px}.chip{padding:9px 12px;border-radius:999px;background:#102638;border:1px solid var(--line);color:#dce7ed}.compare-label{display:inline-block;padding:4px 9px;border-radius:99px;background:#4fb6d520;color:#83d7ee;font-size:12px;font-weight:900;margin-bottom:10px}.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}.tiny{font-size:14px;color:#98adbc}.result{font-size:68px;font-family:Georgia,serif;color:var(--gold);margin:10px 0}textarea{width:100%;min-height:145px;padding:15px;border-radius:14px;border:1px solid #ffffff2b;background:#071522;color:var(--ink);resize:vertical}.footer{text-align:center;color:#718697;padding:18px 0 4px;font-size:12px}
+    @media(max-width:720px){.shell{padding:8px}.topbar{border-radius:12px}.brand{display:none}.grid{grid-template-columns:1fr}.hero{min-height:76vh;border-radius:18px}.card{border-radius:18px}.scene-img{aspect-ratio:16/9}.score{min-width:62px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  .back-file{font-size:12px;padding:8px 10px;box-shadow:none}button:focus-visible,textarea:focus-visible{outline:3px solid #7eddf1;outline-offset:4px}.scene-img{aspect-ratio:auto!important;max-height:350px;object-fit:contain;background:#06101a}.event.wrong{border-color:var(--red)}#storage-note{padding:12px;border:1px solid var(--gold);border-radius:10px;color:var(--ink)}#progress-label{font-size:11px;max-width:130px}.topbar{flex-wrap:wrap}.progress{min-width:60px}p,b,.event{overflow-wrap:anywhere}@media(max-width:720px){.hero{min-height:500px}#progress-label{font-size:10px;max-width:85px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="topbar" aria-label="Game progress"><button id="previous-file" class="btn secondary back-file" onclick="go(Math.max(0,state.screen-1))" disabled aria-label="Previous case file">← Back</button><div class="brand">⚡ Half-Blood Files</div><div class="progress" id="bar-holder" role="progressbar" aria-label="Quest progress" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><i id="bar"></i></div><span id="progress-label" class="tiny">Ready to begin</span><div class="score" id="score">0 / 40</div></div><p id="storage-note" role="status" hidden>Your browser cannot save progress. Keep this tab open and download your writing before leaving.</p>
+
+  <section class="screen active" id="s0"><div class="hero" style="background-image:url('assets/museum.webp')"><div class="hero-content">
+    <div class="eyebrow">English reading quest · Chapters 1–4 + 2010 film opening</div><h1>Escape to Half-Blood Hill</h1>
+    <p>Reality has cracked. A teacher vanished, three women cut a thread, Grover has hooves—and now the book and the film are telling two different versions of Percy’s story.</p>
+    <div class="badge">Chapter 4 + Book vs Film</div><p class="tiny">34 clue points + 6 writing points. Each question is scored once. Wrong answers reveal the explanation and still let you continue.</p><div class="actions"><button class="btn" onclick="go(1)">Open the first file</button></div>
+  </div></div></section>
+
+  <section class="screen" id="s1"><div class="card"><img class="scene-img" src="assets/fountain.webp" alt="Percy near the mysterious fountain">
+    <div class="eyebrow">Mission 1 · Restore the case file</div><h2>What happened first?</h2><p class="instructions">Click the four events in chronological order.</p>
+    <div class="sequence" id="timeline"></div><div class="feedback" id="timelineFb">The file is scrambled.</div><div class="actions"><button class="btn" id="timelineNext" disabled onclick="go(2)">Open the mythology file</button></div>
+  </div></section>
+
+  <section class="screen" id="s2"><div class="card"><img class="scene-img" src="assets/fates.webp" alt="Three mysterious women knitting beside a road">
+    <div class="eyebrow">Mission 2 · Mythology detector</div><h2>Ordinary… or mythological?</h2><p class="instructions">Decide what each clue really means in Percy’s world.</p>
+    <div id="myths"></div><div class="actions"><button class="btn" id="mythNext" disabled onclick="go(3)">Follow Grover</button></div>
+  </div></section>
+
+  <section class="screen" id="s3"><div class="card"><img class="scene-img" src="assets/grover.webp" alt="Grover reveals his goat legs in the storm">
+    <div class="eyebrow">Mission 3 · Language under pressure</div><h2>Choose the exact expression</h2><p class="instructions">Use the language from Chapter 4. Complete all six situations to unlock the next file.</p>
+    <div id="vocab"></div><div class="feedback" id="vocabFb">0 of 6 correct</div><div class="actions"><button class="btn" id="vocabNext" disabled onclick="go(4)">Read the storm evidence</button></div>
+  </div></section>
+
+  <section class="screen" id="s4"><div class="card"><img class="scene-img" src="assets/storm-escape.jpg" alt="Sally drives Percy and Grover toward safety in a red Camaro during the storm in Chapter 4">
+    <div class="eyebrow">New mission · Chapter 4 field notes</div><h2>My Mother Teaches Me Bullfighting</h2>
+    <p class="instructions">Choose the best explanation. These questions test the plot, causes and Percy’s decisions—not tiny details.</p>
+    <div id="chapter"></div><div class="actions"><button class="btn" id="chapterNext" disabled onclick="go(5)">Face the Minotaur</button></div>
+  </div></section>
+
+  <section class="screen" id="s5"><div class="card"><img class="scene-img" src="assets/minotaur.webp" alt="Percy uses the Minotaur's momentum against it">
+    <div class="eyebrow">Mission 5 · Bullfighting</div><h2>Survive the charge</h2><p class="instructions">Choose one action at each moment. Think like Percy: the Minotaur is powerful, fast and bad at changing direction.</p>
+    <div id="battle"></div><div class="feedback" id="battleFb">The Minotaur is on your trail.</div><div class="actions"><button class="btn" id="battleNext" disabled onclick="go(6)">Compare the film</button></div>
+  </div></section>
+
+  <section class="screen" id="s6"><div class="card"><img class="scene-img" src="assets/olympus-opening-v2.webp" alt="Two Greek gods face each other above stormy Manhattan">
+    <div class="eyebrow">New mission · 2010 film · opening scenes</div><h2>The Adaptation Detector</h2>
+    <p class="instructions">The 2010 film changes the opening of the story. Decide where each detail appears.</p>
+    <div id="compare"></div>
+    <div class="divider"></div><span class="compare-label">Listening language</span><h3>What did the film mean?</h3><div id="filmLanguage"></div>
+    <div class="feedback" id="filmFb">0 of 10 film clues completed</div><div class="actions"><button class="btn" id="filmNext" disabled onclick="go(7)">Write the final report</button></div>
+  </div></section>
+
+  <section class="screen" id="s7"><div class="card">
+    <div class="eyebrow">Final report</div><h2>Book or film?</h2>
+    <p>Write 4–6 sentences. Use at least two useful expressions:</p><div class="chips"><span class="chip">keep tabs on</span><span class="chip">on someone’s trail</span><span class="chip">hold your ground</span><span class="chip">with all your might</span><span class="chip">unlike the book</span><span class="chip">in both versions</span></div>
+    <p><b>Which opening is more effective—the book or the film? Mention one important difference and explain your opinion.</b></p>
+    <textarea aria-label="Your book and film report" id="report" placeholder="In both versions, Percy discovers that his world is dangerous. Unlike the book, the film…"></textarea>
+    <p class="tiny">Writing bonus: 6 completion points for at least 60 characters. Your teacher checks your ideas and expressions.</p><p class="tiny">Teacher option: ask the student to read the report aloud and defend one idea.</p>
+    <div class="actions"><button class="btn" onclick="finish()">Complete the quest</button><button class="btn secondary" onclick="downloadReport()">Download my writing (.txt)</button></div><div class="feedback" id="reportFb">The report is stored only in this browser.</div>
+  </div></section>
+
+  <section class="screen" id="s8"><div class="hero" style="background-image:url('assets/minotaur.webp')"><div class="hero-content">
+    <div class="eyebrow">Quest complete</div><div class="result" id="finalScore">0 / 40</div><h2 id="rank">Camp Half-Blood Recruit</h2><p id="finalText"></p>
+    <div class="actions"><button class="btn" onclick="restart()">Play again</button><button class="btn secondary" onclick="go(7)">Read my report</button></div>
+  </div></div></section>
+  <div class="footer">Unofficial educational activity · Original lesson artwork · Fluent Mind Adventures · Progress stays in this browser</div>
+</main>
+<script>
+const MAX=40;
+let state;
+const timeline=[
+  ['Grover reveals his cloven hooves.',3],['Mrs Dodds turns into a winged creature.',1],['The Minotaur follows Percy through the storm.',4],['The three old women cut the blue yarn.',2]
+];
+const mythQs=[
+  {q:'The “Kindly Ones” are…',a:['friendly forest spirits','the Furies, goddesses of revenge','three teachers'],c:1,n:'A pleasant name hides something terrifying.'},
+  {q:'The blue yarn represents…',a:['a road map','a person’s life','Grover’s clothes'],c:1,n:'The Fates spin, measure and cut the thread of life.'},
+  {q:'Grover is really…',a:['a centaur','a satyr','a Cyclops'],c:1,n:'A satyr is human above the waist and goat below it.'},
+  {q:'“Pasiphae’s son” is…',a:['the Minotaur','Zeus','Charon'],c:0,n:'The Minotaur is the bull-headed son of Pasiphae.'}
+];
+const vocabQs=[
+  {q:'Grover secretly watches Percy and checks that he is safe.',a:['keeps tabs on him','holds his ground','tears through him'],c:0},
+  {q:'The monster is following them.',a:['wedged in the mud','on their trail','shaking off the daze'],c:1},
+  {q:'Sally suddenly turns the car to avoid something.',a:['swerves','staggers','hauls'],c:0},
+  {q:'The frightening shape gives Percy a horrible feeling.',a:['wraps his mind around it','makes his skin crawl','keeps tabs on him'],c:1},
+  {q:'Percy stays in place while the Minotaur charges.',a:['holds his ground','makes a beeline for it','falls behind'],c:0},
+  {q:'Percy pulls the horn using all his strength.',a:['in the long run','with all his might','every so often'],c:1}
+];
+const chapterQs=[
+  {q:'Why did the monsters find Percy more easily now?',a:['He had learned too much about who he was.','He had lost his red jacket.','Grover called them.'],c:0,n:'Grover explains that knowing more about his identity makes Percy attract more monsters. The Mist helps hide the truth from humans.'},
+  {q:'Why can’t the Minotaur find them immediately?',a:['It is afraid of rain.','It mainly follows smell and has poor sight and hearing.','It cannot see red.'],c:1,n:'This weakness gives Sally and Percy a small tactical advantage.'},
+  {q:'Why does Sally tell Percy to jump directly sideways?',a:['The Minotaur cannot change direction well during a charge.','Percy can fly sideways.','The hill is less slippery there.'],c:0,n:'She teaches Percy to use the monster’s speed against it.'},
+  {q:'What changes Percy’s fear into strength?',a:['He sees the farmhouse.','He remembers his homework.','His mother disappears and Grover is still in danger.'],c:2,n:'Grief and loyalty turn into action.'},
+  {q:'Why is Percy’s red jacket useful?',a:['It makes him invisible.','He uses it to attract the Minotaur’s attention.','It protects him from lightning.'],c:1,n:'Percy improvises with an object he already has.'},
+  {q:'What best describes Percy at the end of the chapter?',a:['He forgets Grover and runs alone.','He is exhausted and grieving, but still carries Grover to safety.','He celebrates his victory.'],c:1,n:'He is tired and sad, but he still helps his friend.'}
+];
+const battleQs=[
+  {q:'The Minotaur lowers its head and charges. What do you do?',a:['Run straight ahead','Hold your ground','Close your eyes'],c:1,ok:'You wait. It gets closer…'},
+  {q:'It is almost on top of you.',a:['Jump directly sideways','Try to explain the myth','Lie down'],c:0,ok:'It storms past and cannot turn quickly.'},
+  {q:'It charges again, too fast to dodge.',a:['Leap up and use its head as a springboard','Ask Grover for food','Throw away the red jacket'],c:0,ok:'You land on its neck and grip the horns.'},
+  {q:'The Minotaur turns toward Grover.',a:['Let go and run','Pull one horn with all your might','Wait for an adult'],c:1,ok:'Snap! You now have a weapon.'}
+];
+const compareQs=[
+  {q:'Zeus and Poseidon discuss the missing lightning bolt.',a:['Book only','Film only','Both'],c:1,n:'The film opens by showing the gods and the central conflict immediately.'},
+  {q:'Percy warns the reader that being a half-blood is dangerous.',a:['Book only','Film only','Both'],c:0,n:'That direct warning is the book’s opening voice.'},
+  {q:'Percy stays underwater for seven minutes.',a:['Book only','Film only','Both'],c:1,n:'The film uses this visual clue to connect Percy with water.'},
+  {q:'Mrs Dodds attacks Percy during a museum trip.',a:['Book only','Film only','Both'],c:2,n:'The scene exists in both versions, although details change.'},
+  {q:'Mr Brunner’s pen becomes a weapon.',a:['Book only','Film only','Both'],c:2,n:'The disguised weapon is important in both openings.'},
+  {q:'Nancy Bobofit falls into a fountain.',a:['Book only','Film only','Both'],c:0,n:'The film removes this particular incident from its opening.'}
+];
+const filmLanguageQs=[
+  {q:'Percy says water is “the one place I can think.” He means…',a:['water helps him feel calm and focused','he does homework underwater','he cannot think anywhere'],c:0},
+  {q:'“Severe distress” means…',a:['a funny situation','serious danger or extreme trouble','a school test'],c:1},
+  {q:'“Don’t let him out of your sight” means…',a:['watch him continuously','hide him in darkness','stop speaking to him'],c:0},
+  {q:'A “protector” is someone who…',a:['keeps another person safe','steals a weapon','teaches ancient Greek'],c:0}
+];
+const GROUPS={myths:{data:mythQs,box:'#myths',count:'mythsDone',next:'#mythNext'},vocab:{data:vocabQs,box:'#vocab',count:'vocabDone',next:'#vocabNext'},chapter:{data:chapterQs,box:'#chapter',count:'chapterDone',next:'#chapterNext'},battle:{data:battleQs,count:'battleDone'},compare:{data:compareQs,box:'#compare',count:'compareDone'},filmLanguage:{data:filmLanguageQs,box:'#filmLanguage',count:'filmLangDone'}};
+let battleTimer=null,battleGeneration=0;
+function qs(selector){return document.querySelector(selector)}
+function blankState(report=''){return {screen:0,score:0,timeline:0,report,reportScored:false,answers:Object.fromEntries(Object.entries(GROUPS).map(([key,g])=>[key,Array(g.data.length).fill(null)]))}}
+function readStorage(key){try{return localStorage.getItem(key)}catch(e){qs('#storage-note').hidden=false;return null}}
+function sync(){let score=state.timeline;for(const [key,g] of Object.entries(GROUPS)){state[g.count]=state.answers[key].filter(Number.isInteger).length;score+=state.answers[key].filter((a,i)=>a===g.data[i].c).length}state.vocabCorrect=state.answers.vocab.filter((a,i)=>a===vocabQs[i].c).length;state.score=score+(state.reportScored?6:0)}
+function unlocked(){let n=1;if(state.timeline!==4)return n;n=2;for(const [key,next] of [['myths',3],['vocab',4],['chapter',5],['battle',6]]){if(state.answers[key].some(a=>a===null))return n;n=next}if(state.compareDone+state.filmLangDone===10)n=7;if(n===7&&state.reportScored)n=8;return n}
+function persist(){sync();try{localStorage.setItem('hb2-progress',JSON.stringify(state));localStorage.setItem('hb2-report',state.report);localStorage.setItem('hb2-screen',String(state.screen))}catch(e){qs('#storage-note').hidden=false}}
+function restore(){let saved;try{saved=JSON.parse(readStorage('hb2-progress')||'null')}catch(e){}state=blankState(readStorage('hb2-report')||'');if(saved&&typeof saved==='object'&&!Array.isArray(saved)){if(typeof saved.report==='string')state.report=saved.report;if(Number.isInteger(saved.timeline)&&saved.timeline>=0&&saved.timeline<=4)state.timeline=saved.timeline;for(const [key,g] of Object.entries(GROUPS)){const a=saved.answers?.[key];if(Array.isArray(a))state.answers[key]=g.data.map((q,i)=>Number.isInteger(a[i])&&a[i]>=0&&a[i]<q.a.length?a[i]:null)}const hole=state.answers.battle.indexOf(null);if(hole>=0)state.answers.battle.fill(null,hole);sync();state.reportScored=saved.reportScored===true&&state.report.trim().length>=60&&unlocked()>=7;sync();if(Number.isInteger(saved.screen)&&saved.screen>=0&&saved.screen<=unlocked())state.screen=saved.screen}sync()}
+function refresh(){sync();qs('#previous-file').disabled=state.screen===0;qs('#score').textContent=`${state.score} / ${MAX}`;qs('#timelineNext').disabled=state.timeline<4;for(const key of ['myths','vocab','chapter'])qs(GROUPS[key].next).disabled=state.answers[key].some(a=>a===null);qs('#battleNext').disabled=state.battleDone<4;qs('#filmNext').disabled=state.compareDone+state.filmLangDone<10;qs('#vocabFb').textContent=`${state.vocabDone} of 6 answered · ${state.vocabCorrect} correct`;qs('#filmFb').textContent=`${state.compareDone+state.filmLangDone} of 10 film clues completed`;qs('#finalScore').textContent=`${state.score} / ${MAX}`;qs('#rank').textContent=state.score>=36?'Child of Athena':state.score>=29?'Mythology Detective':state.score>=20?'Camp Half-Blood Recruit':'Brave Mortal';qs('#finalText').textContent=state.score>=29?'You followed the clues, understood Chapter 4 and detected the film’s changes.':'You reached safety. Replay the case files to review the clues you missed.';qs('#bar').style.width=`${state.screen/8*100}%`;qs('#progress-label').textContent=state.screen===0?'Ready to begin':state.screen===8?'Quest complete':`Case file ${state.screen} of 7`;qs('#bar-holder').setAttribute('aria-valuenow',state.screen)}
+function go(n){sync();if(!Number.isInteger(n)||n<0)return;n=Math.min(n,unlocked(),8);if(state.screen===5&&n!==5){battleGeneration++;clearTimeout(battleTimer)}state.screen=n;if(n===5)renderBattle();document.querySelectorAll('.screen').forEach((e,i)=>e.classList.toggle('active',i===n));refresh();persist();window.scrollTo({top:0,behavior:'instant'})}
+function renderChoices(key){const g=GROUPS[key],box=qs(g.box);box.replaceChildren();g.data.forEach((x,qi)=>{const q=document.createElement('div');q.className='question';q.innerHTML=`<b>${qi+1}. ${x.q}</b><div class="grid"></div><div class="feedback" role="status"></div>`;const paint=()=>{const answer=state.answers[key][qi];q.querySelectorAll('button').forEach((button,i)=>{button.disabled=answer!==null;button.classList.toggle('correct',answer!==null&&i===x.c);button.classList.toggle('wrong',answer!==null&&i===answer&&i!==x.c)});q.querySelector('.feedback').textContent=answer===null?'Choose one answer.':(answer===x.c?'Correct. ':'Not quite. Correct answer: '+x.a[x.c]+'. ')+(x.n||'')};x.a.forEach((label,ai)=>{const button=document.createElement('button');button.className='option';button.textContent=label;button.onclick=()=>{if(state.answers[key][qi]!==null)return;state.answers[key][qi]=ai;paint();refresh();persist()};q.querySelector('.grid').append(button)});paint();box.append(q)})}
+function renderTimeline(){qs('#timeline').replaceChildren();timeline.forEach(([label,n])=>{const b=document.createElement('button');b.className='event';const num=document.createElement('span'),text=document.createElement('span');num.className='num';num.textContent=n<=state.timeline?n:'?';text.textContent=label;b.append(num,text);b.classList.toggle('chosen',n<=state.timeline);b.disabled=n<=state.timeline;b.onclick=()=>{if(n<=state.timeline)return;if(n===state.timeline+1){state.timeline++;b.classList.add('chosen');b.disabled=true;num.textContent=n;qs('#timelineFb').textContent=state.timeline===4?'Case file restored. The clues form one continuous threat.':'Correct. What happened next?';refresh();persist()}else{b.classList.add('wrong');qs('#timelineFb').textContent='That event belongs somewhere else. Try another.';setTimeout(()=>b.classList.remove('wrong'),650)}};qs('#timeline').append(b)});qs('#timelineFb').textContent=state.timeline===4?'Case file restored.':state.timeline?`${state.timeline} of 4 events restored.`:'The file is scrambled.'}
+function renderBattle(){clearTimeout(battleTimer);const generation=++battleGeneration,box=qs('#battle');box.replaceChildren();sync();const i=state.battleDone;if(i>=battleQs.length){box.textContent='You have finished all four decisions. Percy pulls off a horn and uses it to defeat the Minotaur. Then he helps Grover reach safety.';qs('#battleFb').textContent='Battle complete. Each decision was counted once.';refresh();return}const x=battleQs[i],q=document.createElement('div');q.className='question';q.innerHTML=`<b>${i+1}. ${x.q}</b><div class="grid"></div>`;x.a.forEach((label,ai)=>{const b=document.createElement('button');b.className='option';b.textContent=label;b.onclick=()=>{if(generation!==battleGeneration||state.answers.battle[i]!==null)return;state.answers.battle[i]=ai;q.querySelectorAll('button').forEach((z,j)=>{z.disabled=true;z.classList.toggle('correct',j===x.c);z.classList.toggle('wrong',j===ai&&ai!==x.c)});qs('#battleFb').textContent=ai===x.c?x.ok:'Dangerous choice. Better action: '+x.a[x.c]+'.';refresh();persist();battleTimer=setTimeout(()=>{if(generation===battleGeneration)renderBattle()},850)};q.querySelector('.grid').append(b)});box.append(q)}
+function saveReport(){state.report=qs('#report').value;persist();qs('#reportFb').textContent=qs('#storage-note').hidden?'Saved in this browser.':'Your writing is kept in this tab. Download a copy before closing it.'}
+function downloadReport(){saveReport();const a=document.createElement('a'),url=URL.createObjectURL(new Blob(['PERCY JACKSON — BOOK & FILM QUEST\n\n'+state.report],{type:'text/plain;charset=utf-8'}));a.href=url;a.download='percy-book-film-report.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function finish(){saveReport();sync();if(unlocked()<7){qs('#reportFb').textContent='Complete the case files before submitting your report.';return}if(state.report.trim().length<60){qs('#reportFb').textContent='Write at least 60 characters before completing the quest. Aim for 4–6 sentences and use two useful expressions.';return}state.reportScored=true;go(8)}
+function renderAll(){battleGeneration++;clearTimeout(battleTimer);renderTimeline();for(const key of ['myths','vocab','chapter','compare','filmLanguage'])renderChoices(key);renderBattle();qs('#report').value=state.report;refresh()}
+function restart(){const report=qs('#report').value;state=blankState(report);renderAll();qs('#reportFb').textContent='Your previous writing is kept. You can edit it after replaying the case files.';go(0)}
+restore();renderAll();qs('#report').addEventListener('input',()=>{state.report=qs('#report').value;persist()});go(state.screen);
+</script>
+</body>
+</html>
