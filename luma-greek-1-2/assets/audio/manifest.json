@@ -1,0 +1,178 @@
+[
+  {
+    "file": "01.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου! Τι κάνεις;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": true,
+    "phoneticReview": "not independently audited by a native speaker",
+    "greetingSpeaker": "Sarri.greek",
+    "greetingSource": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "Composite audio CC BY-SA 4.0",
+    "changes": "Native greeting silence trimmed, AAC converted, concatenated with synthetic continuation"
+  },
+  {
+    "file": "02.m4a",
+    "lang": "el-GR",
+    "text": "Εγώ είμαι πολύ καλά. Εσύ;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "03.m4a",
+    "lang": "el-GR",
+    "text": "Πώς είσαι;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "04.m4a",
+    "lang": "el-GR",
+    "text": "Χάρηκα πολύ!",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "05.m4a",
+    "lang": "el-GR",
+    "text": "Τι κάνεις;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "06.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου! Τι κάνεις;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": true,
+    "phoneticReview": "not independently audited by a native speaker",
+    "greetingSpeaker": "Sarri.greek",
+    "greetingSource": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "Composite audio CC BY-SA 4.0",
+    "changes": "Native greeting silence trimmed, AAC converted, concatenated with synthetic continuation"
+  },
+  {
+    "file": "07.m4a",
+    "lang": "el-GR",
+    "text": "Πολύ καλά. Εσύ;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "08.m4a",
+    "lang": "el-GR",
+    "text": "Καλημέρα σας! Τι κάνετε;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "09.m4a",
+    "lang": "el-GR",
+    "text": "Πώς είστε;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "10.m4a",
+    "lang": "el-GR",
+    "text": "Από εδώ η Μαρίνα.",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "11.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου! Με λένε Μαρίνα.",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": true,
+    "phoneticReview": "not independently audited by a native speaker",
+    "greetingSpeaker": "Sarri.greek",
+    "greetingSource": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "Composite audio CC BY-SA 4.0",
+    "changes": "Native greeting silence trimmed, AAC converted, concatenated with synthetic continuation"
+  },
+  {
+    "file": "12.m4a",
+    "lang": "el-GR",
+    "text": "Τι κάνεις;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "13.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου! Χάρηκα!",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": true,
+    "phoneticReview": "not independently audited by a native speaker",
+    "greetingSpeaker": "Sarri.greek",
+    "greetingSource": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "Composite audio CC BY-SA 4.0",
+    "changes": "Native greeting silence trimmed, AAC converted, concatenated with synthetic continuation"
+  },
+  {
+    "file": "14.m4a",
+    "lang": "el-GR",
+    "text": "Καλησπέρα σας! Πώς είστε;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "15.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου! Τι κάνεις;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": true,
+    "phoneticReview": "not independently audited by a native speaker",
+    "greetingSpeaker": "Sarri.greek",
+    "greetingSource": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "Composite audio CC BY-SA 4.0",
+    "changes": "Native greeting silence trimmed, AAC converted, concatenated with synthetic continuation"
+  },
+  {
+    "file": "16.m4a",
+    "lang": "el-GR",
+    "text": "Έτσι κι έτσι.",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "17.m4a",
+    "lang": "el-GR",
+    "text": "Τι κάνετε;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "18.m4a",
+    "lang": "el-GR",
+    "text": "Χαίρω πολύ.",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": false,
+    "phoneticReview": "not independently audited by a native speaker"
+  },
+  {
+    "file": "19.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου! Τι κάνεις;",
+    "voice": "macOS Melina, rate 145",
+    "nativeGreeting": true,
+    "phoneticReview": "not independently audited by a native speaker",
+    "greetingSpeaker": "Sarri.greek",
+    "greetingSource": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "Composite audio CC BY-SA 4.0",
+    "changes": "Native greeting silence trimmed, AAC converted, concatenated with synthetic continuation"
+  }
+]

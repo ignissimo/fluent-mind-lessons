@@ -1,5 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),{JSDOM}=require('jsdom'),fs=require('node:fs');
-const html=fs.readFileSync('luma-greek-1-1/index.html','utf8');
+const path=require('node:path');
+const html=fs.readFileSync('luma-greek-1-1/index.html','utf8').replace(/<script src="([^"]+)"><\/script>/g,(_,p)=>'<script>'+fs.readFileSync(path.resolve('luma-greek-1-1',p),'utf8')+'</script>');
 function load(saved,blocked=false,setup=()=>{}){const dom=new JSDOM(html,{url:'https://example.org/',runScripts:'dangerously',beforeParse(w){setup(w);w.confirm=()=>true;w.HTMLMediaElement.prototype.pause=function(){};w.HTMLMediaElement.prototype.play=function(){return Promise.resolve()};if(saved!==undefined)w.localStorage.setItem('luma11',JSON.stringify(saved));if(blocked)Object.defineProperty(w,'localStorage',{get(){throw Error('blocked')}})}});return {w:dom.window,d:dom.window.document};}
 test('cannot skip unanswered scenes or finish early',()=>{const g=load();g.w.next();assert.match(g.d.querySelector('#count').textContent,/1 из 10/);g.w.close()});
 test('reject substring false positives and incomplete name',()=>{const g=load();g.d.querySelector('#answer').value='όχι γεια σου όχι';g.w.check();assert.equal(JSON.parse(g.w.localStorage.getItem('luma11')||'{}').done?.length||0,0);g.d.querySelector('#answer').value='Γεια σου';g.w.check();g.w.next();g.d.querySelector('#answer').value='Με λένε';g.w.check();assert.equal(JSON.parse(g.w.localStorage.getItem('luma11')).done.length,1);g.w.close()});
