@@ -22,3 +22,7 @@ Author requested removal of all intermediate achievements. Both chapters now hav
 ## Update: two feedback modes
 
 Only Soft and Examiner remain in both chapters. Soft hints are opt-in; Examiner hides/guards hints and NPC text/translation, clears old assistance on switching, and never prints an expected answer after mistakes. Both modes validate answers and allow unlimited retries. Legacy unchecked-mode saves migrate to Soft, preserving scene state, drafts and settings. Five mode-policy regression tests cover both chapters, legacy migration, repeated wrong answers, mode changes, Russian choices and full completion of all scenes in Examiner.
+
+## Update: voice-only progression
+
+Removed editable answer fields, Submit/Next buttons and clickable translation confirmation from both chapters. Recognized words are read-only. Correct SpeechRecognition results automatically advance after a short feedback interval, play the next NPC line when audio is enabled, and open the final chapter dialog automatically on the last answer. Wrong/no-result/error states require another spoken attempt. Session/advance guards cancel stale callbacks and pending transitions on navigation, mode changes and backgrounding. Legacy drafts remain stored, without being presented as speech. Tests now drive real application microphone handlers through deterministic Web Speech callback fakes; this verifies application behavior, not actual service connectivity or acoustic quality.

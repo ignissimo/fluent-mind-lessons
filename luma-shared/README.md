@@ -16,3 +16,11 @@
 - When changing the shared engine, update its versioned URL in both chapter HTML files so cached code cannot restore retired behavior.
 
 - A1 playback has one normal, already slow speech tempo. Do not add a slower-playback button or alternate playback-rate mode to current or future chapters.
+
+## Voice confirmation
+
+- Current and future chapters are voice-only: no editable answer field, Submit button, manual Next button or text-answer fallback. Translation options are read-only task content; the learner says the Russian translation.
+- SpeechRecognition results are the sole normal answer route (`el-GR` for conversation, `ru-RU` for translations). Show the recognized transcript as read-only text, then validate it using the active mode.
+- Correct speech briefly shows success, automatically advances once, and plays the next NPC line when audio is enabled. The final correct reply automatically opens the single chapter-completion dialog.
+- Incorrect or unavailable recognition never advances. Repeated/stale callbacks cannot double-award or skip scenes. Navigation, mode changes and backgrounding cancel pending advancement. The microphone starts only on a learner click.
+- Preserve legacy text drafts in storage during migration, but never display them as recognized speech or count them as a spoken reply.
