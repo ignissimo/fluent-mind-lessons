@@ -1,0 +1,67 @@
+[
+  {
+    "file": "01.mp3",
+    "speaker": "Мария",
+    "text": "Γεια σου!",
+    "synthesisText": "Γεια σου!",
+    "lang": "el-GR",
+    "voice": "el-GR-AthinaNeural",
+    "gender": "Female",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "default; local atempo=0.9, pitch unchanged",
+    "type": "synthetic",
+    "phoneticStatus": "Greek female voice; no independent phonetic audit of individual clips"
+  },
+  {
+    "file": "02.mp3",
+    "speaker": "Мария",
+    "text": "Πώς σε λένε;",
+    "synthesisText": "Πώς σε λένε;",
+    "lang": "el-GR",
+    "voice": "el-GR-AthinaNeural",
+    "gender": "Female",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "default; local atempo=0.9, pitch unchanged",
+    "type": "synthetic",
+    "phoneticStatus": "Greek female voice; no independent phonetic audit of individual clips"
+  },
+  {
+    "file": "03.mp3",
+    "speaker": "Мария",
+    "text": "Με λένε Μαρία.",
+    "synthesisText": "Με λένε Μαρία.",
+    "lang": "el-GR",
+    "voice": "el-GR-AthinaNeural",
+    "gender": "Female",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "default; local atempo=0.9, pitch unchanged",
+    "type": "synthetic",
+    "phoneticStatus": "Greek female voice; no independent phonetic audit of individual clips"
+  },
+  {
+    "file": "08.mp3",
+    "speaker": "Мария",
+    "text": "Αυτός είναι ο Νίκος.",
+    "synthesisText": "Αυτός είναι ο Νίκος.",
+    "lang": "el-GR",
+    "voice": "el-GR-AthinaNeural",
+    "gender": "Female",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "default; local atempo=0.9, pitch unchanged",
+    "type": "synthetic",
+    "phoneticStatus": "Greek female voice; no independent phonetic audit of individual clips"
+  },
+  {
+    "file": "10.mp3",
+    "speaker": "Мария",
+    "text": "Καληνύχτα!",
+    "synthesisText": "Καληνύχτα!",
+    "lang": "el-GR",
+    "voice": "el-GR-AthinaNeural",
+    "gender": "Female",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "default; local atempo=0.9, pitch unchanged",
+    "type": "synthetic",
+    "phoneticStatus": "Greek female voice; no independent phonetic audit of individual clips"
+  }
+]

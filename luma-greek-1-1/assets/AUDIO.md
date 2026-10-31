@@ -1,5 +1,5 @@
-# Greek audio
+# Greek character voices
 
-Active recordings: audio-nestoras-v1/manifest.json (exact Greek text per file). Microsoft el-GR-NestorasNeural via edge-tts 7.3.1, rate -10%, playbackRate 1. Synthetic speech. The author approved the audible voice sample on 2026-10-31. This does not constitute an independent phonetic audit of every recording. No automatic device-voice fallback.
+Active female-character recordings: audio-athina-v1/manifest.json, el-GR-AthinaNeural. Maria, Marina, Eleni and Sofia use the female Greek voice. Active male-character recordings remain audio-nestoras-v1/, el-GR-NestorasNeural. Nikos, Kostas and Markos use the male Greek voice. In the final group scene Nikos speaks on behalf of the friends.
 
-Previous files in audio/ are retained for provenance and are no longer used by the lesson. Their original credits and licences remain in their manifest and ARTWORK.md where applicable.
+Synthesized by Microsoft Edge TTS via edge-tts 7.3.1, female synthesis at default rate followed by local atempo=0.9 (pitch unchanged); male synthesis rate -10%; playbackRate 1. Exact texts are listed in the manifests. The author approved the Nestoras sample; Athina clips have not received an independent phonetic audit. No device-voice fallback. Older recordings retained for provenance; the chapter audioFiles list determines active files.
