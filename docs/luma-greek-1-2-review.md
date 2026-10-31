@@ -18,3 +18,7 @@ Pronunciation limit: Γεια σου uses the documented native-speaker source; 
 ## Update: one chapter achievement
 
 Author requested removal of all intermediate achievements. Both chapters now have no achievement sidebar/counter or per-scene reward dialog. Shared engine awards one chapter achievement only after all scenes; completion dialog opens via Finish chapter. Old badges are replaced while completed scenes, drafts and settings remain. XP now derives from scene completions and one chapter bonus: chapter 1.1 = 120, chapter 1.2 = 210. This supersedes the earlier eight-achievement totals above.
+
+## Update: two feedback modes
+
+Only Soft and Examiner remain in both chapters. Soft hints are opt-in; Examiner hides/guards hints and NPC text/translation, clears old assistance on switching, and never prints an expected answer after mistakes. Both modes validate answers and allow unlimited retries. Legacy unchecked-mode saves migrate to Soft, preserving scene state, drafts and settings. Five mode-policy regression tests cover both chapters, legacy migration, repeated wrong answers, mode changes, Russian choices and full completion of all scenes in Examiner.
