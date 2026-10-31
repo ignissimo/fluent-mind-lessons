@@ -1,0 +1,102 @@
+[
+  {
+    "file": "01.mp3",
+    "text": "Γεια σου!",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "02.mp3",
+    "text": "Πώς σε λένε;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "03.mp3",
+    "text": "Με λένε Μαρία.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "04.mp3",
+    "text": "Χάρηκα!",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "05.mp3",
+    "text": "Καλημέρα σας!",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "06.mp3",
+    "text": "Με λένε Κώστα.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "07.mp3",
+    "text": "Αυτή είναι η Μαρία.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "08.mp3",
+    "text": "Αυτός είναι ο Νίκος.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "09.mp3",
+    "text": "Καλησπέρα σας!",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  },
+  {
+    "file": "10.mp3",
+    "text": "Καληνύχτα!",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; individual recordings not independently audited"
+  }
+]

@@ -1,0 +1,262 @@
+[
+  {
+    "file": "01.mp3",
+    "text": "Γεια σου! Είσαι καλά;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "02.mp3",
+    "text": "Εγώ είμαι ο Νίκος. Εσύ;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "03.mp3",
+    "text": "Είσαι η Μαρία;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "04.mp3",
+    "text": "Αυτός είναι ο Νίκος.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "05.mp3",
+    "text": "Αυτή είναι η Ελένη.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "06.mp3",
+    "text": "Αυτός είναι ο Κώστας;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "07.mp3",
+    "text": "Αυτή είναι η Μαρία;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "08.mp3",
+    "text": "Εσείς είστε καλά;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "09.mp3",
+    "text": "Εμείς είμαστε φίλοι.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "10.mp3",
+    "text": "Εσύ κι εγώ είμαστε εδώ.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "11.mp3",
+    "text": "Αυτοί είναι ο Νίκος και ο Κώστας.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "12.mp3",
+    "text": "Αυτές είναι η Ελένη και η Σοφία.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "13.mp3",
+    "text": "Είμαι ο Κώστας.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "14.mp3",
+    "text": "Είσαι η Σοφία;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "15.mp3",
+    "text": "Είστε ο κύριος Κώστας;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "16.mp3",
+    "text": "Εγώ είμαι η Μαρία.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "17.mp3",
+    "text": "Είμαστε η Ελένη και η Μαρία.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "18.mp3",
+    "text": "Δεν είμαι ο Γιώργος. Είμαι ο Νίκος.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "19.mp3",
+    "text": "Είναι η Μαρία ή η Ελένη;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "20.mp3",
+    "text": "Είμαι καλά. Εσύ είσαι καλά;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "21.mp3",
+    "text": "Ποια είναι η Μαρία;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "22.mp3",
+    "text": "Είμαστε φίλοι;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "23.mp3",
+    "text": "Εμείς είμαστε φίλοι.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "24.mp3",
+    "text": "Δεν είμαι η Σοφία.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "25.mp3",
+    "text": "Αυτοί είναι φίλοι.",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  },
+  {
+    "file": "26.mp3",
+    "text": "Γεια σου! Πώς σε λένε; Είσαι καλά;",
+    "lang": "el-GR",
+    "voice": "el-GR-NestorasNeural",
+    "provider": "Microsoft Edge TTS via edge-tts 7.3.1",
+    "rate": "-10%",
+    "type": "synthetic",
+    "phoneticStatus": "Voice sample approved by author on 2026-10-31; superseded by audio-nestoras-v1/ active URLs"
+  }
+]

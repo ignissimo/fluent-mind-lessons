@@ -24,3 +24,9 @@
 - Correct speech briefly shows success, automatically advances once, and plays the next NPC line when audio is enabled. The final correct reply automatically opens the single chapter-completion dialog.
 - Incorrect or unavailable recognition never advances. Repeated/stale callbacks cannot double-award or skip scenes. Navigation, mode changes and backgrounding cancel pending advancement. The microphone starts only on a learner click.
 - Preserve legacy text drafts in storage during migration, but never display them as recognized speech or count them as a spoken reply.
+
+## Greek language and audio checks
+
+- Review Greek grammar, name cases and accepted spoken variants independently from application tests. Name-only replies must contain an actual name; combined tasks must check all requested parts and polarity.
+- Use fixed local audio files. Never silently substitute an unreviewed device voice when audio fails. A Greek locale label and passing media tests do not constitute pronunciation validation.
+- After repeated author reports of Melina errors, replacement candidate voice Nestoras was prepared. The author approved its audible sample on 2026-10-31; all three chapters use versioned audio-nestoras-v1 MP3 files. Do not describe synthesized recordings as native-speaker recordings or a completed native phonetic audit.
