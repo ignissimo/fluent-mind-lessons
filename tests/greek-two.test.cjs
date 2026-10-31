@@ -1,5 +1,5 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),{JSDOM}=require('jsdom'),fs=require('node:fs'),path=require('node:path');
-function source(dir){return fs.readFileSync(path.join(dir,'index.html'),'utf8').replace(/<script src="([^"]+)"><\/script>/g,(_,p)=>'<script>'+fs.readFileSync(path.resolve(dir,p),'utf8')+'</script>')}
+function source(dir){return fs.readFileSync(path.join(dir,'index.html'),'utf8').replace(/<script src="([^"]+)"><\/script>/g,(_,p)=>'<script>'+fs.readFileSync(path.resolve(dir,p.split('?')[0]),'utf8')+'</script>')}
 function load(saved,setup=()=>{}){const dom=new JSDOM(source('luma-greek-1-2'),{url:'https://example.org/luma-greek-1-2/',runScripts:'dangerously',beforeParse(w){w.confirm=()=>true;w.HTMLMediaElement.prototype.pause=function(){};w.HTMLMediaElement.prototype.play=function(){return Promise.resolve()};if(saved!==undefined)w.localStorage.setItem('luma12',JSON.stringify(saved));setup(w)}});return{w:dom.window,d:dom.window.document};}
 function answer(g,text){g.d.querySelector('#answer').value=text;g.w.check()}
 test('chapter two cannot skip an unanswered scene',()=>{const g=load();g.w.next();assert.match(g.d.querySelector('#count').textContent,/1 из 19/);g.w.close()});
