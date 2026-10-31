@@ -14,3 +14,5 @@
 - Exam: no hint button, transcript/translation reveal or example answers in feedback. Wrong replies receive a neutral retry message, without limits, and do not complete the scene. Listening/replaying audio and task options remain available.
 - Switching modes clears and closes all previously revealed assistance and cancels active audio/microphone work. Legacy `free` saves migrate to `soft` without resetting scene progress or drafts.
 - When changing the shared engine, update its versioned URL in both chapter HTML files so cached code cannot restore retired behavior.
+
+- A1 playback has one normal, already slow speech tempo. Do not add a slower-playback button or alternate playback-rate mode to current or future chapters.
