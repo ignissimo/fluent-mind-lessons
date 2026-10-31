@@ -1,10 +1,12 @@
 [
   {
-    "file": "01.m4a",
+    "file": "01-native.m4a",
     "lang": "el-GR",
     "text": "Γεια σου!",
-    "voice": "macOS Melina",
-    "rate": 145
+    "speaker": "Sarri.greek, native Standard Modern Greek speaker (as documented by source)",
+    "source": "https://commons.wikimedia.org/wiki/File:EL-γεια-σου.ogg",
+    "license": "CC BY-SA 4.0",
+    "changes": "Converted Ogg Vorbis to AAC/M4A; user-controlled playback speed"
   },
   {
     "file": "02.m4a",
