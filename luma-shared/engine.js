@@ -37,7 +37,38 @@ function isIntroduction(value){
   const nonNames=['ειμαι','δεν','οχι','καλα','πολυ','ευχαριστω','και','εγω','εσυ','η','ο','τον','την','μια','χαρα','εδω','φιλοσ','φιλη','φιλοι'];
   return !!match&&!match[1].split(' ').some(word=>nonNames.includes(word));
 }
-function accepted(value){
+// A1 checks speech approximately; ASR spelling is not a pronunciation score.
+function speechKey(value){return value.replace(/αι/g,'ε').replace(/ει|οι|υι/g,'ι').replace(/[ηυ]/g,'ι').replace(/ω/g,'ο')}
+function oneSpeechEdit(a,b){
+  if(Math.abs(a.length-b.length)>1)return false;
+  let i=0,j=0,edits=0;
+  while(i<a.length&&j<b.length){
+    if(a[i]===b[j]){i++;j++;continue}
+    if(++edits>1)return false;
+    if(a.length>=b.length)i++;
+    if(b.length>=a.length)j++;
+  }
+  return edits+(i<a.length||j<b.length?1:0)<=1;
+}
+function speechMatch(value,expected){
+  if(value===expected)return true;
+  if(!/^[α-ω ]+$/u.test(value)||!/^[α-ω ]+$/u.test(expected))return false;
+  // Observed service confusion, scoped to this complete greeting only.
+  if(value==='χρεη πολυ'&&expected==='χαιρω πολυ')return true;
+  const heard=value.split(' '),target=expected.split(' ');
+  if(heard.length!==target.length)return false;
+  const protectedWords=new Set(['ναι','οχι','δεν','μη','μην','εγω','εσυ','αυτοσ','αυτη','αυτο','εμεισ','εσεισ','αυτοι','αυτεσ','αυτα','ειμαι','εισαι','ειναι','ειμαστε','ειστε','καλα','κακα','με','σε','τον','την','του','τησ','ο','η','το','οι','τα']);
+  const names=new Set(Object.keys(chapter.portraits).map(norm).concat(['νικοσ','κωστασ','κωστα','μαρια','μαρινα','μαρκοσ','ελενη','σοφια']));
+  let approximate=0;
+  return target.every((word,i)=>{
+    const a=speechKey(heard[i]),b=speechKey(word);
+    if(a===b)return true;
+    if(protectedWords.has(word)||protectedWords.has(heard[i])||names.has(word)||names.has(heard[i]))return false;
+    // At most one small content-word discrepancy in a complete reply.
+    return b.length>=4&&a.length>=4&&a[0]===b[0]&&oneSpeechEdit(a,b)&&++approximate<=1;
+  });
+}
+function accepted(value,exactOnly=false){
   if(chapter.introductionAndWellbeingScenes?.includes(idx)){
     const reply=value.replace(/^(?:γεια σου|γεια) /u,'');
     const match=reply.match(/^(.+?) (?:και )?(?:ναι )?(?:εγω )?ειμαι (?:πολυ καλα|καλα|μια χαρα)(?: ευχαριστω)?$/u);
@@ -45,7 +76,7 @@ function accepted(value){
   }
   if(chapter.nameScenes.includes(idx))return isIntroduction(value);
   const alternatives=(chapter.alternatives||{})[idx]||data[idx][6];
-  return alternatives.some(a=>norm(a)===value);
+  return alternatives.some(a=>(exactOnly||data[idx][8])?norm(a)===value:speechMatch(value,norm(a)));
 }
 function renderChoices(){
   const choices=data[idx][8];
@@ -80,7 +111,7 @@ function back(){if(idx>0)go(idx-1)}
 function resetGame(){if(!confirm('Начать главу заново и сбросить прогресс этой главы?'))return;stopAll();idx=0;done=[];drafts={};rebuild();closeModal();save();render()}
 function listen(){if(advancing)return;if(recognition){recognition.stop();el('micStatus').textContent='Проверяю, что удалось услышать…';return}const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){el('micStatus').textContent='Этот браузер не поддерживает распознавание. Открой урок в браузере с поддержкой распознавания речи.';return}if(!window.isSecureContext&&location.hostname!=='localhost'){el('micStatus').textContent='Для микрофона открой опубликованную HTTPS-ссылку.';return}stopAll();audioUnlocked=true;const token=++session,scene=idx,r=new R();recognition=r;let received=false,failed=false;r.lang=data[idx][8]?'ru-RU':'el-GR';r.interimResults=false;r.continuous=false;r.maxAlternatives=5;micState(true);el('micStatus').textContent=data[idx][8]?'Разреши микрофон и скажи перевод по-русски…':'Разреши микрофон и произнеси ответ по-гречески…';const current=()=>token===session&&scene===idx;
 r.onstart=()=>{if(current())el('micStatus').textContent='🎙️ Слушаю. Закончи фразу или нажми «Закончить ответ».'};
-r.onresult=e=>{if(!current()||received)return;const result=e.results?.[e.resultIndex||0];const candidates=Array.from(result||[]).map(a=>String(a.transcript||'').trim().slice(0,300)).filter(Boolean);const text=candidates.find(a=>accepted(norm(a)))||candidates[0];if(!text)return;received=true;el('micStatus').textContent='';recognition=null;session++;clearTimeout(recordTimer);micState(false);r.abort();checkVoice(text)};
+r.onresult=e=>{if(!current()||received)return;const result=e.results?.[e.resultIndex||0];const candidates=Array.from(result||[]).map(a=>String(a.transcript||'').trim().slice(0,300)).filter(Boolean);const text=candidates.find(a=>accepted(norm(a),true))||candidates.find(a=>accepted(norm(a)))||candidates[0];if(!text)return;received=true;el('micStatus').textContent='';recognition=null;session++;clearTimeout(recordTimer);micState(false);r.abort();checkVoice(text)};
 const errors={'not-allowed':'Доступ к микрофону запрещён. Разреши его в настройках сайта и попробуй снова.','service-not-allowed':'Сервис распознавания недоступен в этом браузере.','audio-capture':'Микрофон не найден или занят другим приложением.','no-speech':'Не услышала речь. Попробуй ещё раз, немного ближе к микрофону.','network':'Нет связи с сервисом распознавания. Проверь интернет.','language-not-supported':'Сервис не поддерживает язык ответа на этом устройстве.','aborted':'Запись остановлена.'};
 r.onerror=e=>{if(!current())return;failed=true;el('micStatus').textContent=(errors[e.error]||'Не удалось распознать речь. Попробуй ещё раз.')};
 r.onend=()=>{if(!current())return;recognition=null;clearTimeout(recordTimer);micState(false);if(!received&&!failed)el('micStatus').textContent='Ответ не распознан. Нажми микрофон и попробуй ещё раз.'};

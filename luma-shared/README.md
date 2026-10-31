@@ -30,3 +30,9 @@
 - Review Greek grammar, name cases and accepted spoken variants independently from application tests. Name-only replies must contain an actual name; combined tasks must check all requested parts and polarity.
 - Use fixed local audio files. Never silently substitute an unreviewed device voice when audio fails. A Greek locale label and passing media tests do not constitute pronunciation validation.
 - After repeated author reports of Melina errors, replacement candidate voice Nestoras was prepared. The author approved its audible sample on 2026-10-31; all three chapters use versioned audio-nestoras-v1 MP3 files. Do not describe synthesized recordings as native-speaker recordings or a completed native phonetic audit.
+
+## A1 speech tolerance — author update 2026-10-31
+
+Both modes accept limited speech/transcription differences, rather than requiring perfect orthography. Greek vowel spellings with the same sound are normalized; one small edit in a content word of at least four sound symbols is permitted per complete reply. Token counts must agree, and grammatical/negative words, wellbeing polarity and character names are protected from fuzzy edits. Name-introduction and combined-task validators remain structural; Russian translation checks remain exact against their accepted variants. This is a bounded transcript heuristic, not acoustic pronunciation or general semantic assessment.
+
+The observed ASR confusion χρέη πολύ is accepted only as the complete expected greeting Χαίρω πολύ. This supersedes the earlier refusal to allow that confusion: the author explicitly requests A1 tolerance after repeated blockage. The actual transcript stays visible, not rewritten as an ideal recording. Prefer an exact valid alternative from the recognizer before approximate matches. The introduction task also accepts Χάρηκα and complete Χάρηκα … για τη γνωριμία variants.
