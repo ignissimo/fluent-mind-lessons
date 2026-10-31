@@ -1,0 +1,72 @@
+[
+  {
+    "file": "01.m4a",
+    "lang": "el-GR",
+    "text": "Γεια σου!",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "02.m4a",
+    "lang": "el-GR",
+    "text": "Πώς σε λένε;",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "03.m4a",
+    "lang": "el-GR",
+    "text": "Με λένε Μαρία.",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "04.m4a",
+    "lang": "el-GR",
+    "text": "Χάρηκα!",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "05.m4a",
+    "lang": "el-GR",
+    "text": "Καλημέρα σας!",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "06.m4a",
+    "lang": "el-GR",
+    "text": "Με λένε Κώστα.",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "07.m4a",
+    "lang": "el-GR",
+    "text": "Αυτή είναι η Μαρία.",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "08.m4a",
+    "lang": "el-GR",
+    "text": "Αυτός είναι ο Νίκος.",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "09.m4a",
+    "lang": "el-GR",
+    "text": "Καλησπέρα σας!",
+    "voice": "macOS Melina",
+    "rate": 145
+  },
+  {
+    "file": "10.m4a",
+    "lang": "el-GR",
+    "text": "Καληνύχτα!",
+    "voice": "macOS Melina",
+    "rate": 145
+  }
+]
