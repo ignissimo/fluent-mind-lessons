@@ -1,0 +1,13 @@
+# New Player Quest — Minecraft-inspired first lesson
+
+Published lesson: https://ignissimo.github.io/fluent-mind-lessons/minecraft-new-player/
+
+Adapted from Downloads/minecraft_new_player_quest.html. Six flexible diagnostic locations. Original teacher-led free navigation, optional extra challenges and participation badges retained: a badge does not certify a correct answer or CEFR level. No added required writing gates.
+
+Two real Minecraft game images (village and inventory/crafting screen), local assets and attribution in assets/SOURCES.md/footer. They illustrate Minecraft generally, not the fictional Mia/Ben reading stories or their answer keys. Original picture vocabulary/room icons retained. Three local en-GB Daniel/rate140 listening recordings added; browser English synthesis fallback, explicit teacher-read fallback if sound fails. No autoplay; leaving the inventory cancels playback. Third instruction specifies one edible item, matching the existing one-apple answer.
+
+Fixes: validate/deduplicate saved collections; same fm_new_player_v1 key, preserving all prior answers, interests, teacher ratings and notes. Actual location, listening/reading level, independent backpacks, counts/check feedback, sorting dropdowns and reading choices now persist. Revised items/sorting invalidate stale feedback; bad/blocked storage cannot crash the lesson, save warning is visible outside the teacher panel. Reset clears only this quest after confirmation and works without a reload even if storage is blocked. General teacher observations remain on device.
+
+Learners/teachers can record responses to all main and optional oral prompts: age/building/friends, favourite world, inventory discussion, all reading discussions, hobbies, starter labels, neighbour question and next-adventure discussion. Extra text is optional and does not replace speaking. Teacher TXT export includes recorded responses, backpack/read choices, observations and participation badges. Reading/packing correctness is independent of badges; inventory error permits clearing and retrying.
+
+Validation: six regression/flow tests; all157 repository tests pass. Real browser six-location route, all three listening packs, sort, both reading questions, wrong/retry responses, writing, interests, next choice, feeling, all badges, teacher ratings/notes, reload and TXT checked. Audio readyState4 and playing observed (not a claim of speaker audibility). Six location types × seven widths2560–390px have no horizontal overflow/missing images; 768×1024 visually checked. Reset confirm/cancel covered by tests.30-minute timing remains an estimate.
