@@ -1,0 +1,13 @@
+# Warriors of Kyoshi — Modal Verbs Quest
+
+Public URL: https://ignissimo.github.io/fluent-mind-lessons/kyoshi-warriors/
+
+Source: Downloads/kyoshi_warriors_modals.html. Its header identifies Netflix's live-action Avatar (2024), season1 episode2 Warriors. Illustration selection follows that explicit version: two live-action images (one episode still, one editorial Aang/Kyoshi montage), no animated or 2010-film imagery. Sources/attribution in assets/SOURCES.md and footer. No added audio. Training rules, advice and final defence exercise are invented teaching scenarios.
+
+Preserved kyoshi_step and kyoshi_state, original option indices and written drafts. Loading validates stage/choices/check flags/strings; malformed or unavailable storage cannot crash startup. Save failures show a notice, successful writes clear it. All correct answers were originally index0; stable display rotation now distributes them equally across the four visible positions (7 each), without changing saved answer meanings. Changing an answer requires Check again; Check without a choice gives feedback. Letters A–D removed; selection remains visible and keyboard accessible.
+
+Five core missions:25 quiz questions,7 written responses,2 speaking prompts (type OR confirm discussed aloud). The original optional sixth mission remains optional: finish core at mission5, or continue to3 extra questions,5–6-sentence report and a spoken explanation. Finish checks actual work instead of silently exporting. Core progress tracks34 tasks, not page visits. Any learner edit revokes relevant completion, returning to an already completed core does not erase optional completion. Exports include quiz answers, check results, written responses and explicit learner/teacher oral confirmations. Reset requires confirmation and only clears this lesson.
+
+Clarified an invalid no-training deduction (expertise need not imply formal training), removed cartoon-specific assumptions about Sokka's attitude from live-action recall, and labelled imagined advice. Final sentence count is only punctuation-based; grammar, four modal constructions and quality of reasoning remain teacher assessed. Timing40–45min is an estimate, not a measured pupil trial.
+
+Validation: six focused tests,151/151 repository tests pass. Actual browser full core and optional route:28 checked questions, wrong/empty/revised answers,7 drafts, final report, oral confirmations, guide toggle, core/bonus completion, reload and TXT export. Reset confirmed/cancelled in tests. Six mission layouts × seven widths2560–390px have no horizontal overflow or missing images; tablet768×1024 visually checked. Browser console clear.
