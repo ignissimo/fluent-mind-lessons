@@ -1,0 +1,1 @@
+Alien Message cover: OpenAI ImageGen, watercolor radio scene with a friendly teal alien, Ben and an orange cat. Source PNG: exec-6ea2a114-e955-4123-bb96-aba7252e93e3.png. The story scene and vocabulary atlas reuse Level 1 art. Audio uses macOS Daniel (en-GB), rate 145, with no synthetic readings of IPA or invented words.

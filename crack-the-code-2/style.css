@@ -1,0 +1,13 @@
+.top {padding:1rem clamp(.75rem,3vw,2rem);border-bottom:1px solid #466074}
+.top-inner {display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;max-width:1200px;margin:auto}
+#app {width:min(100% - 1.5rem,1100px);margin:1rem auto}
+#audio-status {width:min(100% - 1.5rem,1100px);margin:auto;color:#afc5d1}
+#app .welcome img {width:100%;max-height:390px;object-fit:cover}
+#app .card {margin-block:1rem}
+#app .feedback {min-height:1.5em}
+#app .story-layout img {width:100%;border-radius:1rem}
+#app .choices button {min-width:5rem}
+#app .workbench .cue {overflow-wrap:anywhere}
+#app .row {flex-wrap:wrap}
+#app .assembly button {min-width:2.75rem}
+#app .signal {width:min(100%,22rem);display:block;margin:0 auto 1rem;border-radius:1rem}
