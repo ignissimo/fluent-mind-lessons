@@ -47,3 +47,15 @@ test('Level 2: uses the Level 1 profile and keeps both levels when they save',()
  const two=w.CtcProfiles.make(()=>w.localStorage,{level:'level-2',core:w.CtcTwo});
  assert.ok(two.state(p.id).completed['0:0']);
 });
+test('Level 2: retry after a failed write preserves newer work from Level 1',()=>{
+ const {w}=boot(),db=w.localStorage,one=w.CtcProfiles.make(()=>db);
+ const p=one.create('Alex'),s=w.CtcOne.fresh();
+ let fail=true;
+ const two=w.CtcProfiles.make(()=>({getItem:k=>db.getItem(k),setItem:(k,v)=>{if(fail){fail=false;throw Error('quota');}db.setItem(k,v);}}),{level:'level-2',core:w.CtcTwo});
+ const draft=w.CtcTwo.fresh();draft.completed['0:0']=true;
+ two.save(p.id,draft);
+ assert.ok(w.CtcOne.record(s,0,0,['/æ/']));one.save(p.id,s);
+ two.save(p.id,draft);
+ assert.ok(one.state(p.id).tasks['0:0']);
+ assert.ok(two.state(p.id).completed['0:0']);
+});
