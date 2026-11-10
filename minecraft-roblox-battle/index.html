@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minecraft vs Roblox · Fluent Mind</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101c2a;color:#eef4fb;font:17px/1.55 system-ui,sans-serif}header,main{max-width:1080px;margin:auto;padding:22px}header{padding-bottom:0}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(32px,6vw,62px);line-height:1.06;margin-bottom:8px}.brand,small{color:#b9cce2}.board,.row{display:flex;gap:10px;flex-wrap:wrap}.board{margin:18px 0}button,textarea,select{font:inherit}button{border:1px solid #7890aa;border-radius:8px;background:#223c55;color:white;padding:9px 13px;cursor:pointer}button:hover,button.active{background:#d4f58b;color:#132a22}button:focus-visible,summary:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #f4b764;outline-offset:3px}article,details,.box{border:1px solid #425b72;border-radius:12px;padding:16px;background:#192b3e;margin:12px 0}article{padding:clamp(15px,4vw,34px)}article details,.box{background:#112234}summary{cursor:pointer;font-weight:bold;color:#d4f58b}details p:first-of-type{margin-top:12px}.banner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.tag{font-size:13px;letter-spacing:.08em;color:#d4f58b;text-transform:uppercase}.meter{display:flex;gap:5px;margin-top:10px}.meter i{height:8px;width:30px;background:#425b72;border-radius:3px}.meter i.on{background:#d4f58b}.story{border-left:4px solid #9cc7ff;padding:12px 16px;background:#213952}.meme{background:#ecd698;color:#282135;border:5px solid #bc9d67;border-radius:8px;text-align:center;padding:16px;margin:12px 0;font-weight:800}.meme span{display:block;font-size:45px}.feedback{min-height:1.6em;color:#d4f58b;margin-top:10px}.bank{min-height:48px;margin:10px 0}.picked{padding:12px;background:#101c2a;min-height:50px;border-radius:7px}.wheel{display:grid;place-items:center;width:100px;height:100px;border-radius:50%;border:5px solid #b6cce1;background:conic-gradient(#457463 0 90deg,#5b487b 90deg 180deg,#457463 180deg 270deg,#5b487b 270deg);font-size:28px;transition:transform .55s ease-out}.teacher select,textarea{padding:8px;background:#f1f5fa;color:#152638;border-radius:5px}textarea{width:100%;min-height:90px}.teacher label{display:block;margin:7px 0}.footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:20px}@media(prefers-reduced-motion:reduce){.wheel{transition:none}}
+.worlds{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.worlds figure{margin:0;min-width:0}.worlds img{display:block;width:100%;height:clamp(95px,21vw,190px);object-fit:contain;background:#192b3e;border-radius:10px}.worlds figcaption{font-size:13px;color:#b9cce2}a{color:#d4f58b}button:disabled{opacity:.65;cursor:default}[hidden]{display:none!important}@media(prefers-reduced-motion:reduce){.wheel{transition:none!important}}
+</style>
+<header><div class="brand">FLUENT MIND / ENGLISH ADVENTURES</div><div class="banner"><div><h1>Minecraft vs Roblox</h1><p>Two worlds. Three time zones. Your stories decide the battle.</p></div><div><b id="score"></b><div class="meter" id="meter"></div></div></div><div class="worlds"><figure><img src="assets/minecraft.jpg" alt="A block-built Minecraft village"><figcaption>Minecraft · Mojang</figcaption></figure><figure><img src="assets/adopt-me.jpg" alt="Colourful pets from Adopt Me on Roblox"><figcaption>Roblox · Adopt Me! by Uplift Games</figcaption></figure></div></header>
+<main><nav class="board" id="board" aria-label="Game board"></nav><article id="station"></article><details class="teacher" id="teacher"><summary>Панель учителя</summary><p>45 минут: 5 + 9 + 9 + 9 + 8 + 5. В каждой зоне сначала задай вопрос о нём, пока шпаргалка закрыта. Затем разберите форму и задай новый вопрос с тем же временем. Для оценки сравни первую попытку с новым самостоятельным ответом.</p><p id="cue"></p><div id="ratings"></div><label for="notes">Заметки и примеры фраз ученика</label><textarea id="notes"></textarea><div class="row"><button id="export">Скачать заметки</button><button id="reset">Начать заново</button></div><div id="reset-confirm" hidden><p>Удалить прогресс и заметки этого урока?</p><button id="clear-progress">Удалить</button> <button id="cancel-reset">Отмена</button></div></details><footer><small id="save-status" role="status"></small> · <a href="assets/SOURCES.md">Image credits</a></footer></main>
+<script>
+const present = 'Use the Present Simple for routines and facts. With <b>I/you/we/they</b>, use the base verb: <i>I play</i>. With <b>he/she/it</b>, usually add <b>-s</b>: <i>She plays</i>. In <i>Does she play?</i>, <b>does</b> already marks the third person, so <i>play</i> stays in its base form. <i>Do you play? I don’t play.</i>';
+const past = 'Use the Past Simple for a finished action: <i>Yesterday I played.</i> Regular verbs usually take <b>-ed</b>; some verbs change: <i>go → went, see → saw, feed → fed, build → built</i>. After <b>did/didn’t</b>, use the base verb: <i>Did you build? I didn’t build.</i> <b>Did</b> already shows the past.';
+const future = 'Use <b>will + base verb</b> for a prediction, promise or decision you make now: <i>I’ll build a shelter. My friend will help.</i> The form stays the same for every person. <i>Will you help?</i> puts <b>will</b> first. <i>I won’t forget.</i> <b>Won’t</b> means <i>will not</i>.';
+const mixed = '<b>Every week</b> → routine: <i>I play</i>. <b>Last week</b> → finished past: <i>I played</i>. <b>Next week</b> → prediction or decision: <i>I’ll play</i>. First decide when it happens, then choose the verb form.';
+const zones = [
+ {name:'Lobby', icon:'🟩', time:5, title:'Choose your team', rule:present,
+ first:'What do you like to play? Do you have a pet?',
+ story:'Mia plays Minecraft. She likes to build houses. Leo plays Roblox. He likes to try games made by other players. They both play with friends.',
+ read:'What do Mia and Leo have in common?',
+ talk:['What do you do in Minecraft or Roblox? Is there a Roblox game you especially like?','Which game would you show a friend? Why?'],
+ wheel:['Name one thing you can build.','Name a game you play with friends.','Name something you like to do away from a screen.'],
+ cue:'5 мин. Уточни, играет ли он в Roblox и во что именно. Начни с устного ответа про игру или питомца. Если питомца нет, можно описать любимое животное или придумать питомца.'},
+ {name:'Every day', icon:'🐾', time:9, title:'Pet base', rule:present,
+ first:'What do you usually do after school? What does your pet usually do?',
+ story:'I play Roblox after school, but my sister plays Minecraft. We have a dog called Pixel. I feed Pixel in the morning. My sister walks him after school. Pixel sleeps under my desk when I play.',
+ read:'Who feeds Pixel? Where does he sleep?',
+ talk:['Tell me two things you usually do after school.','Describe a real or imaginary pet. What does it eat? Where does it sleep?'],
+ match:[['feed','give food to an animal'],['usually','on most days or most of the time'],['take turns','do something one person at a time']],
+ sentences:[['My','dog','sleeps','under','my','desk.'],['Does','your','sister','play','Minecraft?']],
+ cue:'9 мин. Сначала послушай I play / he plays. Затем сопоставьте слова, соберите фразу и попроси заменить подлежащее. После разбора спроси про привычки другого человека или животного.'},
+ {name:'Yesterday', icon:'⛏️', time:9, title:'Replay room', rule:past,
+ first:'What did you do yesterday after school?',
+ story:'Yesterday I built a house in Minecraft. My friend found a wolf near the river. We wanted to take it home, but we didn’t have any bones. We left the wolf by the river. Later, I fed my real cat and played a racing game on Roblox.',
+ read:'What did the friend find? Why did they leave the wolf there?',
+ talk:['Tell me one thing you did in a game and one thing you did away from the computer.','Ask me a question about yesterday. Then tell me one thing you didn’t do.'],
+ meme:['🏠 🐺','I built a house. The wolf took the best room.','Give this scene another caption. Start with “Yesterday, the wolf…”'],
+ sentences:[['We','didn’t','have','any','bones.'],['Did','you','feed','your','pet','yesterday?']],
+ cue:'9 мин. Послушай обычный и неправильный глагол. Если звучит did went, подчеркни, что did уже показывает прошлое. После сборки задай новый вопрос: What did you eat or play last weekend?'},
+ {name:'Tomorrow', icon:'🚀', time:9, title:'One more day to build', rule:future,
+ first:'Imagine we can play together tomorrow. What will you choose?',
+ story:'Our game club gets one extra session tomorrow. “I’ll build a house for our pets,” says Mia. “I’ll make a racing track,” says Leo. “I think our friends will try both.”',
+ read:'What will Mia build? What does Leo choose to make?',
+ talk:['Choose one thing for tomorrow’s game. Say what you’ll do and why.','Predict what your pet will do if it sees a new toy. Or make a promise about taking care of it.'],
+ wheel:['You have ten blocks. What will you build?','A new player joins. How will you help?','Your pet finds a box. What will it do?','Your friend wants a race. What will you say?'],
+ sentences:[['I','will','build','a','house','for','my','pet.'],['Will','your','friend','join','the','game?']],
+ cue:'9 мин. Слушай will + начальную форму. Контексты здесь — решение на месте, обещание и прогноз. После колеса предложи новый прогноз или попроси задать тебе вопрос с will.'},
+ {name:'The battle', icon:'⚔️', time:8, title:'Pitch your world', rule:mixed,
+ first:'Which game would you choose for a class game club? Why?',
+ story:'In Minecraft you can build with blocks and explore a world. Roblox has many different games made by its community. You can build in some of those games, too. Two friends want to choose a game they can play together.',
+ read:'Which activities could you do in both worlds? What depends on the Roblox game you pick?',
+ talk:['Compare the games. Which is better for building? Which is better for trying different games? Give one reason for each.','Tell your team three true things. Start with “I usually…”, “Last weekend I…” and “Next time I’ll…”. Try one sentence about a hobby or pet outside gaming.'],
+ meme:['🎮 🐈','I usually play after school. Yesterday my cat sat on the keyboard. Next time I’ll give her the box.','Invent a three-line meme with a different animal or hobby.'],
+ wheel:['A hobby you do often','A funny thing a pet did','Something you’ll try next time','A game you played last weekend'],
+ cue:'8 мин. Попроси сравнить игры на примере конкретного Roblox-режима. При необходимости дай опоры Both games… / In Minecraft…, but in Roblox… Затем попроси три фразы без шпаргалки, с новой лексикой.'},
+ {name:'Final save', icon:'🏆', time:5, title:'Save your player story', rule:mixed,
+ first:'Tell me one thing I learned about you today.',
+ story:'Player log: I usually draw after school. Last Saturday I drew my cat. Next time I’ll draw our Minecraft base.',
+ read:'Which line is about a habit? Which one already happened? Which one is a decision about next time?',
+ talk:['Say your own three-line player log. You can use gaming, another hobby or an animal.','Bonus: ask me one question in any of the three time zones.'],
+ write:true, cue:'5 мин. Три устные фразы — основной выход. Письмо по желанию. В заметках сохрани один дословный пример на каждое время и отметь, что получилось самостоятельно до и после разбора.'}
+];
+const KEY='fluent-mind-minecraft-roblox-battle-v1';
+const ratingFields=['Present Simple','Past Simple','Future Simple (will)'];
+const levels=['Не проверяли','Самостоятельно','С подсказкой','Пока трудно'];
+const categories=['Building','Variety','Playing with friends'];
+const options=['Minecraft','Roblox','Tie'];
+const blank=()=>({at:0,done:[],team:'',notes:'',log:'',ratings:{},votes:{},matches:[],orders:{},spins:{}});
+const ids=(list,n)=>Array.isArray(list)?[...new Set(list.filter(i=>Number.isInteger(i)&&i>=0&&i<n))]:[];
+let state=blank();
+try{
+ const x=JSON.parse(localStorage.getItem(KEY)||'{}');
+ if(x&&typeof x==='object'){
+  if(Number.isInteger(x.at)&&zones[x.at])state.at=x.at;
+  state.done=ids(x.done,zones.length);state.matches=ids(x.matches,zones[1].match.length);
+  if(['Minecraft','Roblox','Both'].includes(x.team))state.team=x.team;
+  for(const k of ['notes','log'])if(typeof x[k]==='string')state[k]=x[k];
+  categories.forEach((_,i)=>{if(options.includes(x.votes?.[i]))state.votes[i]=x.votes[i]});
+  for(const t of ratingFields)for(const p of ['До разбора','После разбора']){const k=t+' · '+p;if(levels.includes(x.ratings?.[k]))state.ratings[k]=x.ratings[k]}
+  zones.forEach((z,i)=>{
+   if(z.sentences){const o=x.orders?.[i];state.orders[i]={round:o?.round===1?1:0,rows:z.sentences.map((row,j)=>ids(o?.rows?.[j],row.length))}}
+   if(z.wheel){const w=x.spins?.[i];state.spins[i]={bag:ids(w?.bag,z.wheel.length),last:Number.isInteger(w?.last)&&z.wheel[w.last]?w.last:null}}
+  });
+ }
+}catch{}
+const get=id=>document.getElementById(id);
+let at=state.at;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));get('save-status').textContent='Progress saved in this browser.'}catch{get('save-status').textContent='Progress could not be saved. Keep this tab open and export your notes.'}}
+function board(){
+ get('board').innerHTML=zones.map((z,i)=>'<button data-zone="'+i+'" class="'+(at===i?'active':'')+'" '+(at===i?'aria-current="step"':'')+'>'+z.icon+' '+z.name+(state.done.includes(i)?' ✓':'')+'</button>').join('');
+ get('score').textContent=(state.team?state.team+' · ':'')+state.done.length+' / 6 badges';
+ get('meter').innerHTML=zones.map((_,i)=>'<i class="'+(i<state.done.length?'on':'')+'"></i>').join('');
+}
+get('board').onclick=e=>{const b=e.target.closest('[data-zone]');if(b)openZone(Number(b.dataset.zone))};
+function openZone(index){
+ if(!Number.isInteger(index)||!zones[index])return;at=index;state.at=index;save();const z=zones[index];board();get('cue').textContent=z.cue;
+ get('station').innerHTML='<div class="tag">Station '+(index+1)+' / 6 · '+z.time+' min</div><h2>'+z.icon+' '+z.title+'</h2>'+
+ (index===0?'<div class="row" id="teams"><button data-team="Minecraft">🟩 Minecraft</button><button data-team="Roblox">🟥 Roblox</button><button data-team="Both">🤝 Both</button></div>':'')+
+ '<div class="box"><b>First try · Say it aloud</b><p>'+z.first+'</p></div>'+
+ '<h3>Read together</h3><p class="story">'+z.story+'</p><p><b>Find it in the text.</b> '+z.read+'</p>'+
+ '<details><summary>Grammar cheat sheet</summary><p>'+z.rule+'</p></details>'+
+ (z.match?'<section id="match"></section>':'')+(z.sentences?'<section id="sort"></section>':'')+
+ (z.wheel?'<section id="wheel-game"></section>':'')+
+ (z.meme?'<details><summary>Meme break · Read and remix</summary><div class="meme"><span>'+z.meme[0]+'</span>'+z.meme[1]+'</div><p>'+z.meme[2]+'</p></details>':'')+
+ '<div class="box"><h3>Your turn · Talk</h3>'+z.talk.map(t=>'<p>'+t+'</p>').join('')+'</div>'+
+ (index===4?'<div class="box" id="votes"></div>':'')+
+ (z.write?'<label for="log">Optional · Write your three lines</label><textarea id="log"></textarea>':'')+
+ '<p><small>Badges mark participation, not a grammar score.</small></p>'+(index===5?'<p id="complete" role="status"></p>':'')+'<div class="footer"><button id="badge" '+(state.done.includes(index)?'disabled':'')+'>'+(state.done.includes(index)?'✓ Badge collected':'Collect badge')+'</button>'+
+ (index<5?'<button id="next">Next station →</button>':'<button id="next">Back to lobby ↺</button>')+'</div>';
+ get('badge').onclick=()=>{if(!state.done.includes(at))state.done.push(at);save();board();get('badge').textContent='✓ Badge collected';get('badge').disabled=true;completion()};
+ get('next').onclick=()=>{openZone((at+1)%zones.length);get('board').scrollIntoView({block:'start'})};
+ if(index===0){
+  const buttons=[...get('teams').querySelectorAll('button')];
+  const refresh=()=>buttons.forEach(b=>{b.classList.toggle('active',b.dataset.team===state.team);b.setAttribute('aria-pressed',b.dataset.team===state.team)});
+  buttons.forEach(b=>b.onclick=()=>{state.team=b.dataset.team;save();refresh();board()});refresh();
+ }
+ completion();
+ if(index===4)renderVotes();
+ if(z.match)matching(z.match);
+ if(z.sentences)unscramble(z.sentences);
+ if(z.wheel)wheel(z.wheel);
+ if(z.write){get('log').value=state.log;get('log').oninput=e=>{state.log=e.target.value;save()}}
+}
+function completion(){if(get('complete'))get('complete').textContent=state.done.length===zones.length?'✓ All six stations complete!':'Say your three lines, then collect your badge. You can revisit any unfinished station.'}
+function renderVotes(){
+ const host=get('votes');
+ const tally=options.map(option=>Object.values(state.votes).filter(v=>v===option).length);
+ const result=Object.keys(state.votes).length<3?'Vote in all three rounds to see the result.':tally[0]===tally[1]?'The battle is a tie!':(tally[0]>tally[1]?'Minecraft':'Roblox')+' wins your vote!';
+ host.innerHTML='<h3>Battle scorecard</h3><p>Give a reason aloud, then cast a vote in each round.</p>'+
+ categories.map((category,i)=>'<p><b>'+category+'</b></p><div class="row">'+options.map((option,j)=>
+ '<button data-category="'+i+'" data-option="'+j+'" aria-pressed="'+(state.votes[i]===option)+'" class="'+(state.votes[i]===option?'active':'')+'">'+option+'</button>').join('')+'</div>').join('')+
+ '<p class="feedback" role="status">'+options.map((option,i)=>option+' '+tally[i]).join(' · ')+'<br>'+result+'</p>';
+ host.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  state.votes[b.dataset.category]=options[b.dataset.option];save();renderVotes();
+ });
+}
+function matching(pairs){
+ const host=get('match');let word=null;const done=new Set(state.matches);
+ host.innerHTML='<div class="box"><h3>Match words to meanings</h3><p>Pick a word, then pick its meaning.</p><div class="row" id="words"></div><div class="row" id="definitions"></div><div class="feedback" id="match-feedback" role="status"></div></div>';
+ const words=get('words'), definitions=get('definitions'), feedback=get('match-feedback');
+ pairs.forEach(([name],i)=>{const b=document.createElement('button');b.textContent=name;b.disabled=done.has(i);b.onclick=()=>{word=i;[...words.children].forEach((x,k)=>x.classList.toggle('active',i===k))};words.append(b)});
+ [2,0,1].forEach(i=>{const b=document.createElement('button');b.textContent=pairs[i][1];b.disabled=done.has(i);b.onclick=()=>{
+  if(word===null){feedback.textContent='Choose a word first.';return}
+  if(word!==i){feedback.textContent='Try another meaning. What would this look like with a pet?';return}
+  if(done.has(i))return;done.add(i);state.matches=[...done];save();b.disabled=true;words.children[i].disabled=true;words.children[i].classList.remove('active');word=null;
+  feedback.textContent=done.size===pairs.length?'✓ All matched! Use one word in your own sentence.':'✓ Match! Choose another word.';
+ };definitions.append(b)});
+}
+function unscramble(sentences){
+ const host=get('sort'), entry=state.orders[at]??={round:0,rows:sentences.map(()=>[])};
+ let round=entry.round,chosen=entry.rows[round];
+ const draw=()=>{entry.round=round;entry.rows[round]=chosen;save();
+  const sentence=sentences[round], order=sentence.map((_,i)=>i).sort((a,b)=>(a*7+3)%11-(b*7+3)%11);
+  host.innerHTML='<div class="box"><h3>Unscramble '+(round+1)+' / '+sentences.length+'</h3><p>Tap the words in order. Read your sentence aloud.</p><div class="picked" aria-live="polite">'+chosen.map(i=>sentence[i]).join(' ')+'</div><div class="row bank">'+order.map(i=>'<button data-word="'+i+'" '+(chosen.includes(i)?'disabled':'')+'>'+sentence[i]+'</button>').join('')+'</div><div class="row"><button id="check-order">Check</button><button id="undo-order">Undo last</button><button id="clear-order">Clear</button><button id="swap-order">Other sentence</button></div><div class="feedback" id="order-feedback" role="status"></div></div>';
+  host.querySelectorAll('[data-word]').forEach(b=>b.onclick=()=>{chosen.push(Number(b.dataset.word));draw()});
+  get('undo-order').onclick=()=>{chosen.pop();draw()};get('clear-order').onclick=()=>{chosen=[];draw()};
+  get('swap-order').onclick=()=>{round=(round+1)%sentences.length;chosen=entry.rows[round];draw()};
+  get('check-order').onclick=()=>{const full=chosen.length===sentence.length;
+   get('order-feedback').textContent=!full?'Use all the words first.':chosen.every((i,k)=>sentence[i]===sentence[k])?'✓ Correct! Change one detail and say a new sentence.':'Try again. Find the subject and the verb. In a question, look for the helping verb first.'};
+ };draw();
+}
+function wheel(prompts){
+ const host=get('wheel-game'), spin=state.spins[at]??={bag:[],last:null};let turn=0;
+ host.innerHTML='<div class="box"><h3>Spin and speak</h3><div class="row"><div class="wheel" aria-hidden="true">◆</div><button>Spin the wheel</button></div><div class="feedback" role="status">Spin to get a speaking prompt.</div></div>';
+ if(spin.last!==null)host.querySelector('.feedback').textContent=prompts[spin.last];
+ host.querySelector('button').onclick=()=>{
+  if(!spin.bag.length)spin.bag=prompts.map((_,i)=>i);
+  const pool=spin.bag.length>1?spin.bag.filter(i=>i!==spin.last):spin.bag;
+  const next=pool[Math.floor(Math.random()*pool.length)];spin.bag.splice(spin.bag.indexOf(next),1);spin.last=next;save();
+  host.querySelector('.wheel').style.transform='rotate('+(++turn*450+next*28)+'deg)';
+  host.querySelector('.feedback').textContent=prompts[next];
+ };
+}
+for(const tense of ratingFields){
+ for(const phase of ['До разбора','После разбора']){
+  const key=tense+' · '+phase,label=document.createElement('label'),select=document.createElement('select');
+  levels.forEach(x=>select.add(new Option(x,x)));select.value=state.ratings[key]||levels[0];
+  select.onchange=()=>{state.ratings[key]=select.value;save()};label.append(key+' ',select);get('ratings').append(label);
+ }
+}
+get('notes').value=state.notes;get('notes').oninput=e=>{state.notes=e.target.value;save()};
+get('reset').onclick=()=>{get('reset-confirm').hidden=false;get('cancel-reset').focus()};
+get('cancel-reset').onclick=()=>{get('reset-confirm').hidden=true;get('reset').focus()};
+get('clear-progress').onclick=()=>{state=blank();get('notes').value='';get('ratings').querySelectorAll('select').forEach(s=>s.value=levels[0]);get('reset-confirm').hidden=true;openZone(0)};
+get('export').onclick=()=>{
+ const report=['Minecraft vs Roblox','Team: '+(state.team||'—'),'Badges: '+state.done.length+'/6',...categories.map((c,i)=>c+': '+(state.votes[i]||'—')),...ratingFields.flatMap(t=>['До разбора','После разбора'].map(p=>{const k=t+' · '+p;return k+': '+(state.ratings[k]||levels[0])})), '', state.notes,'',state.log].join('\n');
+ const url=URL.createObjectURL(new Blob([report],{type:'text/plain;charset=utf-8'})), link=document.createElement('a');
+ link.href=url;link.download='tense-battle-notes.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+openZone(state.at);
+</script>
+</html>

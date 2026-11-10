@@ -1,0 +1,2 @@
+- Minecraft village screenshot: [Windows Central](https://www.windowscentral.com/minecrafts-console-versions-get-new-game-options-blocks-and-more-july-1), reused from Minecraft New Player Quest. Minecraft © Mojang/Microsoft.
+- Adopt Me! key art: [official Adopt Me website](https://www.playadopt.me/), [original image](https://cdn.sanity.io/images/d4ypzn9i/production/db9dfee027a1f667a36164feddaa92361fc0f4a6-1920x1080.png). Adopt Me! by Uplift Games is one example of a Roblox experience.
