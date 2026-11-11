@@ -10,7 +10,7 @@
 <main><header><div><small>FLUENT MIND / MAP PRACTICE</small><h1>MIRAGE</h1><h2>Find your teammate</h2></div><button id="reset">Restart</button></header>
 <div class="grid"><section class="panel" aria-label="Mirage practice map"><div class="bar"><small>RADAR</small><small id="progress">WARM-UP</small></div><div class="map"><canvas width="1100" height="550" aria-hidden="true"></canvas><div class="cross" aria-hidden="true">+</div><div class="radar" aria-label="Radar"><button class="spot" style="left:26%;top:27%" data-zone="B" aria-label="B Site">B</button><button class="spot" style="left:49%;top:54%" data-zone="Mid">Mid</button><button class="spot" style="left:76%;top:75%" data-zone="A" aria-label="A Site">A</button></div><div class="travel" id="travel"></div><div class="hud"><span id="hud-zone"></span><span>COMMS TRAINING</span></div></div><div class="mapfoot muted">Read or listen → move with the buttons or radar. <span id="location"></span></div></section>
 <section class="panel chat" aria-label="Team chat"><div class="radio-head"><img src="assets/radio.svg" alt="" width="32" height="32"><small>TEAM CHAT</small></div><div class="message" id="message" tabindex="-1"></div><div class="controls"><button id="listen">▶ Listen</button></div><div class="hint" id="hint" hidden></div><div class="actions" id="actions"></div><p class="muted" id="status" role="status"></p><audio id="voice" preload="none"></audio></section></div>
-<details lang="ru"><summary>Подсказка для преподавателя</summary><p>Пусть ученик выберет старт. Прочитайте первую команду вместе и нажмите названную точку. После встречи откройте «Read the round log»: ученик читает чат, повторяет маршрут A → Mid → ожидание → B и пишет сообщения. Дальше можно дать ему прочитать реплику или сразу выполнить её на карте. Подчёркнутые слова открывают транскрипцию и озвучку. Кнопка «Listen» читает всю реплику. Если он втянулся, в режиме «Your turn» пусть даст тебе команду, а ты передвинешь маркер по его инструкции.</p></details></main>
+<details lang="ru"><summary>Подсказка для преподавателя</summary><p>Пусть ученик выберет старт. Прочитайте первую команду вместе и нажмите названную точку. После встречи откройте «Read the round log»: ученик читает чат, может повторить маршрут A → Mid → ожидание → B или сразу перейти к письму кнопкой «Continue to writing». Дальше можно дать ему прочитать реплику или сразу выполнить её на карте. Подчёркнутые слова открывают транскрипцию и озвучку. Кнопка «Listen» читает всю реплику. Если он втянулся, в режиме «Your turn» пусть даст тебе команду, а ты передвинешь маркер по его инструкции.</p></details></main>
 <script>
 const $ = id => document.getElementById(id);
 const zones = [...document.querySelectorAll('.spot')];
@@ -132,7 +132,7 @@ function move(next){
   }
   if(stage===5){
     if(next!==goal){say('Try another spot.');return;}
-    stage=6;draw();$('progress').textContent='ROUND COMPLETE';message('Teammate found!',false);say('You met at '+displayZone(goal)+'.');actions(button('Read the round log',startReading),button('Your turn',startDrill));return;
+    showRoundComplete();return;
   }
   if(stage===8){
     if(readStep===0&&next==='A'){readStep=1;say('Follow the next move in the log.');}
@@ -156,6 +156,12 @@ function waitHere(){
     }));
   })));
 }
+function showRoundComplete(focus=false){
+  stage=6;draw();$('progress').textContent='ROUND COMPLETE';
+  message('Teammate found!',false);say('You met at '+displayZone(goal)+'.');
+  actions(button('Read the round log',startReading),button('Continue to writing →',()=>startWriting(true)),button('Your turn',startDrill));
+  if(focus)$('actions').firstElementChild.focus();
+}
 let readStep;
 function exercise(){
   const box=document.createElement('div');box.className='exercise';actions(box);return box;
@@ -165,8 +171,12 @@ function paragraph(box,text){
 }
 function startReading(){
   stage=8;draw();readStep=0;$('progress').textContent='ROUND LOG';
-  message('Read the log. Show the route on the radar.',false);say('Start at A.');
+  message('Read the log, then continue to writing. You can also try the route on the radar.',false);say('Optional route: A → Mid → Wait here → B. Start at A.');
   const box=exercise();
+  const nav=document.createElement('div');nav.className='controls';
+  const proceed=button('Continue to writing →',()=>startWriting(true));
+  nav.append(proceed,button('Close log',()=>showRoundComplete(true)));
+  box.append(nav);$('message').focus();
   const lines=[
     ['Player','I’m at A. Where are you?'],
     ['Teammate','I’m at B. Go to Mid first. Wait there.'],
@@ -188,12 +198,13 @@ function field(box, before, after=''){
   input.autocomplete='off';label.append(before,input,after);box.append(label);return input;
 }
 const clean=value=>value.trim().toLowerCase().replace(/[.!?]+$/,'');
-function startWriting(){
+function startWriting(focus=false){
   stage=9;draw();$('progress').textContent='TEAM CHAT';message('Type three short messages.',false);say();
   const box=exercise();
   paragraph(box,'You are at B. Your teammate is at A. Tell them where you are, ask them to go to Mid, and say that you’re on your way.');
   const here=field(box,'I’m at ','.'),go=field(box,'Go to ','.'),way=field(box,'On my ','.');
   paragraph(box,'A · B · Mid · way');
+  if(focus)$('message').focus();
   box.append(button('Send',()=>{
     if(clean(here.value)!=='b'){say('Message 1: Where are you?');here.focus();return;}
     if(clean(go.value)!=='mid'){say('Message 2: Where will you meet?');go.focus();return;}

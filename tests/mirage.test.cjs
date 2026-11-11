@@ -14,3 +14,14 @@ test('round log, written replies and partner command work end to end',()=>{
  [' b. ','Mid','WAY!'].forEach((x,i)=>fields[i].value=x);act('Send');
  d.querySelector('#actions input').value='wait in mid';act('Send command');assert.match(d.querySelector('#message').textContent,/Wait in Mid/);move('Mid');act('Wait here');assert.match(d.querySelector('#status').textContent,/waiting in Mid/);w.close();
 });
+test('log can be closed, reopened and skipped without moving on the map',()=>{
+ const w=game(),d=w.document,move=z=>d.querySelector('[data-zone="'+z+'"]').click();
+ const act=t=>{const b=[...d.querySelectorAll('#actions button')].find(b=>b.textContent===t);assert.ok(b,t);b.click()};
+ move('B');move('Mid');act('Wait here');act('I’m in Mid.');act('On my way.');move('A');
+ act('Read the round log');act('Close log');
+ assert.equal(d.querySelector('#progress').textContent,'ROUND COMPLETE');
+ assert.equal(d.querySelector('#actions .word'),null);
+ act('Read the round log');act('Continue to writing →');
+ assert.equal(d.querySelectorAll('#actions input').length,3);
+ w.close();
+});
