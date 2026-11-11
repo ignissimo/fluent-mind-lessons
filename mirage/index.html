@@ -3,33 +3,98 @@
 <title>Mirage · Find Your Teammate</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#101718;color:#f4f2e8;font:17px system-ui,sans-serif}main{max-width:1130px;margin:auto;padding:28px}header{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}h1{margin:0;font-size:clamp(44px,8vw,90px);line-height:.95;letter-spacing:-.065em}h2{margin:8px 0 0;font-size:22px}small,.muted{color:#b7c8c7}small{font:700 12px monospace;letter-spacing:.14em}button{font:inherit;color:inherit;background:#233235;border:1px solid #526568;border-radius:6px;padding:10px 14px;cursor:pointer}button:hover,button:focus-visible{border-color:#ffd578;outline-offset:3px}button[aria-pressed=true]{background:#ffd578;color:#171c19;border-color:#ffd578}.grid{display:grid;grid-template-columns:1.45fr 1fr;gap:16px}.panel{border:1px solid #435554;border-radius:12px;background:#192425;overflow:hidden}.bar{display:flex;justify-content:space-between;gap:10px;padding:13px 16px}.map{position:relative;aspect-ratio:1.32;background:#2e3832;isolation:isolate}.map canvas{position:absolute;width:100%;height:100%;z-index:-1}.spot{position:absolute;transform:translate(-50%,-50%);font-weight:800;white-space:nowrap;min-width:65px}.spot[aria-pressed=true]::after{content:' • YOU';font:700 11px monospace}.mapfoot{padding:11px 16px;font-size:14px}.chat{padding:17px;display:grid;align-content:start;gap:12px}.message{background:#101819;border-left:3px solid #ffd578;padding:14px;min-height:68px}.word{font-size:24px;background:transparent;border:0;border-bottom:1px dotted #96a9a7;border-radius:0;padding:2px 1px}.controls,.actions{display:flex;flex-wrap:wrap;gap:8px}.hint{display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:#293a3a;padding:10px;border-radius:6px}.hint[hidden]{display:none}#status{margin:0;min-height:2.6em;font-size:15px}details{margin-top:18px;color:#c8d6d4;font-size:15px}summary{cursor:pointer}select{font:inherit;padding:8px;background:#233235;color:inherit;border-radius:6px}@media(max-width:730px){main{padding:16px}.grid{grid-template-columns:1fr}header{align-items:start}.word{font-size:21px}}
-.map img{position:absolute;inset:0;width:100%;height:100%;z-index:-1}.radio-head{display:flex;align-items:center;gap:10px}.radio-head img{width:38px;height:38px}.mapfoot{line-height:1.4}.spot[aria-pressed=true]::after{content:none}.spot[aria-pressed=true]{box-shadow:0 0 0 3px #101718}.spot:disabled{cursor:default}.word:focus-visible{outline:2px solid #ffd578}.actions select{max-width:100%}button[hidden]{display:none}.muted{line-height:1.45}@media(max-width:360px){main{padding:10px}.spot{min-width:0;padding:8px}}
+
+.grid{display:block}.panel{border-radius:5px}.grid>.panel:first-child{position:relative}.map{aspect-ratio:2;min-height:280px;background:#675a48}.map canvas{z-index:auto;inset:0}.bar{background:#202625}.mapfoot{background:#202625}.chat{margin-top:10px;grid-template-columns:1fr auto;gap:10px;background:#171d1d}.chat>small,.message,.hint,.actions,#status{grid-column:1/-1}.message{min-height:0}.controls{grid-row:1;grid-column:2}.radar{position:absolute;left:14px;top:14px;width:126px;height:112px;background:#151c1cdb;border:1px solid #b3aa94;border-radius:50%}.radar::before{content:'';position:absolute;left:31%;top:24%;width:42%;height:52%;border-left:4px solid #83765d;border-bottom:4px solid #83765d;transform:skew(27deg,21deg)}.spot{font:800 13px monospace;min-width:30px;padding:5px;z-index:1}.spot[aria-pressed=true]::after{content:' •'}.hud{position:absolute;bottom:13px;left:15px;right:15px;display:flex;justify-content:space-between;pointer-events:none;font:bold 14px monospace;text-shadow:1px 2px 3px black}.cross{position:absolute;top:50%;left:50%;color:#ebffaf;transform:translate(-50%,-50%);font:20px monospace;text-shadow:1px 1px #1a291a;pointer-events:none}.travel{position:absolute;right:13px;bottom:40px;display:flex;gap:5px}.travel button{background:#192322e8;font:bold 14px monospace}.exercise{width:100%;background:#212e2c;padding:13px;border-radius:4px}.exercise p{margin:5px 0}.exercise label{display:block;margin:8px 0}.exercise input{font:inherit;background:#121919;color:white;border:1px solid #a0aaa0;padding:5px;width:min(220px,45vw)}.exercise button{margin:4px}.exercise .word{font-size:18px}header{align-items:center;margin-bottom:12px}h1{font-size:clamp(37px,6vw,68px)}@media(max-width:550px){.map{aspect-ratio:1.15}.radar{transform:scale(.83);transform-origin:top left}.chat{padding:10px}}
+.radar{background:#151c1c url("assets/map.svg") center/100% 100% no-repeat}.radar::before{content:none}.radio-head{display:flex;align-items:center;gap:9px;min-width:0}.radio-head img{width:32px;height:32px}.controls{align-self:center}.exercise{width:100%;min-width:0}.exercise input{max-width:100%;min-width:0}.exercise p{margin:8px 0}.exercise label{max-width:100%}.hint{grid-row:auto}button[hidden]{display:none}button:disabled{cursor:default}.message:focus{outline:2px solid #ffd578;outline-offset:2px}.cross,.hud{pointer-events:none}.travel button[aria-pressed=true]{background:#ffd578;color:#171c19}@media(max-width:500px){main{padding:12px}.map{min-height:235px}.hud span:last-child{display:none}.chat{padding:12px}.controls button{padding:8px}.exercise label{flex-wrap:wrap}}
 </style>
 <main><header><div><small>FLUENT MIND / MAP PRACTICE</small><h1>MIRAGE</h1><h2>Find your teammate</h2></div><button id="reset">Restart</button></header>
-<div class="grid"><section class="panel" aria-label="Mirage practice map"><div class="bar"><small>RADAR</small><small id="progress">WARM-UP</small></div><div class="map"><img src="assets/map.svg" alt="" width="660" height="500"><button class="spot" style="left:26%;top:27%" data-zone="B">B Site</button><button class="spot" style="left:49%;top:54%" data-zone="Mid">Mid</button><button class="spot" style="left:76%;top:75%" data-zone="A">A Site</button></div><div class="mapfoot muted">Simplified practice map. Select a spot to move. <span id="location"></span></div></section>
-<section class="panel chat" aria-label="Team chat"><div class="radio-head"><img src="assets/radio.svg" alt="" width="38" height="38"><small>TEAM CHAT</small></div><div class="message" id="message"></div><div class="controls"><button id="listen">▶ Listen</button></div><div class="hint" id="hint" hidden></div><div class="actions" id="actions"></div><p class="muted" id="status" role="status"></p><audio id="voice" preload="none"></audio></section></div>
-<details lang="ru"><summary>Подсказка для преподавателя</summary><p>Пусть ученик сначала сам покажет точки на радаре и выберет старт. Дальше можно дать ему прочитать реплику или сразу выполнить её на карте. Подчёркнутые слова открывают IPA и озвучку. Если он втянулся, в режиме «Your turn» пусть даст тебе команду, а ты передвинешь маркер по его инструкции.</p></details></main>
+<div class="grid"><section class="panel" aria-label="Mirage practice map"><div class="bar"><small>RADAR</small><small id="progress">WARM-UP</small></div><div class="map"><canvas width="1100" height="550" aria-hidden="true"></canvas><div class="cross" aria-hidden="true">+</div><div class="radar" aria-label="Radar"><button class="spot" style="left:26%;top:27%" data-zone="B" aria-label="B Site">B</button><button class="spot" style="left:49%;top:54%" data-zone="Mid">Mid</button><button class="spot" style="left:76%;top:75%" data-zone="A" aria-label="A Site">A</button></div><div class="travel" id="travel"></div><div class="hud"><span id="hud-zone"></span><span>COMMS TRAINING</span></div></div><div class="mapfoot muted">Read or listen → move with the buttons or radar. <span id="location"></span></div></section>
+<section class="panel chat" aria-label="Team chat"><div class="radio-head"><img src="assets/radio.svg" alt="" width="32" height="32"><small>TEAM CHAT</small></div><div class="message" id="message" tabindex="-1"></div><div class="controls"><button id="listen">▶ Listen</button></div><div class="hint" id="hint" hidden></div><div class="actions" id="actions"></div><p class="muted" id="status" role="status"></p><audio id="voice" preload="none"></audio></section></div>
+<details lang="ru"><summary>Подсказка для преподавателя</summary><p>Пусть ученик выберет старт. Прочитайте первую команду вместе и нажмите названную точку. После встречи откройте «Read the round log»: ученик читает чат, повторяет маршрут A → Mid → ожидание → B и пишет сообщения. Дальше можно дать ему прочитать реплику или сразу выполнить её на карте. Подчёркнутые слова открывают транскрипцию и озвучку. Кнопка «Listen» читает всю реплику. Если он втянулся, в режиме «Your turn» пусть даст тебе команду, а ты передвинешь маркер по его инструкции.</p></details></main>
 <script>
 const $ = id => document.getElementById(id);
 const zones = [...document.querySelectorAll('.spot')];
-const ipa = {go:'ɡoʊ',to:'tu',b:'biː',a:'eɪ',mid:'mɪd',wait:'weɪt',at:'æt',in:'ɪn',where:'wɛɹ',are:'ɑɹ',you:'juː',"i’m":'aɪm',on:'ɑn',my:'maɪ',way:'weɪ'};
+const ipa = {go:'ɡoʊ',to:'tu',b:'biː',a:'eɪ',mid:'mɪd',wait:'weɪt',at:'æt',in:'ɪn',where:'wɛɹ',are:'ɑɹ',you:'juː',"i’m":'aɪm',on:'ɑn',my:'maɪ',way:'weɪ',first:'fɝst',there:'ðɛɹ',ok:'oʊˈkeɪ',now:'naʊ'};
 const displayZone = zone => zone === 'Mid' ? 'Mid' : zone + ' Site';
-const position = spot => (spot === 'Mid' ? 'in ' : 'at ') + spot;
-const command = (verb, spot) => verb === 'Wait' ? 'Wait '+position(spot)+'.' : 'Go to '+spot+'.';
-let stage, zone, first, goal, drill, line;
+const position=place=>(place==='Mid'?'in ':'at ')+place;
+const commandLine=(verb,place)=>verb==='Wait'?'Wait '+position(place)+'.':'Go to '+place+'.';
 const voice=$('voice');
+let stage, zone, first, goal, drill, line, audioRequest=0;
+const canvas = document.querySelector('canvas'), ctx = canvas.getContext('2d');
+let viewFrame;
+const scenes={
+  A:{wall:'#bf9e76',left:'#aa7e59',right:'#d2ae87',crates:[[655,346,135],[765,340,85],[692,297,66]],arch:470,mark:'A',awning:false},
+  Mid:{wall:'#b7a292',left:'#788b96',right:'#cba584',crates:[[675,330,84],[737,340,68]],arch:550,mark:'',awning:false},
+  B:{wall:'#cbaf89',left:'#a08065',right:'#b8a384',crates:[[668,350,110],[765,350,85]],arch:482,mark:'B',awning:true}
+};
+function paint(place, shift=0){
+  if(!ctx)return;
+  const s=scenes[place]||scenes.A;
+  const sky=ctx.createLinearGradient(0,0,0,350);sky.addColorStop(0,'#4c89b9');sky.addColorStop(1,'#b7d8df');
+  ctx.fillStyle=sky;ctx.fillRect(0,0,1100,550);
+  ctx.save();ctx.translate(shift,0);
+  function poly(color,points){ctx.fillStyle=color;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill();}
+  function rect(color,x,y,w,h){ctx.fillStyle=color;ctx.fillRect(x,y,w,h);}
+  function arch(x,y,w,h,color){
+    ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y+h);ctx.lineTo(x,y+w/2);ctx.arc(x+w/2,y+w/2,w/2,Math.PI,0);ctx.lineTo(x+w,y+h);ctx.fill();
+  }
+  poly('#a79176',[[-70,550],[1170,550],[770,300],[324,300]]);
+  rect(s.wall,310,140,480,187);
+  rect('#967b61',310,140,480,9);
+  for(let i=0;i<7;i++){rect('#60564a',330+i*65,170,26,41);rect('#dbc2a0',328+i*65,210,30,5);}
+  arch(s.arch-12,209,123,119,'#8e7158');arch(s.arch,220,99,108,'#51473e');arch(s.arch+12,237,75,91,'#6b5d4e');
+  poly(s.left,[[-70,-18],[115,-18],[350,146],[350,331],[-70,499]]);
+  poly(s.right,[[771,155],[1020,-14],[1170,-14],[1170,485],[771,326]]);
+  poly('#655446',[[0,390],[342,309],[492,324],[254,550],[-60,550]]);
+  poly('#b29d82',[[0,457],[359,330],[481,328],[300,550],[0,550]]);
+  for(let y=359;y<550;y+=20){poly('#8e7c67',[[0,y+22],[1100,y],[1100,y+2],[0,y+24]]);}
+  for(let i=0;i<18;i++){const x=i*65-40;poly('#8b7864',[[548+(x-548)*.11,328],[x,550],[x+2,550],[550+(x-548)*.11,328]]);}
+  for(let i=0;i<3;i++){
+    const x=35+i*100,y=72+i*37,w=57-i*10;
+    poly('#594d42',[[x,y],[x+w,y+22],[x+w,y+111-i*16],[x,y+104-i*18]]);
+    poly('#272d2a',[[x+7,y+10],[x+w-6,y+27],[x+w-6,y+98-i*16],[x+7,y+91-i*18]]);
+    const u=1000-i*81;rect('#665546',u,100+i*29,44-i*7,74-i*15);
+  }
+  if(s.awning){
+    poly('#4c6257',[[724,185],[973,113],[1100,183],[825,236]]);
+    for(let i=0;i<5;i++)poly('#667970',[[745+i*42,180-i*12],[755+i*42,177-i*12],[857+i*45,228-i*9],[847+i*45,231-i*9]]);
+  }
+  for(const [x,y,w] of s.crates){
+    const ht=w*.67;poly('#927552',[[x,y-ht],[x+w*.83,y-ht],[x+w,y-ht-19],[x+w*.18,y-ht-19]]);
+    poly('#5c4938',[[x+w*.83,y-ht],[x+w,y-ht-19],[x+w,y-18],[x+w*.83,y]]);
+    rect('#7d6146',x,y-ht,w*.83,ht);rect('#b39061',x+4,y-ht+4,w*.83-8,6);
+    for(let j=1;j<4;j++)rect('#624b37',x,y-ht+j*ht/4,w*.83,2);
+    poly('#ad8b5c',[[x+5,y-5],[x+11,y-5],[x+w*.81,y-ht+9],[x+w*.81,y-ht+3]]);
+  }
+  if(s.mark){ctx.font='bold 59px system-ui';ctx.fillStyle='#a84437';ctx.fillText(s.mark,855,265);}
+  let seed=523;
+  for(let i=0;i<7900;i++){
+    seed=(seed*1664525+1013904223)>>>0;const x=seed%1120-10;
+    seed=(seed*1664525+1013904223)>>>0;const y=seed%550;
+    if(y>155||x<310||x>790)rect(i%2?'#35281b19':'#ffedcd19',x,y,2+(i%4),1);
+  }
+  ctx.restore();
+}
+function walk(place){
+  cancelAnimationFrame(viewFrame);const start=performance.now();
+  const frame=now=>{const t=Math.min(1,(now-start)/370);paint(place,Math.sin(t*Math.PI)*14);if(t<1)viewFrame=requestAnimationFrame(frame);};
+  if(!ctx||window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)paint(place);else viewFrame=requestAnimationFrame(frame);
+}
 const slug=value=>value.toLowerCase().replace(/[’']/g,'').replace(/[.?!]/g,'').replace(/ /g,'-');
-function speak(value, isWord=false){
-  voice.pause();
-  voice.src='assets/audio/'+(isWord?'word-':'line-')+slug(value)+'.m4a';
-  const source=voice.src;
-  voice.play().catch(()=>{if(voice.src===source)say('Audio could not play. You can still read the phrase or tap a word for IPA.');});
+function stopAudio(){audioRequest++;voice.pause()}
+function speak(value, word=false){
+  stopAudio();const request=audioRequest;
+  voice.src='assets/audio/'+(word?'word-':'line-')+slug(value)+'.m4a';
+  voice.play().catch(()=>{if(request===audioRequest)say('Audio could not play. You can still read the phrase or tap a word for IPA.');});
 }
 function say(value=''){ $('status').textContent=value; }
 function button(label,action){const b=document.createElement('button');b.textContent=label;b.onclick=action;return b;}
 function message(value, study=true){
-  voice.pause();line=value;$('message').replaceChildren();$('hint').hidden=true;$('listen').hidden=!study;
+  stopAudio();line=value;$('message').replaceChildren();$('hint').hidden=true;$('listen').hidden=!study;
   if(!study){$('message').textContent=value;return;}
+  words($('message'),value);
+}
+function words(target,value){
   for(const token of value.split(' ')){
     const word=token.replace(/[.?!]/g,'');
     const b=button(token,()=>{
@@ -40,21 +105,26 @@ function message(value, study=true){
       hint.append(spelling,' /'+ipa[word.toLowerCase()]+'/',button('▶ Word',()=>speak(word,true)));
       hint.hidden=false;
     });
-    b.className='word';$('message').append(b,' ');
+    b.className='word';target.append(b,' ');
   }
 }
 function actions(...items){$('actions').replaceChildren(...items);}
 function draw(){
-  for(const b of zones){b.disabled=[3,4,6].includes(stage);b.setAttribute('aria-pressed',String(b.dataset.zone===zone));}
-  $('location').textContent=zone?'You are at '+displayZone(zone)+'.':'';
+  const locked=[3,4,6,9,10].includes(stage);
+  $('hud-zone').textContent=zone?displayZone(zone).toUpperCase():'CHOOSE START';
+  if(!$('travel').children.length)$('travel').replaceChildren(...['A','Mid','B'].map(place=>{const b=button(displayZone(place),()=>move(place));b.dataset.place=place;return b}));
+  for(const b of [...zones,...$('travel').children]){
+    b.disabled=locked;b.setAttribute('aria-pressed',String((b.dataset.zone||b.dataset.place)===zone));
+  }
+  $('location').textContent=zone?'You are '+position(zone)+'.':'';
 }
 function move(next){
-  if([3,4,6].includes(stage))return;
-  const stayed=next===zone;zone=next;draw();
-  if(stage===0){first=next==='B'?'Mid':'B';goal='A';stage=1;$('progress').textContent='ROUND 01';message(command('Go to',first));say();return;}
+  if([3,4,6,9,10].includes(stage))return;
+  const stayed=next===zone;zone=next;draw();if(!stayed)walk(next);
+  if(stage===0){first=next==='B'?'Mid':'B';goal='A';stage=1;$('progress').textContent='ROUND 01';message('Go to '+first+'.');say();return;}
   if(stage===1){
     if(next!==first){say('Try another spot.');return;}
-    stage=2;message(command('Wait',first));actions(button('Wait here',waitHere));say();return;
+    stage=2;message(commandLine('Wait',first));actions(button('Wait here',waitHere));say();return;
   }
   if(stage===2){
     if(next===first&&stayed){waitHere();return;}
@@ -62,7 +132,17 @@ function move(next){
   }
   if(stage===5){
     if(next!==goal){say('Try another spot.');return;}
-    stage=6;draw();$('progress').textContent='ROUND COMPLETE';message('Teammate found!',false);say('You met at '+displayZone(goal)+'.');actions(button('Your turn',startDrill));return;
+    stage=6;draw();$('progress').textContent='ROUND COMPLETE';message('Teammate found!',false);say('You met at '+displayZone(goal)+'.');actions(button('Read the round log',startReading),button('Your turn',startDrill));return;
+  }
+  if(stage===8){
+    if(readStep===0&&next==='A'){readStep=1;say('Follow the next move in the log.');}
+    else if(readStep===1&&next==='Mid'){readStep=2;say('What should you do before leaving Mid?');}
+    else if(readStep===2){say(next==='Mid'?'Use Wait here before leaving Mid.':'Go back to Mid and wait there.');}
+    else if(readStep===3&&next==='B')startWriting();
+    else if(readStep===3)say('You have waited. Follow the last move in the log.');
+    else if(next==='A'){readStep=1;say('Follow the next move in the log.');}
+    else {readStep=0;say('Check the log. Start at A.');}
+    return;
   }
   if(stage===7)say('You are '+position(zone)+'.');
 }
@@ -76,15 +156,75 @@ function waitHere(){
     }));
   })));
 }
+let readStep;
+function exercise(){
+  const box=document.createElement('div');box.className='exercise';actions(box);return box;
+}
+function paragraph(box,text){
+  const p=document.createElement('p');p.textContent=text;box.append(p);return p;
+}
+function startReading(){
+  stage=8;draw();readStep=0;$('progress').textContent='ROUND LOG';
+  message('Read the log. Show the route on the radar.',false);say('Start at A.');
+  const box=exercise();
+  const lines=[
+    ['Player','I’m at A. Where are you?'],
+    ['Teammate','I’m at B. Go to Mid first. Wait there.'],
+    ['Player','OK. I’m in Mid now.'],
+    ['Teammate','Go to B now.'],
+    ['Player','On my way!']
+  ];
+  for(const [speaker,text] of lines){
+    const p=paragraph(box,speaker+' · ');words(p,text);p.append(button('▶',()=>speak(text)));p.lastChild.setAttribute('aria-label','Listen to '+speaker+': '+text);
+  }
+  paragraph(box,'Where is the teammate? Where does the player wait?');
+  box.append(button('Wait here',()=>{
+    if(readStep!==2||zone!=='Mid'){say('Follow the log to Mid before waiting.');return;}
+    readStep=3;say('You waited in Mid. Follow the last move in the log.');
+  }));
+}
+function field(box, before, after=''){
+  const label=document.createElement('label'),input=document.createElement('input');
+  input.autocomplete='off';label.append(before,input,after);box.append(label);return input;
+}
+const clean=value=>value.trim().toLowerCase().replace(/[.!?]+$/,'');
+function startWriting(){
+  stage=9;draw();$('progress').textContent='TEAM CHAT';message('Type three short messages.',false);say();
+  const box=exercise();
+  paragraph(box,'You are at B. Your teammate is at A. Tell them where you are, ask them to go to Mid, and say that you’re on your way.');
+  const here=field(box,'I’m at ','.'),go=field(box,'Go to ','.'),way=field(box,'On my ','.');
+  paragraph(box,'A · B · Mid · way');
+  box.append(button('Send',()=>{
+    if(clean(here.value)!=='b'){say('Message 1: Where are you?');here.focus();return;}
+    if(clean(go.value)!=='mid'){say('Message 2: Where will you meet?');go.focus();return;}
+    if(clean(way.value)!=='way'){say('Message 3: Check the last word.');way.focus();return;}
+    startCommand();
+  }));
+}
+function startCommand(){
+  stage=10;draw();$('progress').textContent='YOUR COMMAND';message('Write a command for your partner.',false);say('Messages sent.');
+  const box=exercise();paragraph(box,'Go to A, B or Mid. Wait at A or B, or wait in Mid.');
+  const command=field(box,'Command ');
+  box.append(button('Send command',()=>{
+    const match=clean(command.value).match(/^(go +to +(a|b|mid)|wait +at +(a|b)|wait +in +(mid))$/);
+    if(!match){say('Try “Go to A”, “Wait at B” or “Wait in Mid”.');command.focus();return;}
+    const target=match[2]||match[3]||match[4];
+    const place=target==='mid'?'Mid':target.toUpperCase();
+    const verb=match[1].startsWith('go')?'Go to':'Wait';
+    message(commandLine(verb,place));say('Read it to your partner. Let them act it out.');
+    stage=7;draw();$('progress').textContent='YOUR TURN';actions(button('New command',startCommand),button('Your turn',startDrill),button('Wait here',drillWait));
+  }));
+}
+function drillWait(){say('You are waiting '+position(zone)+'.')}
 function startDrill(){
   stage=7;draw();$('progress').textContent='YOUR TURN';say('Read a command. Your partner moves or waits.');
   drill=document.createElement('select');drill.setAttribute('aria-label','Choose a spot');
   for(const place of ['Mid','A','B']){const option=new Option(displayZone(place),place);drill.add(option);}
-  const update=verb=>{drill.dataset.verb=verb;message(command(verb,drill.value));say('Read the command aloud. Your partner uses the map or Wait here.');};
+  const update=verb=>{drill.dataset.verb=verb;message(commandLine(verb,drill.value));};
   drill.onchange=()=>update(drill.dataset.verb);update('Go to');
-  actions(drill,button('Go to',()=>update('Go to')),button('Wait',()=>update('Wait')),button('Wait here',()=>say('You are waiting '+position(zone)+'.')));
+  actions(drill,button('Go to',()=>update('Go to')),button('Wait',()=>update('Wait')),button('Wait here',drillWait));
 }
-function reset(){voice.pause();stage=0;zone=null;draw();$('progress').textContent='WARM-UP';message('Choose your starting spot.',false);actions();say();}
+function reset(){stopAudio();stage=0;zone=null;cancelAnimationFrame(viewFrame);paint('A');draw();$('progress').textContent='WARM-UP';message('Choose A, Mid or B to start. Your teammate will send you a message.',false);actions();say();}
 for(const b of zones)b.onclick=()=>move(b.dataset.zone);
 $('listen').onclick=()=>speak(line);$('reset').onclick=reset;reset();
 </script></html>

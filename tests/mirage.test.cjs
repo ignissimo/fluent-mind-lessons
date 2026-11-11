@@ -1,4 +1,16 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),{JSDOM}=require('jsdom'),fs=require('node:fs');
-function game(){return new JSDOM(fs.readFileSync('mirage/index.html','utf8'),{runScripts:'dangerously',beforeParse(w){w.HTMLCanvasElement.prototype.getContext=()=>new Proxy({}, {get:()=>()=>{}});w.HTMLMediaElement.prototype.play=()=>Promise.resolve();w.HTMLMediaElement.prototype.pause=()=>{}}}).window}
+function game(){return new JSDOM(fs.readFileSync('mirage/index.html','utf8'),{runScripts:'dangerously',pretendToBeVisual:true,beforeParse(w){w.HTMLCanvasElement.prototype.getContext=()=>new Proxy({}, {get:()=>()=>({addColorStop(){}})});w.matchMedia=()=>({matches:true});w.HTMLMediaElement.prototype.play=()=>Promise.resolve();w.HTMLMediaElement.prototype.pause=()=>{}}}).window}
 for(const [start,first,target] of [['A','B','A'],['Mid','B','A'],['B','Mid','A']])test('Mirage: complete route from '+start+' and practise waiting',()=>{const w=game(),d=w.document;const move=z=>d.querySelector('[data-zone="'+z+'"]').click();const act=t=>[...d.querySelectorAll('#actions button')].find(b=>b.textContent===t).click();move(start);move(first);act('Wait here');move(first==='B'?'A':'B');assert.match(d.querySelector('#location').textContent,new RegExp(first));act(first==='Mid'?'I’m in Mid.':'I’m at B.');act('On my way.');move(target);assert.equal(d.querySelector('#progress').textContent,'ROUND COMPLETE');act('Your turn');act('Wait');act('Wait here');assert.match(d.querySelector('#status').textContent,/waiting/i);d.querySelector('#reset').click();assert.equal(d.querySelector('#progress').textContent,'WARM-UP');w.close()});
 test('Mirage: tapping each phrase word shows IPA and selects a local recording',async()=>{const w=game(),d=w.document;d.querySelector('[data-zone="B"]').click();d.querySelectorAll('.word')[1].click();assert.match(d.querySelector('#hint').textContent,/\/tu\//);d.querySelector('#hint button').click();assert.match(d.querySelector('audio').getAttribute('src'),/word-to\.m4a$/);w.close()});
+test('round log, written replies and partner command work end to end',()=>{
+ const w=game(),d=w.document,move=z=>d.querySelector('[data-zone="'+z+'"]').click();
+ const act=t=>[...d.querySelectorAll('#actions button')].find(b=>b.textContent===t).click();
+ move('B');move('Mid');act('Wait here');act('I’m in Mid.');act('On my way.');move('A');act('Read the round log');
+ for(const b of d.querySelectorAll('#actions .word')){b.click();assert.doesNotMatch(d.querySelector('#hint').textContent,/undefined/);d.querySelector('#hint button').click();assert.ok(fs.existsSync('mirage/'+d.querySelector('audio').getAttribute('src')))}
+ for(const b of d.querySelectorAll('#actions button[aria-label^="Listen"]')){b.click();assert.ok(fs.existsSync('mirage/'+d.querySelector('audio').getAttribute('src')))}
+ move('B');assert.match(d.querySelector('#status').textContent,/Start at A/);
+ move('A');move('Mid');move('B');assert.equal(d.querySelectorAll('#actions input').length,0);move('Mid');act('Wait here');move('B');
+ const fields=[...d.querySelectorAll('#actions input')];assert.equal(fields.length,3);act('Send');assert.match(d.querySelector('#status').textContent,/Message 1/);
+ [' b. ','Mid','WAY!'].forEach((x,i)=>fields[i].value=x);act('Send');
+ d.querySelector('#actions input').value='wait in mid';act('Send command');assert.match(d.querySelector('#message').textContent,/Wait in Mid/);move('Mid');act('Wait here');assert.match(d.querySelector('#status').textContent,/waiting in Mid/);w.close();
+});
