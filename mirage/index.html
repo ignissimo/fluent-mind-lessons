@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mirage · Find Your Teammate</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101718;color:#f4f2e8;font:17px system-ui,sans-serif}main{max-width:1130px;margin:auto;padding:28px}header{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}h1{margin:0;font-size:clamp(44px,8vw,90px);line-height:.95;letter-spacing:-.065em}h2{margin:8px 0 0;font-size:22px}small,.muted{color:#b7c8c7}small{font:700 12px monospace;letter-spacing:.14em}button{font:inherit;color:inherit;background:#233235;border:1px solid #526568;border-radius:6px;padding:10px 14px;cursor:pointer}button:hover,button:focus-visible{border-color:#ffd578;outline-offset:3px}button[aria-pressed=true]{background:#ffd578;color:#171c19;border-color:#ffd578}.grid{display:grid;grid-template-columns:1.45fr 1fr;gap:16px}.panel{border:1px solid #435554;border-radius:12px;background:#192425;overflow:hidden}.bar{display:flex;justify-content:space-between;gap:10px;padding:13px 16px}.map{position:relative;aspect-ratio:1.32;background:#2e3832;isolation:isolate}.map canvas{position:absolute;width:100%;height:100%;z-index:-1}.spot{position:absolute;transform:translate(-50%,-50%);font-weight:800;white-space:nowrap;min-width:65px}.spot[aria-pressed=true]::after{content:' • YOU';font:700 11px monospace}.mapfoot{padding:11px 16px;font-size:14px}.chat{padding:17px;display:grid;align-content:start;gap:12px}.message{background:#101819;border-left:3px solid #ffd578;padding:14px;min-height:68px}.word{font-size:24px;background:transparent;border:0;border-bottom:1px dotted #96a9a7;border-radius:0;padding:2px 1px}.controls,.actions{display:flex;flex-wrap:wrap;gap:8px}.hint{display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:#293a3a;padding:10px;border-radius:6px}.hint[hidden]{display:none}#status{margin:0;min-height:2.6em;font-size:15px}details{margin-top:18px;color:#c8d6d4;font-size:15px}summary{cursor:pointer}select{font:inherit;padding:8px;background:#233235;color:inherit;border-radius:6px}@media(max-width:730px){main{padding:16px}.grid{grid-template-columns:1fr}header{align-items:start}.word{font-size:21px}}
+.map img{position:absolute;inset:0;width:100%;height:100%;z-index:-1}.radio-head{display:flex;align-items:center;gap:10px}.radio-head img{width:38px;height:38px}.mapfoot{line-height:1.4}.spot[aria-pressed=true]::after{content:none}.spot[aria-pressed=true]{box-shadow:0 0 0 3px #101718}.spot:disabled{cursor:default}.word:focus-visible{outline:2px solid #ffd578}.actions select{max-width:100%}button[hidden]{display:none}.muted{line-height:1.45}@media(max-width:360px){main{padding:10px}.spot{min-width:0;padding:8px}}
+</style>
+<main><header><div><small>FLUENT MIND / MAP PRACTICE</small><h1>MIRAGE</h1><h2>Find your teammate</h2></div><button id="reset">Restart</button></header>
+<div class="grid"><section class="panel" aria-label="Mirage practice map"><div class="bar"><small>RADAR</small><small id="progress">WARM-UP</small></div><div class="map"><img src="assets/map.svg" alt="" width="660" height="500"><button class="spot" style="left:26%;top:27%" data-zone="B">B Site</button><button class="spot" style="left:49%;top:54%" data-zone="Mid">Mid</button><button class="spot" style="left:76%;top:75%" data-zone="A">A Site</button></div><div class="mapfoot muted">Simplified practice map. Select a spot to move. <span id="location"></span></div></section>
+<section class="panel chat" aria-label="Team chat"><div class="radio-head"><img src="assets/radio.svg" alt="" width="38" height="38"><small>TEAM CHAT</small></div><div class="message" id="message"></div><div class="controls"><button id="listen">▶ Listen</button></div><div class="hint" id="hint" hidden></div><div class="actions" id="actions"></div><p class="muted" id="status" role="status"></p><audio id="voice" preload="none"></audio></section></div>
+<details lang="ru"><summary>Подсказка для преподавателя</summary><p>Пусть ученик сначала сам покажет точки на радаре и выберет старт. Дальше можно дать ему прочитать реплику или сразу выполнить её на карте. Подчёркнутые слова открывают IPA и озвучку. Если он втянулся, в режиме «Your turn» пусть даст тебе команду, а ты передвинешь маркер по его инструкции.</p></details></main>
+<script>
+const $ = id => document.getElementById(id);
+const zones = [...document.querySelectorAll('.spot')];
+const ipa = {go:'ɡoʊ',to:'tu',b:'biː',a:'eɪ',mid:'mɪd',wait:'weɪt',at:'æt',in:'ɪn',where:'wɛɹ',are:'ɑɹ',you:'juː',"i’m":'aɪm',on:'ɑn',my:'maɪ',way:'weɪ'};
+const displayZone = zone => zone === 'Mid' ? 'Mid' : zone + ' Site';
+const position = spot => (spot === 'Mid' ? 'in ' : 'at ') + spot;
+const command = (verb, spot) => verb === 'Wait' ? 'Wait '+position(spot)+'.' : 'Go to '+spot+'.';
+let stage, zone, first, goal, drill, line;
+const voice=$('voice');
+const slug=value=>value.toLowerCase().replace(/[’']/g,'').replace(/[.?!]/g,'').replace(/ /g,'-');
+function speak(value, isWord=false){
+  voice.pause();
+  voice.src='assets/audio/'+(isWord?'word-':'line-')+slug(value)+'.m4a';
+  const source=voice.src;
+  voice.play().catch(()=>{if(voice.src===source)say('Audio could not play. You can still read the phrase or tap a word for IPA.');});
+}
+function say(value=''){ $('status').textContent=value; }
+function button(label,action){const b=document.createElement('button');b.textContent=label;b.onclick=action;return b;}
+function message(value, study=true){
+  voice.pause();line=value;$('message').replaceChildren();$('hint').hidden=true;$('listen').hidden=!study;
+  if(!study){$('message').textContent=value;return;}
+  for(const token of value.split(' ')){
+    const word=token.replace(/[.?!]/g,'');
+    const b=button(token,()=>{
+      const hint=$('hint');hint.replaceChildren();
+      const spelling=document.createElement('strong');
+      if(word.toLowerCase()==='wait'){const marked=document.createElement('mark');marked.textContent='ai';spelling.append(word[0],marked,word[3]);}
+      else spelling.textContent=word;
+      hint.append(spelling,' /'+ipa[word.toLowerCase()]+'/',button('▶ Word',()=>speak(word,true)));
+      hint.hidden=false;
+    });
+    b.className='word';$('message').append(b,' ');
+  }
+}
+function actions(...items){$('actions').replaceChildren(...items);}
+function draw(){
+  for(const b of zones){b.disabled=[3,4,6].includes(stage);b.setAttribute('aria-pressed',String(b.dataset.zone===zone));}
+  $('location').textContent=zone?'You are at '+displayZone(zone)+'.':'';
+}
+function move(next){
+  if([3,4,6].includes(stage))return;
+  const stayed=next===zone;zone=next;draw();
+  if(stage===0){first=next==='B'?'Mid':'B';goal='A';stage=1;$('progress').textContent='ROUND 01';message(command('Go to',first));say();return;}
+  if(stage===1){
+    if(next!==first){say('Try another spot.');return;}
+    stage=2;message(command('Wait',first));actions(button('Wait here',waitHere));say();return;
+  }
+  if(stage===2){
+    if(next===first&&stayed){waitHere();return;}
+    say(next===first?'You’re back. Now wait here.':'Go back to '+displayZone(first)+'.');return;
+  }
+  if(stage===5){
+    if(next!==goal){say('Try another spot.');return;}
+    stage=6;draw();$('progress').textContent='ROUND COMPLETE';message('Teammate found!',false);say('You met at '+displayZone(goal)+'.');actions(button('Your turn',startDrill));return;
+  }
+  if(stage===7)say('You are '+position(zone)+'.');
+}
+function waitHere(){
+  if(zone!==first){say('Go back to '+displayZone(first)+'.');return;}
+  stage=3;draw();message('Where are you?');say();
+  actions(...['Mid','A','B'].map(place=>button('I’m '+position(place)+'.',()=>{
+    if(zone!==place){say('Check your position on the radar.');return;}
+    stage=4;message('I’m '+position(goal)+'.');say();actions(button('On my way.',()=>{
+      stage=5;draw();message("On my way.");say('Message sent. Move to your teammate.');actions();
+    }));
+  })));
+}
+function startDrill(){
+  stage=7;draw();$('progress').textContent='YOUR TURN';say('Read a command. Your partner moves or waits.');
+  drill=document.createElement('select');drill.setAttribute('aria-label','Choose a spot');
+  for(const place of ['Mid','A','B']){const option=new Option(displayZone(place),place);drill.add(option);}
+  const update=verb=>{drill.dataset.verb=verb;message(command(verb,drill.value));say('Read the command aloud. Your partner uses the map or Wait here.');};
+  drill.onchange=()=>update(drill.dataset.verb);update('Go to');
+  actions(drill,button('Go to',()=>update('Go to')),button('Wait',()=>update('Wait')),button('Wait here',()=>say('You are waiting '+position(zone)+'.')));
+}
+function reset(){voice.pause();stage=0;zone=null;draw();$('progress').textContent='WARM-UP';message('Choose your starting spot.',false);actions();say();}
+for(const b of zones)b.onclick=()=>move(b.dataset.zone);
+$('listen').onclick=()=>speak(line);$('reset').onclick=reset;reset();
+</script></html>
