@@ -68,6 +68,13 @@ function initDraw(){
  for(const event of ['pointerup','pointercancel','lostpointercapture'])c.addEventListener(event,end);
 }
 function clearDrawing(){if(!ctx)return;sketchVersion++;drawing=null;blankCanvas();sketch='';save()}
-function downloadDrawing(){if(!ctx)return;const a=document.createElement('a');a.href=sketch||$('draw').toDataURL('image/png');a.download='my-game-hero.png';a.click()}
+function downloadDrawing(){
+ if(!ctx)return;
+ $('draw').toBlob(blob=>{
+  if(!blob)return;
+  const a=document.createElement('a'),url=URL.createObjectURL(blob);
+  a.href=url;a.download='my-game-hero.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ },'image/png');
+}
 function reportText(){return `GAME DESIGN REPORT\n==================\nGame: ${$('title').value||'Untitled'}\nGenre: ${genre}\nGoal: ${$('goal').value}\nHero: ${heroIcon} ${$('hero').value}\nSpecial skill: ${$('skill').value}\nWeakness: ${$('weakness').value}\nHealth: ${$('health').value}\nAttack idea: ${$('attack').value}\nWin rule: ${$('winrule').selectedOptions[0].text}\nEnemy rule: ${$('enemyRule').selectedOptions[0].text}\nExtra rule idea: ${$('extra').value}\nPlaytest improvement: ${$('improvement').value}\nWhat makes it special: ${$('special').value}\nAudience: ${$('audience').value}\n\nMAP\n${Array.from({length:6},(_,r)=>map.slice(r*10,r*10+10).map(t=>tiles[t]).join('')).join('\n')}\n`}
 function makeReport(){$('report').textContent=reportText()}function downloadReport(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([reportText()],{type:'text/plain'}));a.download='game-design-report.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}setup();</script></html>
