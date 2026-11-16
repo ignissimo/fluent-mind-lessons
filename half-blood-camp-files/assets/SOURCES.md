@@ -1,0 +1,1 @@
+The three scene illustrations were supplied in the original Half_Blood_Camp_Files.html and extracted without changing the pixels. evidence.svg was drawn for this lesson. The story tasks discuss Chapters 5–6 of Rick Riordan’s The Lightning Thief; the earlier bus-station event is explicitly marked.

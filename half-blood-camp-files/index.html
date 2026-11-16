@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Half-Blood Camp Files</title>
+<meta name="description" content="A 30-minute teacher-led English quest based on chapters 5 and 6 of The Lightning Thief.">
+<style>
+:root{--night:#07121d;--panel:#102333ed;--ink:#f4ecd8;--muted:#bbcad5;--gold:#f4bf58;--blue:#46b9da;--green:#62c690;--red:#db6b61;--line:#ffffff20;--shadow:0 20px 70px #0009}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -5%,#19455f,#081522 42%,#04090f 100%);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}button,textarea{font:inherit}.shell{width:min(1080px,100%);margin:auto;padding:16px;min-height:100vh}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 14px;margin-bottom:14px;border-radius:17px;background:#07121deb;border:1px solid var(--line);backdrop-filter:blur(14px);box-shadow:0 10px 35px #0006}.brand{font-family:Georgia,serif;color:var(--gold);font-weight:800;white-space:nowrap}.bar{height:8px;background:#ffffff12;border-radius:99px;overflow:hidden;flex:1}.bar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));transition:.45s}.score{min-width:68px;text-align:right;color:var(--gold);font-weight:900}
+.screen{display:none;animation:up .4s ease}.screen.active{display:block}@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}.hero,.card{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}.hero{position:relative;min-height:620px;display:grid;align-items:end;background-size:cover;background-position:center}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#06101bf7 5%,#06101ba8 50%,#06101b22)}.hero-content{position:relative;max-width:790px;padding:clamp(28px,6vw,70px)}
+h1,h2,h3{font-family:Georgia,serif;margin:0 0 14px}h1{font-size:clamp(44px,8vw,82px);line-height:.95}h2{font-size:clamp(31px,5vw,52px)}h3{font-size:23px}p{font-size:17px;line-height:1.58;color:var(--muted)}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:900;color:var(--gold)}.time{display:inline-flex;padding:7px 11px;border:1px solid #f4bf5855;background:#f4bf5814;color:var(--gold);border-radius:99px;font-weight:800;font-size:13px}
+.card{padding:clamp(20px,4vw,42px)}.scene{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:18px;margin-bottom:24px;box-shadow:0 12px 38px #0007}.note{border-left:3px solid var(--gold);padding:9px 14px;margin:18px 0;color:#dce8ed;background:#ffffff08;border-radius:0 12px 12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.option,.event,.speak-card{width:100%;border:1px solid var(--line);background:#0b1a28;color:var(--ink);padding:15px;border-radius:14px;text-align:left;cursor:pointer;transition:.18s}.option:hover,.event:hover,.speak-card:hover{border-color:var(--blue);background:#112a3d}.option.correct{border-color:var(--green);background:#153b2a}.option.wrong{border-color:var(--red);background:#421d22}.option:disabled{cursor:default;color:var(--ink)}.question{margin:22px 0;padding-top:20px;border-top:1px solid var(--line)}.question:first-child{border-top:0;padding-top:0}.question b{display:block;font-size:18px;margin-bottom:10px}.feedback{min-height:52px;margin-top:12px;padding:12px 14px;border-radius:12px;background:#ffffff0a;color:#dce8ee}
+.sequence{display:grid;gap:10px}.event{display:grid;grid-template-columns:40px 1fr;align-items:center;gap:11px}.event .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#1a374b;color:var(--gold);font-weight:900}.event.used{opacity:.48}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(135deg,var(--gold),#dc9138);color:#171108;font-weight:900;cursor:pointer;box-shadow:0 8px 25px #0006;transition:.18s}.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}.btn.secondary{background:#173047;color:var(--ink);border:1px solid #ffffff2b}.btn:disabled{opacity:.43;cursor:not-allowed;transform:none}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.chip{padding:8px 11px;border-radius:99px;border:1px solid #46b9da55;background:#46b9da12;color:#bdeeff;font-weight:750}.rule{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.rule>div{padding:16px;border-radius:15px;background:#0b1a28;border:1px solid var(--line)}.rule strong{display:block;color:var(--gold);margin-bottom:6px}.speak-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.speak-card{cursor:default}.speak-card h3{font-family:inherit;font-size:17px}.confirm{margin-top:12px;width:100%}.confirmed{border-color:var(--green)!important;background:#153b2a!important}.small{font-size:14px;color:#91a8b8}.final-score{font-family:Georgia,serif;font-size:70px;color:var(--gold);margin:8px 0}.footer{text-align:center;color:#718798;font-size:12px;padding:18px 0 4px}
+@media(max-width:720px){.shell{padding:8px}.brand{display:none}.grid,.rule,.speak-grid{grid-template-columns:1fr}.hero{min-height:76vh}.scene{aspect-ratio:16/9}.card,.hero{border-radius:18px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.evidence{display:block;width:min(100%,600px);height:auto;margin:16px auto}.screen:focus{outline:none}.score{white-space:nowrap}button:focus-visible{outline:3px solid #ffdf78;outline-offset:3px}[hidden]{display:none!important}.utility{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}.scene{object-fit:contain;background:#0b1a28}@media(max-width:400px){.utility .btn{padding:8px 12px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<div class="top"><div class="brand">⚡ Half-Blood Camp Files</div><div class="bar"><i id="bar"></i></div><div class="score" id="score">0 / 30</div></div>
+
+<section class="screen active" id="s0"><div class="hero" style="background-image:url('assets/scene-1.webp')"><div class="hero-content">
+<div class="eyebrow">Teacher-led English quest · Chapters 5–6</div><h1>Half-Blood Camp Files</h1>
+<p>Percy has survived the Minotaur—but the camp creates more questions than answers. Decode the language, identify the gods, investigate the evidence and discover what the water knows.</p>
+<span class="time">⏱ About 30 minutes</span><div class="actions"><button class="btn" onclick="go(1)">Open the case</button></div>
+</div></div></section>
+
+<section class="screen" id="s1"><div class="card"><img class="scene" src="assets/scene-2.webp" alt="Chiron reveals his centaur form">
+<div class="eyebrow">File 1 · Story reconstruction</div><h2>Restore the timeline</h2><span class="time">3 minutes</span>
+<p class="note">Click the six events in the order they happen across Chapters 5 and 6.</p>
+<div class="sequence" id="timeline"></div><div class="feedback" id="timelineFb">The camp record is scrambled.</div>
+<div class="actions"><button class="btn" id="timelineNext" disabled onclick="go(2)">Enter the language archive</button></div>
+</div></section>
+
+<section class="screen" id="s2"><div class="card"><img class="scene" src="assets/scene-1.webp" alt="An illustration of Camp Half-Blood">
+<div class="eyebrow">File 2 · Survival vocabulary</div><h2>Decode the expressions</h2><span class="time">8 minutes</span>
+<p>Choose the expression that matches each sentence. In the vocabulary, mythology and grammar files, only your first answer earns a point; feedback appears after every choice.</p><div class="word-bank">
+<span class="chip">pass out</span><span class="chip">come around</span><span class="chip">keep watch over</span><span class="chip">hold on to</span><span class="chip">catch your breath</span><span class="chip">keep an eye on</span><span class="chip">get in trouble</span><span class="chip">give someone the slip</span><span class="chip">size someone up</span><span class="chip">stand a chance</span>
+</div><div id="vocab"></div><div class="feedback" id="vocabFb">0 of 8 completed</div>
+<div class="actions"><button class="btn" id="vocabNext" disabled onclick="go(3)">Run the mythology scan</button></div>
+</div></section>
+
+<section class="screen" id="s3"><div class="card"><img class="scene" src="assets/scene-2.webp" alt="Chiron and Dionysus at the camp farmhouse">
+<div class="eyebrow">File 3 · Mythology scan</div><h2>Who am I?</h2><span class="time">4 minutes</span>
+<p class="note">Identify each figure or object from the clues.</p><div id="myth"></div>
+<div class="actions"><button class="btn" id="mythNext" disabled onclick="go(4)">Open the grammar lab</button></div>
+</div></section>
+
+<section class="screen" id="s4"><div class="card"><img class="scene" src="assets/scene-1.webp" alt="">
+<div class="eyebrow">File 4 · Grammar detective</div><h2>Evidence about the past</h2><span class="time">5 minutes</span>
+<p>Use these forms when evidence helps you make a deduction about the past. A deduction is not proof.</p>
+<img class="evidence" src="assets/evidence.svg" width="600" height="108" alt=""><div class="rule"><div><strong>must have + V3</strong>Almost certainly happened.</div><div><strong>might have + V3</strong>Possibly happened.</div><div><strong>can’t have + V3</strong>Almost certainly did not happen.</div></div>
+<p class="note">Percy <b>must have felt</b> confused. Annabeth <b>might have expected</b> a great hero. Percy <b>can’t have understood</b> everything immediately.</p>
+<div id="grammar"></div><div class="actions"><button class="btn" id="grammarNext" disabled onclick="go(5)">Interview the witnesses</button></div>
+</div></section>
+
+<section class="screen" id="s5"><div class="card"><img class="scene" src="assets/scene-1.webp" alt="">
+<div class="eyebrow">File 5 · Witness interviews</div><h2>Defend your opinion</h2><span class="time">6 minutes</span>
+<p class="note"><b>Teacher mode:</b> discuss each question for at least 30 seconds. The teacher confirms a point after a complete answer with <i>because</i>.</p>
+<div class="speak-grid" id="speaking"></div><div class="actions"><button class="btn" id="speakNext" disabled onclick="go(6)">Enter the bathroom</button></div>
+</div></section>
+
+<section class="screen" id="s6"><div class="card"><img class="scene" src="assets/scene-3.webp" alt="Magical water protects Percy in the bathroom">
+<div class="eyebrow">Final file · The water incident</div><h2>What does the evidence suggest?</h2><span class="time">4 minutes</span>
+<p class="note">Give three spoken deductions. Use one different grammar form in each answer.</p>
+<div class="speak-grid" id="finalSpeak"></div>
+<div class="feedback" id="finalFb">0 of 3 deductions confirmed by the teacher.</div><div class="actions"><button class="btn" id="finishBtn" disabled onclick="finish()">Close the case</button></div>
+</div></section>
+
+<section class="screen" id="s7"><div class="hero" style="background-image:url('assets/scene-3.webp')"><div class="hero-content">
+<div class="eyebrow">Case complete</div><div class="final-score" id="finalScore">0 / 30</div><h2 id="rank">New Camper</h2><p id="resultText"></p>
+<div class="actions"><button class="btn" onclick="restart()">Play again</button><button class="btn secondary" onclick="go(5)">Review speaking cards</button></div>
+</div></div></section>
+<div class="utility"><button class="btn secondary" id="back" hidden onclick="go(state.screen-1)">← Previous file</button><span class="small" id="saveStatus" role="status"></span></div><div id="resetBox" hidden><p>Clear this case’s progress and start again?</p><button class="btn" id="confirmRestart">Clear and restart</button> <button class="btn secondary" onclick="this.parentElement.hidden=true">Keep my progress</button></div><div class="footer">Unofficial educational activity · Original lesson artwork · Teacher-led mode</div>
+</main>
+<script>
+const MAX=30;
+const KEY='fma-half-blood-camp-v1';
+const fresh=()=>({screen:0,timeline:0,answers:{vocab:{},myth:{},grammar:{}},speakingDone:[],finalDone:[]});
+let state=fresh();
+const timeline=[
+ {t:'Percy wakes up at Camp Half-Blood.',n:1},
+ {t:'Grover gives Percy the Minotaur’s horn.',n:2},
+ {t:'Percy meets Mr D and discovers that he is Dionysus.',n:3},
+ {t:'Chiron reveals his centaur body.',n:4},
+ {t:'Percy is placed in crowded Cabin Eleven.',n:5},
+ {t:'The bathroom water attacks Clarisse and her friends.',n:6}
+];
+const vocab=[
+ {q:'Percy finally regains consciousness after the fight.',a:['comes around','gives someone the slip','sizes someone up'],c:0,why:'Come around means become conscious again.'},
+ {q:'Chiron secretly watches and protects Percy at Yancy Academy.',a:['stands a chance','keeps watch over him','catches his breath'],c:1,why:'Keep watch over means watch and protect.'},
+ {q:'Percy refuses to release the Minotaur’s horn.',a:['holds on to it','passes it out','gets it in trouble'],c:0,why:'Hold on to means keep something in your hands or possession.'},
+ {q:'The campers look at Percy and judge how strong he may be.',a:['come around','size him up','give him the slip'],c:1,why:'Size someone up means observe and judge them.'},
+ {q:'Earlier in the book, Percy slips away from Grover at the bus station.',a:['catches Grover’s breath','gives Grover the slip','keeps an eye on Grover'],c:1,why:'Give someone the slip means escape without them noticing.'},
+ {q:'Clarisse thinks Percy has no possibility of winning.',a:['doesn’t stand a chance','doesn’t hold on','doesn’t pass out'],c:0,why:'Stand a chance means have a real possibility of success.'},
+ {q:'Percy worries that Grover will have problems with Mr D.',a:['will catch his breath','will get in trouble','will come around'],c:1,why:'Get in trouble means face problems or punishment.'},
+ {q:'At school, an adult should watch a new student carefully.',a:['keep an eye on them','give them the slip','pass them out'],c:0,why:'Keep an eye on means watch carefully.'}
+];
+const myth=[
+ {q:'I am half human and half horse. I trained famous heroes.',a:['Chiron','Ares','Hermes'],c:0,why:'Chiron is a centaur and a trainer of heroes.'},
+ {q:'I am the god of wine. Zeus punished me and sent me to the camp.',a:['Apollo','Dionysus','Hades'],c:1,why:'Mr D is Dionysus.'},
+ {q:'Gods consume us. We heal demigods but can kill ordinary humans.',a:['Nectar and ambrosia','Pinochle and soda','Strawberries and grapes'],c:0,why:'Nectar and ambrosia are divine food and drink.'},
+ {q:'I protect travellers and thieves. New campers stay in my cabin.',a:['Ares','Zeus','Hermes'],c:2,why:'Cabin Eleven belongs to Hermes.'},
+ {q:'I am the god of war. Clarisse is my daughter.',a:['Ares','Poseidon','Dionysus'],c:0,why:'Clarisse is a child of Ares.'}
+];
+const grammar=[
+ {q:'Percy needed time to recover. Choose a strong deduction about his condition: He ___ badly injured.',a:['must have been','might been','can’t be'],c:0,why:'The evidence is strong, so use must have been.'},
+ {q:'Annabeth watched Percy carefully. She ___ something unusual about him.',a:['can’t have suspect','might have suspected','must suspected'],c:1,why:'This is possible, but not certain.'},
+ {q:'Make a negative deduction: Clarisse tried to dunk Percy’s head in a toilet. She ___ to become his friend.',a:['might have wanted','must have wanted','can’t have wanted'],c:2,why:'Her behaviour is strong evidence that friendship was not her aim.'},
+ {q:'Chiron came to Yancy personally. He ___ Percy was important.',a:['must have believed','can’t have believe','might believed'],c:0,why:'His unusual effort gives us strong evidence.'}
+];
+const speaking=[
+ {title:'Grover’s Trial',q:'Was Grover a bad protector, or was he simply unlucky? Give two reasons.',help:'Use: keep watch over / get in trouble'},
+ {title:'Mr D’s Mask',q:'Is Mr D funny, frightening, or both? Use one example from the chapter.',help:'Use: might have / must have'},
+ {title:'Annabeth’s Test',q:'Why might Annabeth have watched Percy so closely?',help:'Use: size someone up / because'},
+ {title:'Percy’s Reply',q:'Was Percy’s final comment to Clarisse brave, foolish, or both?',help:'Use: stand a chance / because'}
+];
+const finalSpeaking=[
+ {title:'Must have',q:'What must Annabeth have noticed about the water? What detail supports your answer?'},
+ {title:'Might have',q:'What might Percy have thought when the pipes began to shake?'},
+ {title:'Can’t have',q:'What can’t Clarisse have expected when she attacked Percy?'}
+];
+const $=s=>document.querySelector(s);
+const groups={vocab,myth,grammar};
+const counts=()=>Object.entries(groups).map(([key])=>Object.keys(state.answers[key]).length);
+function allowed(){const [v,m,g]=counts();return state.timeline<6?1:v<vocab.length?2:m<myth.length?3:g<grammar.length?4:state.speakingDone.length<speaking.length?5:state.finalDone.length<finalSpeaking.length?6:7}
+function save(){
+ let msg='Progress saved in this browser.';
+ try{localStorage.setItem(KEY,JSON.stringify(state))}catch{msg='This browser could not save progress. Keep the tab open to finish.'}
+ if($('#saveStatus').textContent!==msg)$('#saveStatus').textContent=msg;
+}
+function refresh(){
+ const [v,m,g]=counts(),done=state.timeline+v+m+g+state.speakingDone.length+state.finalDone.length;
+ const score=state.timeline+state.speakingDone.length+state.finalDone.length+Object.entries(groups).reduce((n,[k,qs])=>n+qs.filter((q,i)=>state.answers[k][i]===q.c).length,0);
+ $('#score').textContent=score+' / '+MAX;$('#bar').style.width=(done/MAX*100)+'%';
+ $('#vocabFb').textContent=v+' of '+vocab.length+' completed';
+ $('#finalFb').textContent=state.finalDone.length+' of 3 deductions confirmed by the teacher.';
+ for(const [id,n] of [['timelineNext',2],['vocabNext',3],['mythNext',4],['grammarNext',5],['speakNext',6],['finishBtn',7]])$('#'+id).disabled=allowed()<n;
+ $('#finalScore').textContent=score+' / '+MAX;
+ $('#rank').textContent=score>=27?'Child of Athena':score>=22?'Mythology Detective':score>=16?'Camp Half-Blood Recruit':'Brave Mortal';
+ $('#resultText').textContent='You reached the end of the case. Review the clues or try a new case.';
+ save();
+}
+function go(n,focus=true){
+ if(!Number.isInteger(n)||n<0||n>allowed())return;
+ state.screen=n;$('#resetBox').hidden=true;
+ document.querySelectorAll('.screen').forEach((x,i)=>x.classList.toggle('active',i===n));
+ $('#back').hidden=n===0;
+ const section=$('#s'+n);section.tabIndex=-1;
+ if(focus){section.focus({preventScroll:true});window.scrollTo({top:0})}
+ refresh();
+}
+function renderTimeline(){
+ const entries=[...timeline];
+ for(let i=entries.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[entries[i],entries[j]]=[entries[j],entries[i]]}
+ for(const x of entries){
+  const b=document.createElement('button');b.className='event';b.dataset.event=x.n;b.innerHTML='<span class="n">?</span><span>'+x.t+'</span>';
+  const mark=()=>{b.disabled=true;b.classList.add('used');b.querySelector('.n').textContent=x.n};
+  if(x.n<=state.timeline)mark();
+  b.onclick=()=>{
+   if(x.n!==state.timeline+1){$('#timelineFb').textContent='That event belongs somewhere else. Try again.';return}
+   state.timeline++;mark();$('#timelineFb').textContent=state.timeline===6?'Timeline restored.':'Correct. What happened next?';refresh();
+  };
+  $('#timeline').append(b);
+ }
+ $('#timelineFb').textContent=state.timeline===6?'Timeline restored.':state.timeline?'Continue from event '+(state.timeline+1)+'.':'The camp record is scrambled.';
+}
+function renderQuestions(key,data){data.forEach((x,i)=>{
+ const q=document.createElement('div');q.className='question';q.innerHTML='<b>'+(i+1)+'. '+x.q+'</b><div class="grid"></div><div class="feedback" role="status">Choose one answer.</div>';
+ const paint=j=>{q.querySelectorAll('button').forEach((b,k)=>{b.disabled=true;if(k===x.c)b.classList.add('correct');else if(k===j)b.classList.add('wrong')});q.querySelector('.feedback').textContent=(j===x.c?'Correct. ':'Not quite. ')+x.why};
+ x.a.forEach((label,j)=>{const b=document.createElement('button');b.className='option';b.textContent=label;b.onclick=()=>{if(state.answers[key][i]!==undefined)return;state.answers[key][i]=j;paint(j);refresh()};q.querySelector('.grid').append(b)});
+ if(state.answers[key][i]!==undefined)paint(state.answers[key][i]);
+ $('#'+key).append(q);
+})}
+function teacherCards(root,data,key){data.forEach((x,i)=>{
+ const c=document.createElement('article');c.className='speak-card';c.innerHTML='<h3>'+(i+1)+'. '+x.title+'</h3><p>'+x.q+'</p>'+(x.help?'<p class="small">'+x.help+'</p>':'')+'<button class="btn secondary confirm">Teacher: answer complete</button>';
+ const b=c.querySelector('button'),paint=()=>{const checked=state[key].includes(i);c.classList.toggle('confirmed',checked);b.textContent=checked?'✓ Confirmed · Undo':'Teacher: answer complete';b.setAttribute('aria-pressed',checked)};
+ b.onclick=()=>{state[key]=state[key].includes(i)?state[key].filter(j=>j!==i):[...state[key],i];paint();refresh()};paint();$(root).append(c);
+})}
+function finish(){go(7)}
+function restart(){$('#resetBox').hidden=false;$('#confirmRestart').focus()}
+$('#confirmRestart').onclick=()=>{state=fresh();render();go(0)};
+function render(){
+ for(const id of ['timeline','vocab','myth','grammar','speaking','finalSpeak'])$('#'+id).replaceChildren();
+ renderTimeline();Object.entries(groups).forEach(([key,qs])=>renderQuestions(key,qs));teacherCards('#speaking',speaking,'speakingDone');teacherCards('#finalSpeak',finalSpeaking,'finalDone');
+}
+try{
+ const x=JSON.parse(localStorage.getItem(KEY));
+ if(x&&typeof x==='object'){
+  if(Number.isInteger(x.timeline)&&x.timeline>=0&&x.timeline<=6)state.timeline=x.timeline;
+  for(const [k,qs] of Object.entries(groups))qs.forEach((q,i)=>{const a=x.answers?.[k]?.[i];if(Number.isInteger(a)&&q.a[a]!==undefined)state.answers[k][i]=a});
+  for(const [k,n] of [['speakingDone',speaking.length],['finalDone',finalSpeaking.length]])if(Array.isArray(x[k]))state[k]=[...new Set(x[k].filter(i=>Number.isInteger(i)&&i>=0&&i<n))];
+  if(Number.isInteger(x.screen)&&x.screen>=0&&x.screen<=allowed())state.screen=x.screen;
+ }
+}catch{}
+$('#timelineFb').setAttribute('role','status');
+render();go(state.screen,false);
+</script>
+</body>
+</html>
