@@ -1,0 +1,1316 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Karni English Academy — Lesson 3</title><style>:root{font-family:Arial,Verdana,sans-serif;color:#192c49;background:#f4f1e9}*{box-sizing:border-box}body{margin:0}header{background:#172d51;color:white;padding:18px 22px}header h1{font-size:25px;margin:0 0 6px}header p{margin:0;color:#e4ddc9}.wrap{max-width:980px;margin:auto;padding:18px}nav{display:flex;gap:8px;overflow:auto;padding:12px 0}nav button{white-space:nowrap}button{cursor:pointer;font-size:17px;border-radius:12px;border:2px solid #c9d1dd;padding:12px 16px;background:white;color:#172d51}button:hover{border-color:#466d9c}button.active{background:#23456d;color:white}button.correct{background:#e2f5e8;border-color:#4a9669}button.wrong{background:#fff0dc;border-color:#d59543}.panel{background:white;border-radius:18px;padding:22px;box-shadow:0 3px 14px #142b4512;margin:14px 0}.theory{background:#e9eff6;border-left:6px solid #416a9d;line-height:1.7;font-size:19px}.small{font-size:15px;color:#58667b}.question{font-size:24px;line-height:1.5;font-weight:650;margin:14px 0 20px}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.options button{text-align:left;min-height:64px}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.feedback{font-size:18px;line-height:1.55;padding:14px;border-radius:12px;background:#eef3f8;margin-top:14px}.hidden{display:none}.tag{font-size:15px;color:#506680}#progress{height:10px;background:#d9e0e8;border-radius:10px;overflow:hidden}#progress>div{height:100%;background:#477da0;transition:width .2s}footer{padding:24px;color:#536274;text-align:center}@media(max-width:600px){.options{grid-template-columns:1fr}.question{font-size:22px}.panel{padding:16px}}nav{flex-wrap:wrap;overflow:visible}nav button{white-space:normal}button:disabled{opacity:.55;cursor:default}button:focus-visible{outline:3px solid #416a9d;outline-offset:2px}.options{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:600px){.options{grid-template-columns:1fr}}[hidden]{display:none!important}</style></head><body><header><h1>🧠 Karni English Academy · Lesson 3</h1><p>Knowledge & Grammar Challenge · A2–B1 · Learn, try again, explain!</p></header><div class="wrap"><div class="panel"><div id="status" class="small"></div><div id="progress"><div></div></div><nav id="nav" aria-label="Lesson sections"></nav></div><main id="main"></main></div><footer>No timer · Listen aloud · You can always correct an answer · English practice for Karni preparation · Not an official test</footer><script>
+const SECTIONS = [
+  {
+    "title": "Science & Nature",
+    "theory": "Listen to the statement. Decide TRUE or FALSE. Then explain WHY in English.",
+    "items": [
+      {
+        "q": "The Moon reflects sunlight.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "The Moon does not produce its own visible light."
+      },
+      {
+        "q": "All mammals live on land.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Whales and dolphins live in water."
+      },
+      {
+        "q": "A spider has eight legs.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Spiders are arachnids."
+      },
+      {
+        "q": "Sound can travel through empty space.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Sound needs a medium such as air or water."
+      },
+      {
+        "q": "The Earth travels around the Sun.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "One orbit takes about a year."
+      },
+      {
+        "q": "All deserts are hot.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Some deserts are cold."
+      },
+      {
+        "q": "A whale breathes air.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Whales have lungs."
+      },
+      {
+        "q": "The human heart pumps blood.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "It moves blood through the body."
+      },
+      {
+        "q": "A light-year measures time.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "It measures distance."
+      },
+      {
+        "q": "The Pacific Ocean is the largest ocean.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "It covers more area than any other ocean."
+      },
+      {
+        "q": "A square has four equal sides.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Its four angles are also right angles."
+      },
+      {
+        "q": "A dolphin is a fish.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "It is a mammal."
+      },
+      {
+        "q": "The Sun is a star.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "It is the star at the centre of our solar system."
+      },
+      {
+        "q": "Some birds cannot fly.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Penguins and ostriches cannot fly."
+      },
+      {
+        "q": "Water can exist as solid, liquid, and gas.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Ice, liquid water, and water vapour are three states."
+      }
+    ]
+  },
+  {
+    "title": "World & Everyday Life",
+    "theory": "Watch for tricky words: ALL, EVERY, ONLY, SOME, NEVER. One word can change the whole meaning.",
+    "items": [
+      {
+        "q": "A decade is ten years.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Ten years make one decade."
+      },
+      {
+        "q": "Every country has the same currency.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Countries can use different currencies."
+      },
+      {
+        "q": "A compass can help you find north.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "A compass points toward magnetic north."
+      },
+      {
+        "q": "A century is one thousand years.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "A century is one hundred years."
+      },
+      {
+        "q": "If today is Thursday, the day after tomorrow is Saturday.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Friday is tomorrow, then Saturday."
+      },
+      {
+        "q": "All triangles have three equal sides.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Only equilateral triangles do."
+      },
+      {
+        "q": "A dictionary can help explain word meanings.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "It gives definitions."
+      },
+      {
+        "q": "A thermometer measures temperature.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "It does not measure weight."
+      },
+      {
+        "q": "Every island is surrounded by water.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "That is part of the definition of an island."
+      },
+      {
+        "q": "The opposite of ancient is modern.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Ancient means very old; modern means recent or current."
+      },
+      {
+        "q": "If something is optional, you must do it.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Optional means you can choose."
+      },
+      {
+        "q": "A library is only a place to buy books.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Libraries usually lend books."
+      },
+      {
+        "q": "A map can show the location of cities.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Maps represent places."
+      },
+      {
+        "q": "A person who is bilingual can use two languages.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 0,
+        "why": "Bi means two."
+      },
+      {
+        "q": "If two objects are identical, they are different.",
+        "opts": [
+          "True",
+          "False"
+        ],
+        "a": 1,
+        "why": "Identical means exactly the same."
+      }
+    ]
+  },
+  {
+    "title": "Articles Academy",
+    "theory": "A = one nonspecific thing before a consonant sound. AN = before a vowel sound. THE = something specific, known, or unique. NO ARTICLE = many general plural/uncountable nouns, meals, and some institutions. Sound matters: AN honest person, A university.",
+    "items": [
+      {
+        "q": "I saw ___ elephant at the zoo.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 1,
+        "why": "Use AN before a vowel sound."
+      },
+      {
+        "q": "She wants to be ___ scientist.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 0,
+        "why": "Use A for one job or profession."
+      },
+      {
+        "q": "___ Sun is a star.",
+        "opts": [
+          "A",
+          "An",
+          "The",
+          "No article"
+        ],
+        "a": 2,
+        "why": "Use THE for this unique object."
+      },
+      {
+        "q": "We usually have ___ breakfast at seven.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 3,
+        "why": "Meals often take no article in general statements."
+      },
+      {
+        "q": "He bought ___ umbrella yesterday.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 1,
+        "why": "Umbrella begins with a vowel sound."
+      },
+      {
+        "q": "I found a key. ___ key was under the chair.",
+        "opts": [
+          "A",
+          "An",
+          "The",
+          "No article"
+        ],
+        "a": 2,
+        "why": "Use THE when the thing has already been mentioned."
+      },
+      {
+        "q": "Use the usual British English form: She plays ___ piano.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 2,
+        "why": "Traditionally use THE with musical instruments."
+      },
+      {
+        "q": "___ cats are usually curious animals.",
+        "opts": [
+          "A",
+          "An",
+          "The",
+          "No article"
+        ],
+        "a": 3,
+        "why": "Use no article with plural nouns in general statements."
+      },
+      {
+        "q": "Of the three stories, this is ___ most interesting one.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 2,
+        "why": "Use THE with superlatives."
+      },
+      {
+        "q": "My brother is ___ honest person.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 1,
+        "why": "Honest starts with a vowel sound: the H is silent."
+      },
+      {
+        "q": "We visited ___ museum near our hotel.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 0,
+        "why": "First mention of one nonspecific museum: A."
+      },
+      {
+        "q": "She goes to ___ school every weekday.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 3,
+        "why": "Go to school means attend school as a student."
+      },
+      {
+        "q": "Can you close ___ door, please?",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 2,
+        "why": "Both speakers know which door."
+      },
+      {
+        "q": "I need ___ information about the exam in general.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 3,
+        "why": "Information is uncountable and used generally here."
+      },
+      {
+        "q": "He is ___ European scientist.",
+        "opts": [
+          "a",
+          "an",
+          "the",
+          "No article"
+        ],
+        "a": 0,
+        "why": "European starts with a /y/ consonant sound."
+      }
+    ]
+  },
+  {
+    "title": "Present Tenses",
+    "theory": "PRESENT SIMPLE: routines and facts (she works; does she work?). PRESENT CONTINUOUS: happening now or temporary (she is working). PRESENT PERFECT: experience or a past action connected to now (she has worked; I have lost my keys). Look for signal words, but always check meaning.",
+    "items": [
+      {
+        "q": "She usually ___ to school by bus.",
+        "opts": [
+          "go",
+          "goes",
+          "is going",
+          "has gone"
+        ],
+        "a": 1,
+        "why": "Usually signals a routine: Present Simple, she GOES."
+      },
+      {
+        "q": "Look! The dog ___ in the garden.",
+        "opts": [
+          "runs",
+          "is running",
+          "has run",
+          "run"
+        ],
+        "a": 1,
+        "why": "Look! suggests an action happening now."
+      },
+      {
+        "q": "So far this year, I ___ this film twice.",
+        "opts": [
+          "see",
+          "am seeing",
+          "have seen",
+          "sees"
+        ],
+        "a": 2,
+        "why": "Experience up to now: Present Perfect."
+      },
+      {
+        "q": "They ___ football every Sunday as part of their usual routine.",
+        "opts": [
+          "play",
+          "are playing",
+          "has played",
+          "plays"
+        ],
+        "a": 0,
+        "why": "Every Sunday = routine."
+      },
+      {
+        "q": "Why ___ you laughing?",
+        "opts": [
+          "do",
+          "are",
+          "have",
+          "does"
+        ],
+        "a": 1,
+        "why": "Present Continuous question: ARE you laughing?"
+      },
+      {
+        "q": "My father ___ coffee.",
+        "opts": [
+          "does not drink",
+          "is not drink",
+          "do not drinks",
+          "has not drinking"
+        ],
+        "a": 0,
+        "why": "Present Simple negative: does not + base verb."
+      },
+      {
+        "q": "We ___ here since 2022.",
+        "opts": [
+          "live",
+          "are living",
+          "have lived",
+          "lives"
+        ],
+        "a": 2,
+        "why": "Since + starting point; situation continuing now."
+      },
+      {
+        "q": "Listen! Someone ___ at the door.",
+        "opts": [
+          "knocks",
+          "is knocking",
+          "has knock",
+          "knock"
+        ],
+        "a": 1,
+        "why": "Listen! indicates something happening now."
+      },
+      {
+        "q": "___ she like science?",
+        "opts": [
+          "Do",
+          "Does",
+          "Is",
+          "Has"
+        ],
+        "a": 1,
+        "why": "Present Simple question with she: DOES."
+      },
+      {
+        "q": "I ___ my homework already.",
+        "opts": [
+          "finish",
+          "am finishing",
+          "have finished",
+          "finishes"
+        ],
+        "a": 2,
+        "why": "Already commonly appears with Present Perfect."
+      },
+      {
+        "q": "He ___ his room at the moment.",
+        "opts": [
+          "cleans",
+          "is cleaning",
+          "has cleaned",
+          "clean"
+        ],
+        "a": 1,
+        "why": "At the moment = now."
+      },
+      {
+        "q": "Water ___ at 100°C at standard atmospheric pressure.",
+        "opts": [
+          "boil",
+          "boils",
+          "is boiling",
+          "has boiled"
+        ],
+        "a": 1,
+        "why": "General fact: Present Simple."
+      },
+      {
+        "q": "We ___ for the bus right now.",
+        "opts": [
+          "wait",
+          "are waiting",
+          "have waited",
+          "waits"
+        ],
+        "a": 1,
+        "why": "Right now = Present Continuous."
+      },
+      {
+        "q": "Until now, she ___ never ___ sushi.",
+        "opts": [
+          "has / tried",
+          "are / trying",
+          "does / tried",
+          "have / try"
+        ],
+        "a": 0,
+        "why": "Life experience: has never tried."
+      },
+      {
+        "q": "What time ___ the lesson start?",
+        "opts": [
+          "do",
+          "does",
+          "is",
+          "has"
+        ],
+        "a": 1,
+        "why": "Timetable or routine: does + base verb."
+      },
+      {
+        "q": "They ___ three languages fluently.",
+        "opts": [
+          "speaks",
+          "is speaking",
+          "speak",
+          "has spoken"
+        ],
+        "a": 2,
+        "why": "General ability: Present Simple."
+      },
+      {
+        "q": "I ___ my keys. I cannot find them.",
+        "opts": [
+          "lose",
+          "am losing",
+          "have lost",
+          "loses"
+        ],
+        "a": 2,
+        "why": "Past action with a result now: have lost."
+      },
+      {
+        "q": "Look at the children! They ___ quietly right now.",
+        "opts": [
+          "is working",
+          "are working",
+          "has worked",
+          "works"
+        ],
+        "a": 1,
+        "why": "Temporary activity today: are working."
+      }
+    ]
+  },
+  {
+    "title": "Future: Will & Going To",
+    "theory": "WILL + base verb: predictions, promises, offers, decisions made now. BE GOING TO + base verb: plans already decided and predictions based on present evidence. Compare: “I’ll help!” vs “I’m going to study tonight.”",
+    "items": [
+      {
+        "q": "I think it ___ rain tomorrow.",
+        "opts": [
+          "will",
+          "is",
+          "does",
+          "has"
+        ],
+        "a": 0,
+        "why": "Prediction/opinion: will + base verb."
+      },
+      {
+        "q": "Look at those dark clouds! It ___ rain.",
+        "opts": [
+          "will to",
+          "is going to",
+          "going",
+          "has"
+        ],
+        "a": 1,
+        "why": "Evidence now suggests a future result."
+      },
+      {
+        "q": "We ___ visit Grandma on Saturday. We have already planned it.",
+        "opts": [
+          "are going to",
+          "will to",
+          "have",
+          "do"
+        ],
+        "a": 0,
+        "why": "A prior plan: be going to."
+      },
+      {
+        "q": "I am thirsty. — I ___ get you some water.",
+        "opts": [
+          "am going",
+          "will",
+          "have",
+          "do"
+        ],
+        "a": 1,
+        "why": "A decision made now: will."
+      },
+      {
+        "q": "She ___ be twelve next year.",
+        "opts": [
+          "will",
+          "is going",
+          "does",
+          "has"
+        ],
+        "a": 0,
+        "why": "Simple future fact: will."
+      },
+      {
+        "q": "They are going to ___ a robot.",
+        "opts": [
+          "built",
+          "building",
+          "build",
+          "builds"
+        ],
+        "a": 2,
+        "why": "Going to + base verb."
+      },
+      {
+        "q": "___ you help me, please?",
+        "opts": [
+          "Are",
+          "Will",
+          "Have",
+          "Do going"
+        ],
+        "a": 1,
+        "why": "Will can make a request."
+      },
+      {
+        "q": "He ___ going to study tonight.",
+        "opts": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "a": 1,
+        "why": "He IS going to."
+      },
+      {
+        "q": "I promise I ___ tell anyone.",
+        "opts": [
+          "will not",
+          "am not going",
+          "do not",
+          "have not"
+        ],
+        "a": 0,
+        "why": "A promise often uses will."
+      },
+      {
+        "q": "Which is a plan already decided?",
+        "opts": [
+          "I will maybe travel one day.",
+          "I am going to visit Haifa on Friday.",
+          "I travel yesterday.",
+          "I have travel."
+        ],
+        "a": 1,
+        "why": "Be going to expresses a plan."
+      },
+      {
+        "q": "What ___ you going to do after school?",
+        "opts": [
+          "is",
+          "do",
+          "are",
+          "have"
+        ],
+        "a": 2,
+        "why": "Are you going to...?"
+      },
+      {
+        "q": "If we leave now, we ___ arrive early.",
+        "opts": [
+          "will",
+          "are",
+          "have",
+          "did"
+        ],
+        "a": 0,
+        "why": "First conditional result: will + base verb."
+      }
+    ]
+  },
+  {
+    "title": "Preposition Review",
+    "theory": "PLACE: in = inside, on = surface, at = point. MOVEMENT: into = to the inside; across = side to side; through = inside and out. EXPRESSIONS: interested in, good at, afraid of, listen to, wait for, belong to. Learn expressions as chunks.",
+    "items": [
+      {
+        "q": "She is interested ___ astronomy.",
+        "opts": [
+          "on",
+          "in",
+          "at",
+          "of"
+        ],
+        "a": 1,
+        "why": "Interested IN is a fixed expression."
+      },
+      {
+        "q": "We arrived ___ the station at eight.",
+        "opts": [
+          "to",
+          "on",
+          "at",
+          "in"
+        ],
+        "a": 2,
+        "why": "Arrive AT a specific place."
+      },
+      {
+        "q": "He is good ___ solving puzzles.",
+        "opts": [
+          "in",
+          "on",
+          "at",
+          "for"
+        ],
+        "a": 2,
+        "why": "Good AT an activity."
+      },
+      {
+        "q": "The cat jumped ___ the box and stayed inside.",
+        "opts": [
+          "into",
+          "between",
+          "at",
+          "through"
+        ],
+        "a": 0,
+        "why": "Into means movement from outside to inside."
+      },
+      {
+        "q": "I have lived here ___ 2020.",
+        "opts": [
+          "for",
+          "since",
+          "during",
+          "at"
+        ],
+        "a": 1,
+        "why": "Since introduces a starting point."
+      },
+      {
+        "q": "She walked ___ the bridge to reach the other side.",
+        "opts": [
+          "through",
+          "across",
+          "between",
+          "into"
+        ],
+        "a": 1,
+        "why": "Across means from one side to the other."
+      },
+      {
+        "q": "The book belongs ___ my sister.",
+        "opts": [
+          "for",
+          "to",
+          "with",
+          "of"
+        ],
+        "a": 1,
+        "why": "Belong TO is a fixed expression."
+      },
+      {
+        "q": "They listened ___ the teacher as she explained the rule.",
+        "opts": [
+          "at",
+          "of",
+          "to",
+          "on"
+        ],
+        "a": 2,
+        "why": "Listen TO someone."
+      },
+      {
+        "q": "We are waiting ___ the bus.",
+        "opts": [
+          "to",
+          "for",
+          "at",
+          "on"
+        ],
+        "a": 1,
+        "why": "Wait FOR something."
+      },
+      {
+        "q": "He is afraid ___ heights.",
+        "opts": [
+          "from",
+          "of",
+          "at",
+          "with"
+        ],
+        "a": 1,
+        "why": "Afraid OF is a fixed expression."
+      }
+    ]
+  },
+  {
+    "title": "Vocabulary & Logic Lab",
+    "theory": "Read or listen carefully. Explain the meaning in English. ALL means every one. SOME means at least one. ONLY tells you who or what is allowed. MUST BE TRUE means the answer follows from the facts.",
+    "items": [
+      {
+        "q": "A person who is reliable is someone who…",
+        "opts": [
+          "often breaks promises",
+          "can be trusted",
+          "is always late",
+          "never speaks"
+        ],
+        "a": 1,
+        "why": "Reliable means you can depend on them."
+      },
+      {
+        "q": "“Avoid” means…",
+        "opts": [
+          "stay away from",
+          "look for",
+          "become better",
+          "arrive early"
+        ],
+        "a": 0,
+        "why": "Avoid = try not to meet or experience something."
+      },
+      {
+        "q": "If all owls are birds, what must be true?",
+        "opts": [
+          "All birds are owls",
+          "Owls are birds",
+          "Owls are mammals",
+          "All owls fly"
+        ],
+        "a": 1,
+        "why": "The statement gives only one direction."
+      },
+      {
+        "q": "Which word is closest to enormous?",
+        "opts": [
+          "tiny",
+          "huge",
+          "ordinary",
+          "narrow"
+        ],
+        "a": 1,
+        "why": "Enormous means extremely large."
+      },
+      {
+        "q": "“On purpose” means…",
+        "opts": [
+          "by accident",
+          "intentionally",
+          "in a hurry",
+          "without knowing"
+        ],
+        "a": 1,
+        "why": "On purpose = intentionally."
+      },
+      {
+        "q": "A kitten is to cat as a puppy is to…",
+        "opts": [
+          "horse",
+          "dog",
+          "bird",
+          "fish"
+        ],
+        "a": 1,
+        "why": "Both are young animals."
+      },
+      {
+        "q": "Maya is taller than Leo. Leo is taller than Dan. Who is shortest?",
+        "opts": [
+          "Maya",
+          "Leo",
+          "Dan",
+          "Impossible to know"
+        ],
+        "a": 2,
+        "why": "Compare the whole chain."
+      },
+      {
+        "q": "“Run out of water” means…",
+        "opts": [
+          "start running",
+          "have none left",
+          "spill it",
+          "find more"
+        ],
+        "a": 1,
+        "why": "Run out of = use all of something."
+      },
+      {
+        "q": "Only members may enter. Ella was allowed to enter. What follows?",
+        "opts": [
+          "Ella is a member",
+          "Ella is the oldest",
+          "Ella works there",
+          "Ella arrived first"
+        ],
+        "a": 0,
+        "why": "Only members may enter means entry requires membership."
+      },
+      {
+        "q": "“Fragile” means…",
+        "opts": [
+          "easy to break",
+          "very heavy",
+          "extremely loud",
+          "difficult to find"
+        ],
+        "a": 0,
+        "why": "Fragile objects need careful handling."
+      },
+      {
+        "q": "Which is an antonym of increase?",
+        "opts": [
+          "grow",
+          "reduce",
+          "add",
+          "improve"
+        ],
+        "a": 1,
+        "why": "Reduce means make smaller or less."
+      },
+      {
+        "q": "A thermometer is to temperature as a ruler is to…",
+        "opts": [
+          "sound",
+          "length",
+          "weight",
+          "time"
+        ],
+        "a": 1,
+        "why": "A ruler measures length."
+      },
+      {
+        "q": "“Find out” means…",
+        "opts": [
+          "discover information",
+          "lose something",
+          "go outside",
+          "stop trying"
+        ],
+        "a": 0,
+        "why": "Find out = learn or discover."
+      },
+      {
+        "q": "Some birds cannot fly. Which statement must be true?",
+        "opts": [
+          "No birds fly",
+          "At least one bird cannot fly",
+          "All birds swim",
+          "Every bird flies"
+        ],
+        "a": 1,
+        "why": "Some means at least one."
+      },
+      {
+        "q": "“Hesitate” means…",
+        "opts": [
+          "act immediately",
+          "pause because unsure",
+          "refuse forever",
+          "run away"
+        ],
+        "a": 1,
+        "why": "Hesitate means delay briefly because you are uncertain."
+      }
+    ]
+  },
+  {
+    "title": "Final Mixed Challenge",
+    "theory": "No hints from the title! Decide which rule applies before choosing. You can return to any lesson page.",
+    "items": [
+      {
+        "q": "___ Amazon is a major river in South America.",
+        "opts": [
+          "A",
+          "An",
+          "The",
+          "No article"
+        ],
+        "a": 2,
+        "why": "Use THE with river names."
+      },
+      {
+        "q": "She ___ her homework right now.",
+        "opts": [
+          "does",
+          "is doing",
+          "has do",
+          "do"
+        ],
+        "a": 1,
+        "why": "Right now = Present Continuous."
+      },
+      {
+        "q": "I have known her ___ three years.",
+        "opts": [
+          "since",
+          "during",
+          "for",
+          "at"
+        ],
+        "a": 2,
+        "why": "For + duration."
+      },
+      {
+        "q": "They ___ never visited Japan.",
+        "opts": [
+          "are",
+          "do",
+          "have",
+          "did"
+        ],
+        "a": 2,
+        "why": "Have never visited = Present Perfect."
+      },
+      {
+        "q": "A person who is exhausted is…",
+        "opts": [
+          "very energetic",
+          "extremely tired",
+          "very angry",
+          "very hungry"
+        ],
+        "a": 1,
+        "why": "Exhausted means extremely tired."
+      },
+      {
+        "q": "The glass is going to fall! Which clue supports this prediction?",
+        "opts": [
+          "It is standing safely",
+          "It is moving towards the edge",
+          "It is in a cupboard",
+          "It is empty"
+        ],
+        "a": 1,
+        "why": "Evidence visible now supports going to."
+      },
+      {
+        "q": "He ___ to school every day.",
+        "opts": [
+          "go",
+          "goes",
+          "is going",
+          "have gone"
+        ],
+        "a": 1,
+        "why": "Every day = routine."
+      },
+      {
+        "q": "She is afraid ___ spiders.",
+        "opts": [
+          "at",
+          "for",
+          "of",
+          "in"
+        ],
+        "a": 2,
+        "why": "Afraid of."
+      },
+      {
+        "q": "___ you ever tried skiing?",
+        "opts": [
+          "Were",
+          "Do",
+          "Have",
+          "Are"
+        ],
+        "a": 2,
+        "why": "Have you ever...? asks about experience."
+      },
+      {
+        "q": "Which statement about mammals is true?",
+        "opts": [
+          "All mammals are whales",
+          "Some mammals live in water",
+          "No mammals breathe air",
+          "Every animal is a mammal"
+        ],
+        "a": 1,
+        "why": "Whales and dolphins are aquatic mammals."
+      }
+    ]
+  }
+];
+const key='karni_english_lesson3_v1';
+const ids=SECTIONS.flatMap((s,i)=>s.items.map((_,j)=>i+'-'+j));
+let sec=0,idx=0,view='theory',saved={},attempts={},storage=true,speech=null;
+const el=id=>document.getElementById(id);
+const current=()=>SECTIONS[sec].items[idx];
+const id=()=>sec+'-'+idx;
+try{
+ const data=JSON.parse(localStorage.getItem(key)||'{}');
+ const valid=data && typeof data==='object' && !Array.isArray(data);
+ if(valid){
+  for(const k of ids)if(data[k]===true)saved[k]=true;
+  const p=data.position;
+  if(p&&Number.isInteger(p.sec)&&Number.isInteger(p.idx)&&SECTIONS[p.sec]?.items[p.idx]&&['theory','quiz','summary'].includes(p.view)){
+   ({sec,idx,view}=p);
+  }
+ }
+}catch{}
+function persist(){
+ try{localStorage.setItem(key,JSON.stringify({...saved,position:{sec,idx,view}}));storage=true}
+ catch{storage=false}
+}
+function stopSpeech(){speech=null;window.speechSynthesis?.cancel()}
+function speak(t){
+ const status=el('audio-status');
+ const unavailable=()=>{status.textContent='Audio is unavailable here. Read the text aloud together.'};
+ if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){unavailable();return}
+ try{
+  stopSpeech();status.textContent='';
+  const u=new SpeechSynthesisUtterance(t.replace(/___/g,' blank '));
+  u.lang='en-US';u.rate=.82;u.onerror=()=>{if(speech===u)unavailable()};
+  speech=u;window.speechSynthesis.speak(u)
+ }catch{unavailable()}
+}
+const button=(action,label,disabled=false,extra='')=>`<button type="button" data-action="${action}" ${disabled?'disabled':''} ${extra}>${label}</button>`;
+function render(focus=false){
+ stopSpeech();persist();
+ const done=Object.keys(saved).length,s=SECTIONS[sec];
+ el('status').textContent=`${done} / ${ids.length} questions completed · Section ${sec+1} of ${SECTIONS.length}`;
+ const progress=el('progress');
+ progress.setAttribute('role','progressbar');progress.setAttribute('aria-label','Questions completed');
+ progress.setAttribute('aria-valuemax',ids.length);progress.setAttribute('aria-valuenow',done);
+ progress.firstElementChild.style.width=100*done/ids.length+'%';
+ el('nav').innerHTML=SECTIONS.map((s,i)=>`<button type="button" data-section="${i}" ${i===sec?'class="active" aria-current="step"':''}>${i+1}. ${s.title}</button>`).join('');
+ let panel;
+ if(view==='theory'){
+  panel=`<div class="tag">LESSON SLIDE · ${sec+1} / ${SECTIONS.length}</div>
+  <h2 tabindex="-1">${s.title}</h2><div class="panel theory">${s.theory}</div>
+  <p>Read the rule aloud and give one example. You can return to the rule any time.</p>
+  <div class="controls">${button('listen-rule','🔊 Listen to the rule')}${button('start',idx?'Continue practice →':'Start practice →',false,'class="active"')}</div>`;
+ }else if(view==='summary'){
+  panel=`<h2 tabindex="-1">${done===ids.length?'Lesson complete!':'Lesson review'}</h2>
+  <p>You answered ${done} of ${ids.length} questions correctly. ${done===ids.length?'Choose any section above to review it or practise again.':'You can return to the first question you skipped or still need to correct.'}</p>
+  <div class="controls">${button('previous','← Last question')}${done<ids.length?button('unfinished','Go to first unfinished question →'):''}</div>`;
+ }else{
+  const q=current(),k=id(),finished=!!saved[k],st=attempts[k];
+  const offset=q.opts.length===2?0:(q.a-(sec+idx)%q.opts.length+q.opts.length)%q.opts.length;
+  const options=q.opts.map((_,n)=>{const i=(offset+n)%q.opts.length;
+   return `<button type="button" data-choice="${i}" class="${finished&&i===q.a?'correct':st===i?'wrong':''}" ${finished?'disabled':''}>${String.fromCharCode(65+n)}. ${q.opts[i]}</button>`;
+  }).join('');
+  panel=`<div class="tag">${s.title} · Question ${idx+1} of ${s.items.length}</div>
+  <h2 class="question" tabindex="-1">${q.q}</h2>
+  <div class="controls">${button('question','🔊 Read question &amp; answers')}${button('rule','📖 Review the rule')}</div><p>Choose the best answer.</p>
+  <div class="options">${options}</div>
+  <div id="feedback" role="status" class="${finished||st!==undefined?'feedback':''}">${finished?'✓ Correct! '+q.why:st!==undefined?'Not quite. Try another answer or review the rule.':''}</div>
+  <div class="controls">${button('previous','← Previous',sec===0&&idx===0)}
+  ${button('next',idx===s.items.length-1?(sec===SECTIONS.length-1?'See result →':'Next section →'):'Next →')}
+  ${button('explanation','🔊 Listen to explanation',!finished)}
+  ${button('notebook','✏️ Optional notebook',false,'aria-expanded="false" aria-controls="notebook"')}
+  ${finished?button('retry','Try this question again'):''}</div>
+  <p id="notebook" hidden>${sec<2?'Write one sentence about this fact in your own words.':'Write one example using a rule or word from this question.'}</p>`;
+ }
+ el('main').innerHTML=`<div class="panel">${panel}<p id="audio-status" role="status"></p><p class="small">${storage?'Progress saves in this browser.':'Progress cannot be saved in this browser. Keep this page open while practising.'}</p></div>`;
+ if(focus)el('main').querySelector('h2').focus();
+}
+function change(){render(true)}
+el('nav').addEventListener('click',e=>{
+ const b=e.target.closest('[data-section]');if(!b)return;
+ const next=Number(b.dataset.section);if(next!==sec){sec=next;idx=0}view='theory';change()
+});
+el('main').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b||b.disabled)return;
+ if(b.dataset.choice!==undefined){
+  if(view!=='quiz'||saved[id()])return;
+  const i=Number(b.dataset.choice);
+  if(i===current().a){saved[id()]=true;delete attempts[id()];render();el('main').querySelector('[data-action=next]').focus()}
+  else {attempts[id()]=i;b.parentElement.querySelectorAll('button').forEach(o=>o.classList.toggle('wrong',o===b));const f=el('feedback');f.className='feedback';f.textContent='Not quite. Try another answer or review the rule.'}
+  return;
+ }
+ switch(b.dataset.action){
+ case 'start':view='quiz';change();break;
+ case 'rule':view='theory';change();break;
+ case 'listen-rule':speak(SECTIONS[sec].theory);break;
+ case 'question':{const q=current();const options=[...el('main').querySelectorAll('[data-choice]')].map(o=>o.textContent);speak([q.q,...options].join('. '));break}
+ case 'explanation':speak(current().why);break;
+ case 'notebook':{const p=el('notebook');p.hidden=!p.hidden;b.setAttribute('aria-expanded',String(!p.hidden));break}
+ case 'retry':delete saved[id()];delete attempts[id()];change();break;
+ case 'previous':
+  if(view==='summary')view='quiz';
+  else if(idx>0)idx--;
+  else if(sec>0){sec--;idx=SECTIONS[sec].items.length-1}
+  change();break;
+ case 'next':
+  if(idx+1<SECTIONS[sec].items.length)idx++;
+  else if(sec+1<SECTIONS.length){sec++;idx=0;view='theory'}
+  else view='summary';
+  change();break;
+ case 'unfinished':{
+  const remaining=ids.find(k=>!saved[k]);if(remaining){[sec,idx]=remaining.split('-').map(Number);view='quiz';change()}break
+ }
+ }
+});
+render();
+</script>
+</body>
+</html>
