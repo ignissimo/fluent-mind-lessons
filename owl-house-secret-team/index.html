@@ -1,0 +1,321 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Secret Team | Fluent Mind Adventures</title><style>:root{--bg:#10152b;--panel:#202844;--gold:#f3cf83;--mint:#a9ead9;--ink:#f6f0e8}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0%,#39416d,transparent 38%),var(--bg);color:var(--ink);font:17px/1.55 system-ui,Arial}main{max-width:940px;margin:auto;padding:22px}header{text-align:center;padding:24px 8px}h1{font-family:Georgia,serif;font-size:clamp(29px,5vw,48px);margin:5px;color:var(--gold)}h2{color:var(--gold)}.sub{color:#d0c9e7}.panel{background:var(--panel);border:1px solid #566084;border-radius:20px;padding:24px;margin:16px 0}.screen{display:none}.screen.active{display:block}.btn,button{background:#394c70;color:white;border:1px solid #8d9ac1;border-radius:12px;padding:10px 16px;cursor:pointer;font:inherit}.btn:hover,button:hover{background:#526c9d}button:focus-visible,textarea:focus-visible{outline:3px solid var(--gold)}.primary{background:#8262b3}.nav{display:flex;gap:10px;justify-content:space-between;margin-top:20px}.chips{display:flex;flex-wrap:wrap;gap:10px}.chip{background:#353e60;border:1px solid #8790b3;padding:12px 15px;border-radius:20px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.card{background:#303b5b;border:2px solid transparent;border-radius:16px;padding:16px;cursor:pointer}.card.selected{border-color:var(--gold)}.art{height:160px;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,#59609d,#272c54);border-radius:14px;margin-bottom:10px}.art svg{width:100%;height:100%}.small{font-size:14px;color:#c8cde0}.hidden{display:none}textarea{width:100%;min-height:125px;border-radius:12px;background:#111b35;border:1px solid #8691ba;color:white;font:inherit;padding:12px}input{font:inherit}.match{display:grid;grid-template-columns:1fr 1fr;gap:12px}.match button{width:100%;margin:4px 0;text-align:left}.picked{background:#765aa3!important}.done{background:#216e65!important}.notice{min-height:30px;color:var(--mint)}.progress{height:7px;background:#414866;border-radius:10px;overflow:hidden}.bar{height:100%;background:var(--gold);transition:width .2s}.quizrow{padding:13px 0;border-bottom:1px solid #48516d}.quizrow button{margin:4px}.correct{color:var(--mint)}.incorrect{color:#ffc4b7}.sentence{padding:12px;background:#303c5b;border-radius:12px;margin:8px 0}footer{text-align:center;color:#aeb7cc;font-size:13px;padding:22px}@media(max-width:540px){.match{grid-template-columns:1fr}.panel{padding:16px}}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center}.hero>*{min-width:0}header{text-align:left}header h1{margin-left:0}.still{margin:8px 0 16px}.still img{display:block;width:100%;max-height:245px;object-fit:contain;background:#10152b;border-radius:14px}.still figcaption{font-size:12px;color:#c8cde0;margin-top:5px}#missionNav{display:flex;gap:6px;flex-wrap:wrap}#missionNav button{flex:1 1 100px;padding:8px;font-size:14px}#missionNav button[aria-current=step]{border-color:var(--gold);background:#685086}
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}.card{color:var(--ink);text-align:left;font:inherit}.card img{display:block;width:100%;height:auto;aspect-ratio:1000/526;object-fit:contain;background:#10152b;border-radius:10px;margin-bottom:12px}.card strong,.card span{display:block}.card span{margin-top:7px}.card[aria-pressed=true],#predictionChoices button[aria-pressed=true],.quizrow button[aria-pressed=true]{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.spoken{display:flex;gap:10px;align-items:flex-start;margin:18px 0;padding:12px;background:#111b35;border-radius:10px;cursor:pointer}.spoken input{width:20px;height:20px;margin-top:4px;flex-shrink:0;accent-color:var(--mint)}.actions{display:flex;flex-wrap:wrap;gap:8px}.nav{flex-wrap:wrap}.nav>*{min-width:0}button:disabled{cursor:default;opacity:.7}.match button:disabled{opacity:1}.match button{overflow-wrap:anywhere}.panel{overflow-wrap:anywhere}footer a{color:var(--mint)}input:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}h2:focus{outline:none}#finishStatus{color:var(--gold)}
+@media(max-width:650px){.hero{grid-template-columns:1fr;gap:6px}.hero .still img{max-height:170px}main{padding:14px}.cards{gap:10px}.card{padding:12px}header{padding:14px 0}}
+@media(prefers-reduced-motion:reduce){.bar{transition:none}}
+</style></head><body><main><header><div class="hero"><div><div class="sub">FLUENT MIND ADVENTURES · THE OWL HOUSE · S2E13</div><h1>Any Sport in a Storm</h1><div class="sub">THE SECRET TEAM · A 25–30 minute English quest</div><p class="small">A2–B1 · After watching Any Sport in a Storm</p></div><figure class="still"><img src="assets/team.jpg" width="1000" height="563" alt="A team photo of the Emerald Entrails with Hunter and Willow"><figcaption>Any Sport in a Storm · © Disney</figcaption></figure></div><div class="progress" role="progressbar" aria-label="Tasks completed" aria-valuemin="0" aria-valuemax="17" aria-valuenow="0"><div class="bar" id="bar"></div></div><p id="progressText" class="small"></p></header><nav id="missionNav" aria-label="Missions"></nav>
+<section class="screen active panel" id="s0"><h2>Mission 1 · Memory Portal</h2><p>Look at the seven clues. Retell the episode out loud. Can you connect at least five clues?</p><div class="chips"><span class="chip">Hunter</span><span class="chip">Willow</span><span class="chip">Flyer Derby</span><span class="chip">Team</span><span class="chip">Emperor's Coven</span><span class="chip">Azura</span><span class="chip">Friendship</span></div><p class="small">Start with “What happened first?” Then explain why Hunter joined the team and what happened when Darius arrived.</p><label class="spoken"><input type="checkbox" data-spoken="memory"> I connected at least five clues in my retelling.</label><div class="nav"><span></span><button onclick="go(1)">Choose a story →</button></div></section>
+<section class="screen panel" id="s1"><h2>Mission 2 · Choose Your Story</h2><p>Which part of the episode did you enjoy most? Pick one route. Your reading and writing will change.</p><div class="cards"><button type="button" class="card" id="route-hunter" onclick="choose('hunter')" aria-pressed="false"><img src="assets/hunter.jpg" width="1000" height="526" alt="Hunter watches Willow after his secret is revealed"><strong>Hunter &amp; Willow</strong><span class="small">Teamwork, secrets, and finding a place to belong.</span></button><button type="button" class="card" id="route-azura" onclick="choose('azura')" aria-pressed="false"><img src="assets/azura.jpg" width="1000" height="526" alt="Luz and Amity investigate the Azura books"><strong>Luz &amp; Amity</strong><span class="small">A mysterious author, curiosity, and a surprise.</span></button></div><p id="routeNote" class="notice" role="status">Choose a route to continue.</p><div class="nav"><button onclick="go(0)">← Back</button><button onclick="go(2)" id="routeNext" disabled>Continue →</button></div></section>
+<section class="screen panel" id="s2"><h2>Mission 3 · Read & Think</h2><figure class="still"><img id="routeImage" src="assets/hunter.jpg" width="1000" height="526" alt="Hunter and Willow" loading="lazy"><figcaption id="routeCaption"></figcaption></figure><div id="reading"></div><p><b>Speak:</b> <span id="readQ"></span></p><label class="spoken"><input type="checkbox" data-spoken="reading"> I answered the reading question aloud.</label><label for="shortWrite"><b>Write two sentences:</b> <span id="writeQ"></span></label><textarea id="shortWrite" placeholder="Write here..." oninput="save()"></textarea><p class="small">Try using <b>because</b> or <b>although</b>. Plan your answer out loud first.</p><div class="nav"><button onclick="go(1)">← Back</button><button onclick="go(3)">Vocabulary →</button></div></section>
+<section class="screen panel" id="s3"><h2>Mission 4 · Vocabulary Match</h2><p>Match each expression to its English meaning. Then explain one expression in your own words.</p><div class="match"><div id="words"></div><div id="defs"></div></div><p id="matchMsg" class="notice" aria-live="polite"></p><button onclick="resetMatch()">Shuffle cards</button><label class="spoken"><input type="checkbox" data-spoken="vocab"> I explained one expression in my own words.</label><div class="nav"><button onclick="go(2)">← Back</button><button onclick="go(4)">Grammar →</button></div></section>
+<section class="screen panel" id="s4"><h2>Mission 5 · Grammar: Although / Because / So</h2><p><b>Because</b> gives a reason. <b>So</b> gives a result. <b>Although</b> introduces a surprising contrast.</p><div class="sentence">Hunter joined the team <b>because</b> he wanted to recruit students.</div><div class="sentence">He started to care about his teammates, <b>so</b> his plans changed.</div><div class="sentence"><b>Although</b> he had a secret mission, he made real friends.</div><div id="grammar"></div><p class="small">Optional speaking: Say one true sentence about your life using <i>although</i>.</p><div class="nav"><button onclick="go(3)">← Back</button><button onclick="go(5)">Final writing →</button></div></section>
+<section class="screen panel" id="s5"><h2>Mission 6 · Your Character's Secret</h2><p id="finalPrompt"></p><label for="finalWrite"><b>Your paragraph</b></label><p><b>Write 5–6 connected sentences.</b> Say your ideas aloud first. Then write them as one short paragraph.</p><div class="chips"><span class="chip">I think...</span><span class="chip">because...</span><span class="chip">although...</span><span class="chip">For example,...</span><span class="chip">In the end,...</span></div><textarea id="finalWrite" placeholder="Your paragraph..." oninput="save()"></textarea><p class="small">You can use the sentence starters, but you don't have to. Your ideas matter more than perfect grammar.</p><div class="nav"><button onclick="go(4)">← Back</button><button onclick="go(6)">Final challenge →</button></div></section>
+<section class="screen panel" id="s6"><h2>Final Challenge · Predict the Future</h2><p>Choose one question and make a prediction. Use only what you know after this episode. Different predictions are welcome.</p><div class="cards" id="predictionChoices"></div><p id="prediction" class="notice"></p><p><b>Speak:</b> “I think ... might ... because ...”</p><label for="predictionWrite"><b>Write your prediction</b></label><textarea id="predictionWrite" placeholder="I think ... might ... because ..." oninput="save()"></textarea><p class="small">Optional: draw a scene from the next episode on paper and explain it.</p><div class="nav"><button onclick="go(5)">← Back</button><div class="actions"><button onclick="downloadAnswers()">Download answers ↓</button><button id="finish" class="primary" onclick="finishLesson()">Finish lesson ✓</button></div></div><p id="finishStatus" class="notice" role="status"></p><p id="downloadStatus" role="status"></p></section><section class="screen panel" id="s7" aria-labelledby="resultTitle"><h2 id="resultTitle" tabindex="-1">Lesson complete!</h2><p id="resultSummary"></p><p>Your writing and spoken answers are ready to discuss together.</p><div class="nav"><button onclick="go(6)">← Review answers</button><button onclick="downloadAnswers()">Download all answers ↓</button></div><p id="resultDownloadStatus" role="status"></p></section><footer><span id="saveStatus" role="status"></span><br>Fluent Mind Adventures · <a href="assets/SOURCES.md">Image credits</a></footer></main>
+<script>
+const vocab=[['fit in','to feel accepted as part of a group'],['recruit','to get someone to join a group'],['prove yourself','to show that you can do something well'],['betray','to break someone’s trust'],['teammate','someone who belongs to the same team as you'],['disappointed','sad because something was not as good as you hoped'],['undercover','secretly pretending to have a different identity'],['stand up for','to defend or support someone']];
+
+const routes = {
+  hunter: {
+    name: 'Hunter & Willow',
+    reading: 'Hunter wants to prove that he is useful to the Emperor’s Coven. At Hexside, he meets Willow and joins her Flyer Derby team. He uses the name Caleb and looks for new recruits. During the game, he enjoys being part of the team. Then he reveals his identity, and coven scouts take his teammates away. Hunter realises that they do not want to join. He stands up to Darius to protect them. In the end, the students are free to go.',
+    q: 'What helps Hunter understand that his teammates need his help?',
+    w: 'What does Hunter learn about friendship? Give one example from the episode.',
+    final: 'Imagine you are Hunter. Write a private diary entry about your day at Hexside. Explain what you wanted at first, what surprised you, and how you feel about the team now.'
+  },
+  azura: {
+    name: 'Luz & Amity',
+    reading: 'Luz and Amity notice that the author looks different on their copies of The Good Witch Azura. They hope to solve the mystery. They follow a person who seems to be the author, but she is really Tinella Nosa in disguise. Tibbles has brought human books to the Boiling Isles to sell them. He has changed the author’s pictures to make her look like a witch. Luz and Amity do not meet the real author. Their theories were wrong, but they still enjoy the books together.',
+    q: 'What do Luz and Amity discover about the person they follow?',
+    w: 'Why do Luz and Amity expect a magical explanation? What do they discover instead?',
+    final: 'Imagine you are Luz. Write to a friend about the Azura mystery. Explain what you expected, who you followed, what you discovered, and how you feel about the books now.'
+  }
+};
+const qs = [
+  ['Give a reason: Hunter joins the team ___ he wants to find new recruits.', ['because', 'although', 'so'], 0, 'Because introduces his reason.'],
+  ['Show a contrast: ___ Hunter joins for a secret reason, he makes real friends.', ['So', 'Although', 'Because'], 1, 'Although connects two ideas that seem surprising together.'],
+  ['Give a result: Hunter begins to care about his teammates, ___ he helps protect them.', ['although', 'because', 'so'], 2, 'So introduces the result.']
+];
+const predictionQuestions = [
+  'Will Hunter choose his new friends or the Emperor?',
+  'How might Willow help her team in the next game?',
+  'Will Luz and Amity discover another secret about Azura?'
+];
+const missionNames = ['Memory Portal', 'Choose Your Story', 'Read & Think', 'Vocabulary', 'Grammar', 'Your Character', 'Prediction'];
+const storageKey = 'owl13progress-v1';
+const $ = id => document.getElementById(id);
+const validRoute = value => value === 'hunter' || value === 'azura';
+const isRecord = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+let state = {
+  route: '', screen: 0, matched: [], grammar: {},
+  texts: { hunter: { short: '', final: '' }, azura: { short: '', final: '' } },
+  spoken: {}, prediction: null, predictionText: '', predictionTexts: {}, finished: false
+};
+let first = null;
+function readStorage(key) {
+  try { return localStorage.getItem(key); } catch (error) { return null; }
+}
+// Import the author's separate draft keys without changing or deleting them.
+const legacyRoute = readStorage('owl13route');
+if (validRoute(legacyRoute)) state.route = legacyRoute;
+for (const route of ['hunter', 'azura']) {
+  state.texts[route].short = readStorage('owl13short_' + route) || '';
+  state.texts[route].final = readStorage('owl13final_' + route) || '';
+}
+const legacyPrediction = readStorage('owl13prediction');
+const legacyIndex = legacyPrediction === 'Will Willow become a leader?' ? 1 : predictionQuestions.indexOf(legacyPrediction);
+if (legacyIndex >= 0) state.prediction = legacyIndex;
+try {
+  const saved = JSON.parse(readStorage(storageKey));
+  if (isRecord(saved)) {
+    if (validRoute(saved.route)) state.route = saved.route;
+    if (Number.isInteger(saved.screen) && saved.screen >= 0 && saved.screen <= 7) state.screen = saved.screen;
+    if (Array.isArray(saved.matched)) state.matched = [...new Set(saved.matched.filter(i => Number.isInteger(i) && i >= 0 && i < vocab.length))];
+    qs.forEach((q, i) => {
+      const answer = saved.grammar?.[i];
+      if (Number.isInteger(answer) && answer >= 0 && answer < q[1].length) state.grammar[i] = answer;
+    });
+    for (const route of ['hunter', 'azura']) {
+      for (const field of ['short', 'final']) {
+        if (typeof saved.texts?.[route]?.[field] === 'string') state.texts[route][field] = saved.texts[route][field];
+      }
+    }
+    for (const id of ['memory', 'vocab', 'reading_hunter', 'reading_azura']) state.spoken[id] = saved.spoken?.[id] === true;
+    if (Number.isInteger(saved.prediction) && saved.prediction >= 0 && saved.prediction < predictionQuestions.length) state.prediction = saved.prediction;
+    for (let i = 0; i < predictionQuestions.length; i++) {
+      if (typeof saved.predictionTexts?.[i] === 'string') state.predictionTexts[i] = saved.predictionTexts[i];
+    }
+    if (state.prediction !== null && typeof saved.predictionText === 'string' && state.predictionTexts[state.prediction] === undefined) {
+      state.predictionTexts[state.prediction] = saved.predictionText;
+    }
+    state.predictionText = state.predictionTexts[state.prediction] || '';
+    state.finished = saved.finished === true;
+  }
+} catch (error) {
+  // A malformed progress record does not prevent using the lesson.
+}
+function persist() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    $('saveStatus').textContent = 'Progress saved in this browser.';
+  } catch (error) {
+    $('saveStatus').textContent = 'This browser could not save your progress. Download your answers before leaving.';
+  }
+}
+function totals() {
+  const texts = state.texts[state.route];
+  const written = [texts?.short, texts?.final, state.prediction === null ? '' : state.predictionText].filter(t => t?.trim()).length;
+  const spoken = ['memory', 'vocab', 'reading_' + state.route].filter(id => state.spoken[id]).length;
+  const answered = Object.keys(state.grammar).length;
+  const correct = qs.filter((q, i) => state.grammar[i] === q[2]).length;
+  return { written, spoken, answered, correct, done: state.matched.length + answered + written + spoken };
+}
+function updateProgress() {
+  const count = totals();
+  if (count.done < 17) state.finished = false;
+  $('bar').style.width = `${count.done / 17 * 100}%`;
+  document.querySelector('[role=progressbar]').setAttribute('aria-valuenow', String(count.done));
+  $('progressText').textContent = `${state.finished ? 'Lesson complete' : `Mission ${Math.min(state.screen + 1, 7)} of 7`} · ${count.done} / 17 tasks done`;
+}
+function spokenId(field) {
+  return field.dataset.spoken === 'reading' ? 'reading_' + state.route : field.dataset.spoken;
+}
+function renderRoute() {
+  document.querySelectorAll('[id^="route-"]').forEach(card => {
+    const selected = card.id === 'route-' + state.route;
+    card.classList.toggle('selected', selected);
+    card.setAttribute('aria-pressed', String(selected));
+  });
+  $('routeNext').disabled = !validRoute(state.route);
+  if (!validRoute(state.route)) return;
+  const route = routes[state.route];
+  $('routeNote').textContent = 'Selected: ' + route.name;
+  $('reading').textContent = route.reading;
+  $('readQ').textContent = route.q;
+  $('writeQ').textContent = route.w;
+  $('finalPrompt').textContent = route.final;
+  $('shortWrite').value = state.texts[state.route].short;
+  $('finalWrite').value = state.texts[state.route].final;
+  $('routeImage').src = 'assets/' + state.route + '.jpg';
+  $('routeImage').alt = state.route === 'hunter' ? 'Hunter watches Willow after his secret is revealed' : 'Luz and Amity investigate the Azura books';
+  $('routeCaption').textContent = route.name + ' · Any Sport in a Storm · © Disney';
+  const readingCheck = document.querySelector('[data-spoken="reading"]');
+  readingCheck.checked = state.spoken['reading_' + state.route] === true;
+}
+function showScreen(focus = false) {
+  if (state.screen >= 2 && !validRoute(state.route)) state.screen = 1;
+  if (state.screen === 7 && (!state.finished || totals().done < 17)) state.screen = 6;
+  document.querySelectorAll('.screen').forEach((section, i) => section.classList.toggle('active', i === state.screen));
+  document.querySelectorAll('[data-go]').forEach(button => {
+    if (Number(button.dataset.go) === state.screen) button.setAttribute('aria-current', 'step');
+    else button.removeAttribute('aria-current');
+  });
+  if (state.screen === 7) {
+    const count = totals();
+    $('resultSummary').textContent = `${routes[state.route].name}: ${count.done} / 17 tasks done. Vocabulary: ${state.matched.length} / 8 pairs. Grammar: ${count.correct} / 3 correct. Written tasks: ${count.written} / 3. Spoken tasks: ${count.spoken} / 3.`;
+  }
+  updateProgress();
+  persist();
+  if (focus) {
+    const heading = $('s' + state.screen).querySelector('h2');
+    heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  }
+}
+function go(n) {
+  if (!Number.isInteger(n) || n < 0 || n > 6) return;
+  state.screen = n;
+  $('finishStatus').textContent = '';
+  first = null;
+  document.querySelectorAll('.picked').forEach(button => button.classList.remove('picked'));
+  showScreen(true);
+}
+function choose(route) {
+  if (!validRoute(route)) return;
+  if (route !== state.route) state.finished = false;
+  state.route = route;
+  renderRoute();
+  updateProgress();
+  persist();
+}
+function save() {
+  if (validRoute(state.route)) {
+    state.texts[state.route].short = $('shortWrite').value;
+    state.texts[state.route].final = $('finalWrite').value;
+  }
+  state.predictionText = $('predictionWrite').value;
+  if (state.prediction !== null) state.predictionTexts[state.prediction] = state.predictionText;
+  $('finishStatus').textContent = '';
+  updateProgress();
+  persist();
+}
+function shuffle(items) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+function resetMatch() {
+  first = null;
+  for (const [id, side, col] of [['words', 'w', 0], ['defs', 'd', 1]]) {
+    $(id).innerHTML = shuffle(vocab.map((v, i) => i)).map(i => `<button type="button" data-i="${i}" data-side="${side}" class="${state.matched.includes(i) ? 'done' : ''}" ${state.matched.includes(i) ? 'disabled' : ''} onclick="match(this)">${vocab[i][col]}</button>`).join('');
+  }
+  $('matchMsg').textContent = state.matched.length === 8 ? 'Excellent! All eight pairs found.' : `${state.matched.length} / 8 pairs found. Shuffling keeps your matches.`;
+}
+function match(button) {
+  if (button.disabled) return;
+  if (!first) { first = button; button.classList.add('picked'); return; }
+  const previous = first;
+  first = null;
+  previous.classList.remove('picked');
+  if (previous === button) return;
+  if (previous.dataset.side === button.dataset.side) { first = button; button.classList.add('picked'); return; }
+  if (previous.dataset.i !== button.dataset.i) {
+    $('matchMsg').textContent = 'Not quite. Try another pair.';
+    return;
+  }
+  for (const card of [previous, button]) { card.classList.add('done'); card.disabled = true; }
+  state.matched.push(Number(button.dataset.i));
+  $('matchMsg').textContent = state.matched.length === 8 ? 'Excellent! All eight pairs found.' : `Correct! ${state.matched.length} / 8 pairs.`;
+  updateProgress();
+  persist();
+}
+function renderGrammar() {
+  $('grammar').innerHTML = qs.map((q, i) => `<div class="quizrow" role="group" aria-labelledby="q${i}"><b id="q${i}">${i + 1}. ${q[0]}</b><div>${q[1].map((answer, j) => `<button type="button" aria-pressed="false" data-question="${i}" data-answer="${j}" onclick="checkGrammar(${i},${j})">${answer}</button>`).join('')}</div><div class="notice" id="g${i}" aria-live="polite"></div></div>`).join('');
+  updateGrammar();
+}
+function updateGrammar() {
+  qs.forEach((q, i) => {
+    const answer = state.grammar[i];
+    const correct = answer === q[2];
+    const feedback = $('g' + i);
+    feedback.textContent = answer === undefined ? '' : correct ? 'Correct! ' + q[3] : 'Try again. Think about reason, result, or contrast.';
+    feedback.className = 'notice ' + (correct ? 'correct' : 'incorrect');
+    document.querySelectorAll(`[data-question="${i}"]`).forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.answer) === answer)));
+  });
+}
+function checkGrammar(i, answer) {
+  state.grammar[i] = answer;
+  updateGrammar();
+  updateProgress();
+  persist();
+}
+function renderPredictions() {
+  $('predictionWrite').disabled = state.prediction === null;
+  $('predictionChoices').innerHTML = predictionQuestions.map((text, i) => `<button type="button" data-prediction="${i}" aria-pressed="${state.prediction === i}" onclick="pickPrediction(${i})">${text}</button>`).join('');
+  $('prediction').textContent = state.prediction === null ? '' : 'Your question: ' + predictionQuestions[state.prediction];
+}
+function pickPrediction(i) {
+  if (!Number.isInteger(i) || i < 0 || i >= predictionQuestions.length) return;
+  state.prediction = i;
+  state.predictionText = state.predictionTexts[i] || '';
+  $('predictionWrite').value = state.predictionText;
+  renderPredictions();
+  updateProgress();
+  persist();
+}
+function finishLesson() {
+  const count = totals();
+  if (count.done < 17) {
+    $('finishStatus').textContent = `You still have tasks to finish. Vocabulary: ${state.matched.length} / 8. Grammar answers: ${count.answered} / 3. Written tasks: ${count.written} / 3. Spoken tasks: ${count.spoken} / 3. Use the mission buttons to return.`;
+    return;
+  }
+  state.finished = true;
+  state.screen = 7;
+  showScreen(true);
+}
+function report() {
+  const count = totals();
+  const lines = ['THE SECRET TEAM — Any Sport in a Storm · S2E13', 'Fluent Mind Adventures',
+    `Route: ${validRoute(state.route) ? routes[state.route].name : '(not selected)'}`,
+    `Tasks: ${count.done} / 17. Vocabulary: ${state.matched.length} / 8. Grammar: ${count.correct} / 3 correct.`, '', 'VOCABULARY'];
+  vocab.forEach((v, i) => lines.push(`${v[0]} — ${v[1]} (${state.matched.includes(i) ? 'matched' : 'not matched'})`));
+  lines.push('', 'GRAMMAR');
+  qs.forEach((q, i) => lines.push(q[0], 'Your answer: ' + (q[1][state.grammar[i]] || '(not answered)'), 'Practice answer: ' + q[1][q[2]], ''));
+  for (const route of ['hunter', 'azura']) {
+    const draft = state.texts[route];
+    if (route !== state.route && !draft.short && !draft.final) continue;
+    lines.push(routes[route].name, routes[route].w, draft.short || '(not answered)', '', routes[route].final, draft.final || '(not answered)', '');
+  }
+  lines.push('PREDICTIONS');
+  if (state.prediction === null) lines.push('(question not selected)');
+  predictionQuestions.forEach((question, i) => {
+    if (i === state.prediction || state.predictionTexts[i]?.trim()) {
+      lines.push(question + (i === state.prediction ? ' (selected)' : ''), state.predictionTexts[i] || '(not answered)', '');
+    }
+  });
+  lines.push('SPOKEN TASKS');
+  for (const [id, label] of [['memory', 'Retelling with at least five clues'], ['reading_' + state.route, 'Reading question'], ['vocab', 'Explain an expression']]) lines.push(label + ': ' + (state.spoken[id] ? 'confirmed by the learner' : 'not confirmed'));
+  lines.push('', 'Open writing and speaking are for discussion together.');
+  return lines.join('\n');
+}
+function downloadAnswers() {
+  const url = URL.createObjectURL(new Blob([report()], { type: 'text/plain;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'The_Secret_Team_Answers.txt';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  $(state.screen === 7 ? 'resultDownloadStatus' : 'downloadStatus').textContent = 'Answers downloaded.';
+}
+$('missionNav').innerHTML = missionNames.map((name, i) => `<button type="button" data-go="${i}" onclick="go(${i})">${i + 1}. ${name}</button>`).join('');
+document.querySelectorAll('[data-spoken]').forEach(field => {
+  field.checked = state.spoken[spokenId(field)] === true;
+  field.addEventListener('change', () => {
+    state.spoken[spokenId(field)] = field.checked;
+    updateProgress();
+    persist();
+  });
+});
+$('predictionWrite').value = state.predictionText;
+renderRoute();
+resetMatch();
+renderGrammar();
+renderPredictions();
+showScreen();
+</script></body></html>
