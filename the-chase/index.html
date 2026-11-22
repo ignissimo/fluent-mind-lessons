@@ -1,0 +1,241 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Chase | Fluent Mind Adventures</title><style>:root{--bg:#101d28;--panel:#1b3040;--line:#3e5965;--accent:#9ed4bf;--gold:#f4d79a;--text:#f0f5f5;--muted:#bed0d6}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#294858,var(--bg) 65%);color:var(--text);font:16px/1.55 system-ui,Arial}main{max-width:920px;margin:auto;padding:22px}header{padding:28px 20px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(130deg,#233f4a,#142633)}h1{font-size:clamp(28px,5vw,43px);margin:4px 0}h2{color:var(--gold);margin-top:0}h3{color:var(--accent)}.eyebrow{letter-spacing:2px;text-transform:uppercase;font-size:12px;color:var(--accent)}.muted{color:var(--muted)}.bar{height:9px;background:#0d1a21;border-radius:20px;overflow:hidden;margin-top:18px}.fill{height:100%;width:0;background:var(--accent);transition:.2s}.panel{background:var(--panel);border:1px solid var(--line);padding:24px;border-radius:18px;margin:18px 0}.rule{background:#112531;border-left:4px solid var(--accent);padding:14px 18px;border-radius:9px;margin:14px 0}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px}.example{background:#263f4a;padding:13px;border-radius:10px}.q{margin:17px 0;padding:15px;border:1px solid #49606b;border-radius:12px}.q p{margin:0 0 10px;font-weight:650}.options{display:grid;grid-template-columns:1fr 1fr;gap:8px}.choice{background:#203946;border:1px solid #617987;color:white;padding:10px;border-radius:9px;text-align:left;cursor:pointer;font-size:15px}.choice:hover,.choice.selected{border-color:var(--gold);background:#355264}.feedback{font-size:14px;min-height:20px;margin-top:7px;color:var(--gold)}textarea,input{width:100%;border:1px solid #718994;background:#0d202b;color:white;border-radius:10px;padding:12px;font:inherit}textarea{min-height:76px;resize:vertical}button.action{background:var(--accent);color:#10222a;border:0;border-radius:10px;padding:11px 18px;font-weight:750;cursor:pointer}button.secondary{background:#304d5c;color:white;border:1px solid #6b8791}.nav{display:flex;justify-content:space-between;gap:10px;margin:20px 0}.hidden{display:none}.tag{display:inline-block;border:1px solid var(--line);padding:3px 9px;border-radius:30px;font-size:12px;color:var(--gold)}.prompt{margin:13px 0}.footer{font-size:13px;color:var(--muted)}@media(max-width:600px){.twocol,.options{grid-template-columns:1fr}.panel{padding:17px}}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:center}.hero>*{min-width:0}
+.still{margin:10px 0}.still img{display:block;width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#101d28}.still figcaption{font-size:12px;color:var(--muted);margin-top:5px}
+#missions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}#missions button{flex:1 1 125px;border:1px solid var(--line);background:#1b3040;color:var(--text);font:inherit;padding:9px;border-radius:10px;cursor:pointer}#missions button[aria-current=step]{border-color:var(--gold);background:#355264}
+button{font-family:inherit}button:disabled{opacity:.45;cursor:default}.choice[aria-pressed=true]{box-shadow:inset 0 0 0 1px var(--gold)}button:focus-visible,textarea:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.spoken{display:flex;align-items:flex-start;gap:10px;padding:13px;background:#112531;border-radius:10px;margin:16px 0;cursor:pointer}.spoken input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--accent);margin-top:3px}
+.export-actions{display:flex;gap:10px;flex-wrap:wrap}.nav button{min-height:44px}.footer a{color:var(--accent)}.q,.panel{overflow-wrap:anywhere}h2:focus{outline:none}.panel h2{scroll-margin-top:20px}#result[hidden]{display:none}#finishStatus{color:var(--gold)}
+@media(max-width:600px){main{padding:14px}header{padding:17px}.hero{grid-template-columns:1fr;gap:4px}.hero .still img{max-height:160px}.eyebrow{letter-spacing:1px}.nav{flex-wrap:wrap}.nav button{flex:1}}
+@media(prefers-reduced-motion:reduce){.fill{transition:none}}
+</style></head><body><main><header><div class="hero"><div><div class="eyebrow">Fluent Mind Adventures · Avatar: The Last Airbender · Animated series · Book 2 Episode 8</div><h1>The Chase</h1><p>Everyone Needs a Break · A2+/B1 · 25–30 minutes</p><p class="muted">Story · Grammar · Reading · Social thinking · Short writing</p></div><figure class="still"><img src="assets/appa.jpg" width="946" height="720" alt="A tired Appa carries Team Avatar through the sky"><figcaption>The Chase · © Nickelodeon</figcaption></figure></div><div class="bar" role="progressbar" aria-label="Lesson tasks completed" aria-valuemin="0" aria-valuemax="26" aria-valuenow="0"><div class="fill" id="fill"></div></div><div id="progress" class="muted" style="margin-top:7px">Mission 1 of 5</div></header><nav id="missions" aria-label="Missions"></nav>
+<section class="panel" data-page="0"><span class="tag">4 minutes</span><h2>Mission 1 — What Happened?</h2><p>After watching the episode, choose an answer, then explain one of your choices aloud.</p><div id="story"></div><label class="spoken"><input type="checkbox" data-spoken="story"> I explained one choice aloud.</label><div class="prompt"><label for="remember"><strong>Write one sentence:</strong> Why does the team need a break?</label><textarea id="remember" data-save placeholder="The team needs a break because..."></textarea></div></section>
+<section class="panel hidden" data-page="1"><span class="tag">8 minutes</span><h2>Mission 2 — Three Verbs, Two Meanings</h2><p>Some verbs can describe a <strong>state</strong> or an <strong>action</strong>. The meaning helps us choose the tense.</p><div class="rule"><h3>1. THINK</h3><div class="twocol"><div class="example"><strong>Present Simple — opinion</strong><p>I <b>think</b> Toph is right.</p><small>This is my opinion.</small></div><div class="example"><strong>Present Continuous — mental activity</strong><p>I <b>am thinking</b> about Toph's decision.</p><small>I am spending time thinking about it now.</small></div></div></div><div class="rule"><h3>2. HAVE</h3><div class="twocol"><div class="example"><strong>Present Simple — possession</strong><p>Sokka <b>has</b> a boomerang.</p><small>He owns it.</small></div><div class="example"><strong>Present Continuous — activity</strong><p>They <b>are having</b> dinner.</p><small>They are eating now.</small></div></div></div><div class="rule"><h3>3. SEE</h3><div class="twocol"><div class="example"><strong>Present Simple — vision</strong><p>I <b>see</b> Azula in the distance.</p><small>I can see her with my eyes.</small></div><div class="example"><strong>Present Continuous — meeting</strong><p>We <b>are seeing</b> our friends tonight.</p><small>We have arranged a meeting.</small></div></div></div><h3>Choose the correct form</h3><p class="muted">These sentences are practice examples, not quotes from the episode.</p><div id="grammar"></div><p><strong>Fix the mistakes:</strong> Write the correct sentences.</p><div class="prompt"><label for="fix1">1. I am thinking Toph is a good earthbender.</label><textarea data-save id="fix1" placeholder="I think..."></textarea></div><div class="prompt"><label for="fix2">2. Sokka is having a boomerang.</label><textarea data-save id="fix2" placeholder="Sokka has..."></textarea></div></section>
+<section class="panel hidden" data-page="2"><span class="tag">5 minutes</span><h2>Mission 3 — A Difficult Night</h2><figure class="still"><img src="assets/iroh.jpg" width="946" height="720" alt="Toph listens to Iroh during their meeting in the forest" loading="lazy"><figcaption>Toph and Iroh · The Chase · © Nickelodeon</figcaption></figure><p class="muted">Read the story. You can return to the text when answering.</p><div class="rule"><p>Aang and his friends are travelling through the Earth Kingdom. They are very tired because Azula and her team keep following them. Whenever they stop to rest, their enemies find them again.</p><p>Katara thinks everyone should help with the camp. Toph wants to be independent and believes she can take care of herself. They argue because they do not agree. The group is tired, so it is difficult for them to listen calmly.</p><p>Later, Toph meets Iroh. He listens to her and explains that accepting help does not mean being weak. Toph starts thinking about his advice. At the same time, Aang tries to find a way to stop the chase so his friends can finally rest.</p></div><div id="reading"></div><div class="prompt"><label for="iroh"><strong>One-sentence answer:</strong> What does Iroh help Toph understand?</label><textarea id="iroh" data-save placeholder="Iroh helps Toph understand that..."></textarea></div></section>
+<section class="panel hidden" data-page="3"><span class="tag">5 minutes</span><h2>Mission 4 — Communication Choices</h2><p>Read the situations. Choose a helpful response. Then discuss why it might work.</p><div id="social"></div><label class="spoken"><input type="checkbox" data-spoken="social"> I explained why one response could help.</label><div class="prompt"><label for="request"><strong>Write one respectful request:</strong> Katara needs help setting up camp. What can she say?</label><textarea id="request" data-save placeholder="Could you please...?"></textarea></div></section>
+<section class="panel hidden" data-page="4"><span class="tag">4–6 minutes</span><h2>Mission 5 — Your Field Report</h2><p>Finish these four sentences. Use <strong>think, have, see</strong> in forms that match your meaning. One sentence per box is enough.</p><div class="prompt"><label for="w1">1. I think...</label><textarea id="w1" data-save placeholder="I think..."></textarea></div><div class="prompt"><label for="w2">2. At the moment, Aang is thinking about...</label><textarea id="w2" data-save placeholder="Aang is thinking about..."></textarea></div><div class="prompt"><label for="w3">3. The team has... / The team is having...</label><textarea id="w3" data-save placeholder="The team..."></textarea></div><div class="prompt"><label for="w4">4. I can see... / I am seeing...</label><textarea id="w4" data-save placeholder="I..."></textarea></div><div class="rule"><strong>Final discussion:</strong> Is it better to solve a problem alone or ask for help? Can both choices be good?</div><label class="spoken"><input type="checkbox" data-spoken="discussion"> I answered the final discussion question aloud.</label><div class="export-actions"><button class="action" id="export">⬇ Download my written answers</button> <button class="action secondary" id="copy">Copy answers</button></div><p id="exportstatus" class="muted" role="status"></p><p id="finishStatus" role="status"></p></section><section class="panel" id="result" hidden aria-labelledby="resultTitle"><h2 id="resultTitle" tabindex="-1">Lesson complete!</h2><p>You finished all five missions.</p><p id="resultScore"></p><p>Your writing and speaking are ready to discuss together.</p><div class="export-actions"><button class="action" id="downloadResult">Download all answers</button><button class="action secondary" id="copyResult">Copy answers</button></div><p id="resultExportStatus" role="status"></p></section>
+<div class="nav"><button class="action secondary" id="back">← Back</button><button class="action" id="next">Next mission →</button></div><p class="footer"><span id="saveStatus" role="status"></span> · Fluent Mind Adventures · <a href="assets/SOURCES.md">Image credits</a></p></main><script>
+const story=[['Who keeps chasing Team Avatar?',['Azula and her team','The Kyoshi Warriors','King Bumi'],0,'Azula and her team keep finding the group.'],['Why do Katara and Toph argue?',['They disagree about helping the group','They both want to ride Appa','They are fighting over food'],0,'They have different expectations about helping with camp.'],['Who talks with Toph about accepting help?',['Zuko','Iroh','Sokka'],1,'Iroh explains that receiving help is not a weakness.']];
+const grammar=[['Give an opinion: I ___ Toph is right.',['think','am thinking'],0,'An opinion uses Present Simple.'],['Aang ___ about a plan right now.',['thinks','is thinking'],1,'Considering something now is an activity.'],['Sokka ___ a boomerang.',['has','is having'],0,'Possession uses Present Simple.'],['The group ___ breakfast at the moment.',['has','is having'],1,'Eating breakfast is an activity.'],['I ___ a Fire Nation ship in the distance.',['see','am seeing'],0,'Vision usually uses Present Simple.'],['We have arranged a meeting: We ___ our friends tomorrow afternoon.',['see','are seeing'],1,'We use Present Continuous for this planned meeting.']];
+const reading=[['Why is Team Avatar exhausted?',['Azula keeps following them','They are training all night','They have no food'],0,'The enemies keep finding them when they try to rest.'],['What does Toph want?',['To be independent','To leave forever','To join Azula'],0,'She wants to take care of herself.']];
+const social=[['Katara wants help. Which request is more respectful?',['You never help!','Could you help me with the camp?','You are lazy!'],1,'It describes the need and makes a clear request.'],['Toph wants to do something independently. What can a friend say?',['You cannot do it alone.','I will help whether you want it or not.','Would you like help, or would you prefer to do it yourself?'],2,'It offers help while respecting her choice.'],['Two tired friends start arguing. What might help?',['Take a short break and listen to each other','Keep shouting','Ignore each other forever'],0,'A break and listening may reduce the conflict.']];
+
+const sets = { s: story, g: grammar, r: reading, c: social };
+const missionNames = ['What Happened?', 'Three Verbs', 'A Difficult Night', 'Communication', 'Field Report'];
+const textLabels = {
+  remember: 'Why does the team need a break?',
+  fix1: 'Correct the sentence: I am thinking Toph is a good earthbender.',
+  fix2: 'Correct the sentence: Sokka is having a boomerang.',
+  iroh: 'What does Iroh help Toph understand?',
+  request: 'Write a respectful request for help with the camp.',
+  w1: 'I think...', w2: 'At the moment, Aang is thinking about...',
+  w3: 'The team has... / The team is having...', w4: 'I can see... / I am seeing...'
+};
+const spokenLabels = {
+  story: 'Explain one story answer aloud.',
+  social: 'Explain why one response could help.',
+  discussion: 'Is it better to solve a problem alone or ask for help? Can both choices be good?'
+};
+const storageKey = 'mark-the-chase-v1';
+let state = { page: 0, answers: {}, text: {}, spoken: {}, finished: false };
+const $ = id => document.getElementById(id);
+function isRecord(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey));
+  if (isRecord(saved)) {
+    if (Number.isInteger(saved.page) && saved.page >= 0 && saved.page < 5) state.page = saved.page;
+    for (const [prefix, questions] of Object.entries(sets)) {
+      questions.forEach((q, i) => {
+        const key = `${prefix}-${i}`;
+        const answer = saved.answers?.[key];
+        if (Number.isInteger(answer) && answer >= 0 && answer < q[1].length) state.answers[key] = answer;
+      });
+    }
+    for (const id of Object.keys(textLabels)) {
+      if (typeof saved.text?.[id] === 'string') state.text[id] = saved.text[id];
+    }
+    for (const id of Object.keys(spokenLabels)) state.spoken[id] = saved.spoken?.[id] === true;
+    state.finished = saved.finished === true;
+  }
+} catch (error) {
+  // The lesson also works when browser storage is unavailable.
+}
+function persist() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    $('saveStatus').textContent = 'Progress saved in this browser.';
+  } catch (error) {
+    $('saveStatus').textContent = 'This browser could not save your progress. Download your answers before leaving.';
+  }
+}
+function totals() {
+  const answered = Object.keys(state.answers).length;
+  const written = Object.keys(textLabels).filter(id => state.text[id]?.trim()).length;
+  const spoken = Object.keys(spokenLabels).filter(id => state.spoken[id]).length;
+  let correct = 0;
+  for (const [prefix, questions] of Object.entries(sets)) {
+    questions.forEach((q, i) => { if (state.answers[`${prefix}-${i}`] === q[2]) correct++; });
+  }
+  return { answered, written, spoken, correct, done: answered + written + spoken };
+}
+function updateProgress() {
+  const count = totals();
+  if (count.done < 26) state.finished = false;
+  $('fill').style.width = `${count.done / 26 * 100}%`;
+  document.querySelector('[role=progressbar]').setAttribute('aria-valuenow', String(count.done));
+  $('progress').textContent = `${state.finished ? 'Lesson complete' : `Mission ${state.page + 1} of 5`} · ${count.done} / 26 tasks done`;
+  $('resultScore').textContent = `Practice answers: ${count.correct} / 14 correct. Written tasks: ${count.written} / 9. Spoken tasks: ${count.spoken} / 3.`;
+}
+function renderQuiz(id, questions, prefix) {
+  $(id).innerHTML = questions.map((q, i) => `
+    <div class="q" role="group" aria-labelledby="${prefix}-q-${i}">
+      <p id="${prefix}-q-${i}">${i + 1}. ${q[0]}</p>
+      <div class="options">${q[1].map((answer, j) => `
+        <button type="button" class="choice" data-quiz="${prefix}" data-i="${i}" data-j="${j}" aria-pressed="false" aria-describedby="${prefix}-f-${i}">${answer}</button>`).join('')}
+      </div>
+      <div class="feedback" id="${prefix}-f-${i}" aria-live="polite"></div>
+    </div>`).join('');
+}
+renderQuiz('story', story, 's');
+renderQuiz('grammar', grammar, 'g');
+renderQuiz('reading', reading, 'r');
+renderQuiz('social', social, 'c');
+$('missions').innerHTML = missionNames.map((name, i) => `<button type="button" data-go="${i}">${i + 1}. ${name}</button>`).join('');
+function updateChoices() {
+  document.querySelectorAll('[data-quiz]').forEach(button => {
+    const key = `${button.dataset.quiz}-${button.dataset.i}`;
+    const selected = state.answers[key] === Number(button.dataset.j);
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+  for (const [prefix, questions] of Object.entries(sets)) {
+    questions.forEach((q, i) => {
+      const answer = state.answers[`${prefix}-${i}`];
+      const feedback = $(`${prefix}-f-${i}`);
+      if (answer === undefined) { feedback.textContent = ''; return; }
+      const correct = answer === q[2];
+      feedback.textContent = (correct ? '✓ Correct. ' : '↻ Try again. ') + q[3];
+      feedback.style.color = correct ? '#9ed4bf' : '#f4d79a';
+    });
+  }
+}
+function show(focus = false) {
+  updateProgress();
+  document.querySelectorAll('[data-page]').forEach(section => {
+    section.classList.toggle('hidden', state.finished || Number(section.dataset.page) !== state.page);
+  });
+  $('result').hidden = !state.finished;
+  document.querySelectorAll('[data-go]').forEach(button => {
+    if (!state.finished && Number(button.dataset.go) === state.page) button.setAttribute('aria-current', 'step');
+    else button.removeAttribute('aria-current');
+  });
+  $('back').disabled = !state.finished && state.page === 0;
+  $('next').hidden = state.finished;
+  $('next').textContent = state.page === 4 ? 'Finish lesson ✓' : 'Next mission →';
+  persist();
+  if (focus) {
+    const heading = state.finished ? $('resultTitle') : document.querySelector(`[data-page="${state.page}"] h2`);
+    heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+}
+document.addEventListener('click', event => {
+  const button = event.target.closest('[data-quiz]');
+  if (button) {
+    state.answers[`${button.dataset.quiz}-${button.dataset.i}`] = Number(button.dataset.j);
+    updateChoices();
+    updateProgress();
+    persist();
+    $('finishStatus').textContent = '';
+  }
+  const navigation = event.target.closest('[data-go]');
+  if (navigation) {
+    state.page = Number(navigation.dataset.go);
+    state.finished = false;
+    $('finishStatus').textContent = '';
+    show(true);
+  }
+});
+document.querySelectorAll('[data-save]').forEach(field => {
+  field.value = state.text[field.id] || '';
+  field.addEventListener('input', () => {
+    state.text[field.id] = field.value;
+    updateProgress();
+    persist();
+    $('finishStatus').textContent = '';
+  });
+});
+document.querySelectorAll('[data-spoken]').forEach(field => {
+  field.checked = state.spoken[field.dataset.spoken] === true;
+  field.addEventListener('change', () => {
+    state.spoken[field.dataset.spoken] = field.checked;
+    updateProgress();
+    persist();
+    $('finishStatus').textContent = '';
+  });
+});
+$('back').onclick = () => {
+  if (state.finished) state.finished = false;
+  else state.page = Math.max(0, state.page - 1);
+  show(true);
+};
+$('next').onclick = () => {
+  if (state.page < 4) { state.page++; show(true); return; }
+  const count = totals();
+  if (count.done < 26) {
+    $('finishStatus').textContent = `You still have tasks to finish. Answered questions: ${count.answered} / 14. Written tasks: ${count.written} / 9. Spoken tasks: ${count.spoken} / 3. Use the mission buttons to return.`;
+    return;
+  }
+  state.finished = true;
+  show(true);
+};
+function report() {
+  const count = totals();
+  const lines = ['THE CHASE — Everyone Needs a Break', 'Fluent Mind Adventures',
+    `Tasks done: ${count.done} / 26. Practice answers: ${count.correct} / 14 correct.`,
+    'Open writing and speaking are for discussion together.', ''];
+  for (const [prefix, questions] of Object.entries(sets)) {
+    lines.push(({ s: 'Story', g: 'Grammar', r: 'Reading', c: 'Communication' })[prefix]);
+    questions.forEach((q, i) => {
+      const answer = state.answers[`${prefix}-${i}`];
+      lines.push(q[0], `Your answer: ${answer === undefined ? '(not answered)' : q[1][answer]}`,
+        `Practice answer: ${q[1][q[2]]}`, q[3], '');
+    });
+  }
+  lines.push('WRITTEN ANSWERS', '');
+  for (const [id, label] of Object.entries(textLabels)) lines.push(label, state.text[id]?.trim() || '(not answered)', '');
+  lines.push('SPOKEN TASKS', '');
+  for (const [id, label] of Object.entries(spokenLabels)) lines.push(label, state.spoken[id] ? 'Confirmed by the learner' : '(not confirmed)', '');
+  return lines.join('\n');
+}
+function exportStatus(message) {
+  $(state.finished ? 'resultExportStatus' : 'exportstatus').textContent = message;
+}
+function downloadAnswers() {
+  const url = URL.createObjectURL(new Blob([report()], { type: 'text/plain;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'the_chase_answers.txt';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  exportStatus('Answers downloaded.');
+}
+async function copyAnswers() {
+  try {
+    await navigator.clipboard.writeText(report());
+    exportStatus('Answers copied.');
+  } catch (error) {
+    exportStatus('Use Download if copying is unavailable.');
+  }
+}
+$('export').onclick = downloadAnswers;
+$('downloadResult').onclick = downloadAnswers;
+$('copy').onclick = copyAnswers;
+$('copyResult').onclick = copyAnswers;
+updateChoices();
+show();
+</script></body></html>
