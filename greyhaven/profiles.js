@@ -1,0 +1,13 @@
+(function(root){'use strict';
+const PREFIX='greyhaven:player:v1:',LEGACY='greyhaven-01-v1';
+function create(storage,C){const memory=new Map(),dirty=new Set();let message='';const copy=x=>JSON.parse(JSON.stringify(x));
+function warn(){message='Autosave is unavailable. Use Save squad before closing this page.';}
+function valid(r){if(!r||r.version!==1||typeof r.id!=='string'||!(/^[a-zA-Z0-9_-]{1,100}$/).test(r.id)||typeof r.name!=='string'||!r.name.trim()||r.name.length>80||!Number.isFinite(r.createdAt)||!Number.isFinite(r.updatedAt))throw Error('Invalid player save');return {...r,state:C.validate(r.state)};}
+function read(){try{for(let i=0;i<storage.length;i++){const key=storage.key(i);if(!key?.startsWith(PREFIX))continue;try{const r=valid(JSON.parse(storage.getItem(key)));if(key!==PREFIX+r.id)throw Error('Invalid player ID');if(!dirty.has(r.id))memory.set(r.id,r);}catch(e){message='Some saved data could not be read. The original data is preserved. Use Load squad to import a backup.';}}}catch(e){warn();}}
+function persist(r){memory.set(r.id,copy(r));dirty.add(r.id);try{storage.setItem(PREFIX+r.id,JSON.stringify(r));dirty.delete(r.id);}catch(e){warn();}return copy(r);}
+function add(name,state=C.fresh(),id){name=String(name||'').trim();if(!name||name.length>80)throw Error('Enter a player name (1–80 characters).');const now=Date.now();if(!id)id=root.crypto?.randomUUID?.()||'p-'+now.toString(36)+'-'+Math.random().toString(36).slice(2);const v=C.validate(state);return persist({version:1,id,name,createdAt:now,updatedAt:now,state:v});}
+read();try{const raw=storage.getItem(LEGACY);if(raw&&!memory.has('legacy')){const state=C.validate(JSON.parse(raw));add((state.answers.name?.trim()||state.answers.call?.trim()||'Previous squad').slice(0,80),state,'legacy');}}catch(e){if(!storage)warn();else message='Previous progress could not be read. The original save is preserved. You can import a squad backup.';}
+return{list(){read();return [...memory.values()].sort((a,b)=>b.updatedAt-a.updatedAt).map(copy);},get(id){read();const r=memory.get(id);if(!r)throw Error('Player save not found.');return copy(r);},add(name){const s=C.fresh();s.answers.name=String(name||'').trim();return add(name,s);},save(id,state){read();const old=memory.get(id);if(!old)throw Error('Choose a player first.');return persist({...old,state:C.validate(state),updatedAt:Date.now()});},import(state){const v=C.validate(state);return add((v.answers.name?.trim()||v.answers.call?.trim()||'Imported squad').slice(0,80),v);},warning(){return message;}};
+}
+const api={create};if(typeof module!=='undefined')module.exports=api;root.GreyProfiles=api;
+})(typeof window!=='undefined'?window:globalThis);

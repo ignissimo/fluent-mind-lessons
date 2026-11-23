@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "quest": "greyhaven-01",
+  "level": 1,
+  "xp": 100,
+  "stage": 5,
+  "hero": "hero2",
+  "colour": "sand",
+  "weapon": "smg",
+  "extras": [
+    "flashlight",
+    "ammo"
+  ],
+  "squad": {
+    "engineer": "nova",
+    "medic": "sage",
+    "scout": "kite"
+  },
+  "answers": {
+    "name": "Adam",
+    "call": "Raven",
+    "identity": " I’M   the LEADER! ",
+    "gear1": "I have a compact SMG.",
+    "gear2": "I have some extra ammo and a flashlight.",
+    "team1": "Our engineer is Nova.",
+    "team2": "Our medic is Sage.",
+    "team3": "Our scout is Kite.",
+    "command": "Wait here.",
+    "report1": "I'm the leader.",
+    "report2": "Our engineer is Nova.",
+    "report3": "I have a compact SMG."
+  },
+  "confirmed": {
+    "identity": true,
+    "gear": true,
+    "team": true,
+    "command": true,
+    "report": true
+  },
+  "notebook": {
+    "identity": false,
+    "gear": false,
+    "team": false,
+    "command": false,
+    "report": false
+  },
+  "quizzes": {
+    "weapon": true,
+    "engineer": true,
+    "nova": true,
+    "careful": true,
+    "medic": true,
+    "water": true,
+    "scout": true,
+    "echo": true
+  },
+  "readOrder": true,
+  "found": [
+    "locker",
+    "desk",
+    "gate"
+  ],
+  "training": [
+    true,
+    true,
+    true
+  ],
+  "built": [
+    "Follow",
+    "me"
+  ],
+  "final": true
+}
