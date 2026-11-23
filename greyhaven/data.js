@@ -1,7 +1,8 @@
 window.GreyData={
-stages:['Create your hero','Get your orders','Choose equipment','Build your squad','Team training','Get clearance'],
-objectives:['Choose your hero. Make your leader pass.','Read the order. Find the locker, the radio desk and the gate.','Choose one weapon and two extra items.','Read the files. Choose an engineer, a medic and a scout.','Choose the right teammate. Give a clear command.','Write your report. Meet your squad at the gate.'],
-order:['Welcome to Greyhaven. You are our new team leader.','We cannot contact the North District. Build your team.','Choose your equipment. Find an engineer, a medic and a scout.','Then meet your team at the gate.'],
+stages:['Create your hero','Build your squad','Choose equipment','Get your orders','Team training','Get clearance'],
+objectives:['Choose your hero.','Choose an engineer, a medic and a scout.','Choose one weapon and two extra items.','Read your orders.','Choose the right teammate. Give a clear command.','Write your report. Meet your squad at the gate.'],
+teamIntro:['Welcome to Greyhaven. You are our new team leader.','Build your team.','Find an engineer, a medic and a scout.','Then meet your team at the gate.'],
+order:['We cannot contact the North District.','Your team will go to the relay station.','First, check your team in the training area.'],
 heroes:[{id:'hero1',name:'Alex',label:'Steady and ready.'},{id:'hero2',name:'Morgan',label:'Calm under pressure.'},{id:'hero3',name:'Jordan',label:'Ready to lead.'}],
 items:[
 {id:'rifle',name:'Kestrel R4',type:'light rifle',lines:['This is a light rifle.','It is good for long paths.','It has a slow fire rate.']},
