@@ -19,3 +19,5 @@ test('old saves migrate to hero-first order without losing drafts or completed s
 test('hero setup needs only name and call sign without a written exercise',()=>{const s=C.fresh();s.answers.name='Adam';s.answers.call='Raven';assert.equal(C.ready(s,0),true);assert.equal(s.confirmed.identity,false);});
 
 test('v2 equipment progress redirects to team selection and keeps equipment and drafts',()=>{const s=C.fresh();s.version=2;s.stage=2;s.answers.name='Adam';s.answers.call='Raven';s.readOrder=true;s.found=['locker','desk','gate'];s.weapon='rifle';s.extras=['flashlight','ammo'];s.answers.gear1='My draft';const moved=C.validate(s);assert.equal(moved.stage,1);assert.equal(moved.weapon,'rifle');assert.equal(moved.answers.gear1,'My draft');assert.equal(moved.readOrder,true);});
+
+test('new candidates remain valid persistent squad members',()=>{const s=C.fresh();s.squad={engineer:'bolt',medic:'vale',scout:'rook'};assert.doesNotThrow(()=>C.validate(s));assert(C.ready(s,1));});

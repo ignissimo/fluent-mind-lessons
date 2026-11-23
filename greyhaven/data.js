@@ -21,6 +21,9 @@ items:[
 {id:'bandage',name:'Bandage',type:'kit',lines:['I can help a hurt teammate.']}
 ],
 candidates:[
+{id:'vale',role:'medic',trait:'Patient',items:['medkit','water'],lines:['I can help hurt people.','I listen to my team.']},
+{id:'rook',role:'scout',trait:'Careful',items:['map','flashlight'],lines:['I can check the road.','I watch and listen.']},
+{id:'bolt',role:'engineer',trait:'Friendly',items:['toolkit','flashlight'],lines:['I can fix radios.','I work fast.']},
 {id:'nova',role:'engineer',trait:'Friendly',items:['toolkit','flashlight'],lines:['I can fix radios.','I have a toolkit and a flashlight.','I like working with a team.']},
 {id:'patch',role:'engineer',trait:'Careful',items:['toolkit','rope'],lines:['I can fix radios and doors.','I have a toolkit and a rope.','I check my work twice.']},
 {id:'sage',role:'medic',trait:'Calm',items:['medkit','water'],lines:['I can help hurt people.','I have a medkit and some water.','I stay calm and listen.']},
@@ -29,11 +32,21 @@ candidates:[
 {id:'kite',role:'scout',trait:'Patient',items:['map','rope'],lines:['I can find a safe path.','I have a map and a rope.','I wait and watch the road.']}
 ],
 training:[
-{role:'engineer',title:'The radio terminal',message:'The terminal is not working. The radio is off. Who can help?',commands:['Fix the radio.','Help our teammate.','Check the road.'],correct:'Fix the radio.',reply:'The radio is working. We can talk to the team.',before:'RADIO OFF',after:'RADIO ONLINE'},
+{role:'engineer',title:'The radio terminal',message:'The terminal is not working. The radio is off. Who can help?',profiles:{
+nova:['I can fix radios.','I work with my team.'],patch:['I can fix radios and doors.','I check my work.'],bolt:['I can fix radios.','I work fast.'],
+sage:['I can help hurt people.','I stay calm.'],pulse:['I can help your team.','I work fast.'],vale:['I can help hurt people.','I listen to my team.'],
+echo:['I can check the road.','I move quietly.'],kite:['I can find a safe path.','I wait and watch.'],rook:['I can check the road.','I watch and listen.']
+},
+commands:['Fix the radio.' ,'Help our teammate.','Check the road.'],correct:'Fix the radio.',reply:'The radio is working. We can talk to the team.',before:'RADIO OFF',after:'RADIO ONLINE'},
 {role:'medic',title:'A training problem',message:'Our teammate has a hurt arm. Who can help?',commands:['Open the door.','Help our teammate.','Wait here.'],correct:'Help our teammate.',reply:'Our teammate is OK. We can train again.',before:'NEEDS HELP',after:'TEAMMATE READY'},
 {role:'scout',title:'Beyond the gate',message:'We cannot see the road. We need to check it. Who can help?',commands:['Follow me.','Fix the radio.','Check the road.'],correct:'Check the road.',reply:'The road is safe. Our team can go.',before:'ROAD UNKNOWN',after:'ROAD CHECKED'}
 ],
-commands:['Fix the radio.','Open the door.','Help our teammate.','Check the road.','Follow me.','Wait here.'],
+profiles:{
+nova:['I can fix radios.','I work with my team.'],patch:['I can fix radios and doors.','I check my work.'],bolt:['I can fix radios.','I work fast.'],
+sage:['I can help hurt people.','I stay calm.'],pulse:['I can help your team.','I work fast.'],vale:['I can help hurt people.','I listen to my team.'],
+echo:['I can check the road.','I move quietly.'],kite:['I can find a safe path.','I wait and watch.'],rook:['I can check the road.','I watch and listen.']
+},
+commands:['Fix the radio.' ,'Open the door.','Help our teammate.','Check the road.','Follow me.','Wait here.'],
 text:['Choose a player.','Enter your name.','Start a new mission.',"I'm the leader.",'My name is Adam.','Call sign: Raven.', 'I have a light rifle.','I have a compact SMG.','I have a flashlight and some extra ammo.','Our team has four people.','Your squad is ready.','The gate is open.','Go to the North District. Find the relay station. Wait for a new order.','Mission complete.','Mission complete. Save your squad for the next chapter.','Choose a hero.','Choose a colour.','Write your name and call sign.','Choose two extra items.','Which weapon has a fast fire rate?','Who has a flashlight?','Who can fix a radio?','Who can help a hurt teammate?','Who can check the road?','Build the command.','Write one command.','Who checks the work twice?','Who has water?','Read your report.','Read the order.','Find the weapons locker.','Find the radio desk.','Find the gate.','Choose your engineer.','Choose your medic.','Choose your scout.','Read the next line.','Listen and read.','Write in your notebook.','Follow me.','Wait here.'],
 translations:{leader:'лидер',engineer:'инженер',medic:'медик',scout:'разведчик',team:'команда',rifle:'винтовка',radio:'рация',flashlight:'фонарик',toolkit:'набор инструментов',medkit:'аптечка',ammo:'патроны',armour:'броня',door:'дверь',gate:'ворота',fix:'чинить',help:'помогать',check:'проверять',follow:'следовать за',wait:'ждать',here:'здесь',our:'наш / наша',have:'иметь',can:'мочь / уметь',smoke:'дым',grenade:'граната',extra:'дополнительный',compact:'компактный',light:'лёгкий',weapon:'оружие',teammate:'напарник',hurt:'пострадавший',road:'дорога',path:'путь',safe:'безопасный',calm:'спокойный',quiet:'тихий',friendly:'дружелюбный',careful:'внимательный',kind:'добрый',patient:'терпеливый',rope:'верёвка',map:'карта',water:'вода',bandage:'бинт',choose:'выбери',write:'напиши',read:'прочитай',working:'работает / работающий',slow:'медленный',fast:'быстрый',fire:'огонь',rate:'темп',north:'северный',district:'район',relay:'ретрансляция',station:'станция',clearance:'допуск',squad:'отряд',orders:'приказы',equipment:'снаряжение',people:'люди',four:'четыре',name:'имя',call:'позывной (call sign)',sign:'знак / позывной',spare:'запасной',pistol:'пистолет',dark:'тёмный',long:'длинный',small:'маленький',rooms:'комнаты',protect:'защищать',climb:'взбираться',watch:'наблюдать',twice:'дважды',listen:'слушать',move:'двигаться',quietly:'тихо',more:'больше',hide:'скрыть',meet:'встретить',contact:'связаться',first:'первый',job:'задание',build:'собрать',new:'новый',welcome:'добро пожаловать',terminal:'терминал'}
 };

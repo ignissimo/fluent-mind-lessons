@@ -1,6 +1,6 @@
 (function(root){
 'use strict';
-const roles={engineer:['nova','patch'],medic:['sage','pulse'],scout:['echo','kite']};
+const roles={engineer:['nova','patch','bolt'],medic:['sage','pulse','vale'],scout:['echo','kite','rook']};
 const answerKeys=['name','call','identity','gear1','gear2','team1','team2','team3','command','report1','report2','report3'];
 const quizKeys=['weapon','nova','medic','scout','engineer','careful','water','echo'];
 function fresh(){return {version:3,quest:'greyhaven-01',level:1,xp:0,stage:0,hero:'hero1',colour:'teal',weapon:null,extras:[],squad:{engineer:null,medic:null,scout:null},answers:{},confirmed:{identity:false,gear:false,team:false,command:false,report:false},notebook:{identity:false,gear:false,team:false,command:false,report:false},quizzes:{},readOrder:false,found:[],training:[false,false,false],built:[],final:false};}
