@@ -1,6 +1,6 @@
 window.GreyData={
-stages:['Get your orders','Create your hero','Choose equipment','Build your squad','Team training','Get clearance'],
-objectives:['Read the order. Find the locker, the radio desk and the gate.','Choose your hero. Make your leader pass.','Choose one weapon and two extra items.','Read the files. Choose an engineer, a medic and a scout.','Choose the right teammate. Give a clear command.','Write your report. Meet your squad at the gate.'],
+stages:['Create your hero','Get your orders','Choose equipment','Build your squad','Team training','Get clearance'],
+objectives:['Choose your hero. Make your leader pass.','Read the order. Find the locker, the radio desk and the gate.','Choose one weapon and two extra items.','Read the files. Choose an engineer, a medic and a scout.','Choose the right teammate. Give a clear command.','Write your report. Meet your squad at the gate.'],
 order:['Welcome to Greyhaven. You are our new team leader.','We cannot contact the North District. Build your team.','Choose your equipment. Find an engineer, a medic and a scout.','Then meet your team at the gate.'],
 heroes:[{id:'hero1',name:'Alex',label:'Steady and ready.'},{id:'hero2',name:'Morgan',label:'Calm under pressure.'},{id:'hero3',name:'Jordan',label:'Ready to lead.'}],
 items:[
