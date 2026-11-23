@@ -1,8 +1,8 @@
 window.GreyData={
-stages:['Create your hero','Build your squad','Choose equipment','Get your orders','Team training','Get clearance'],
-objectives:['Choose your hero.','Choose an engineer, a medic and a scout.','Choose one weapon and two extra items.','Read your orders.','Choose the right teammate. Give a clear command.','Write your report. Meet your squad at the gate.'],
+stages:['Create your hero','Build your squad','Choose equipment','Radio desk','Radio check','Training'],
+objectives:['Choose your hero.','Choose an engineer, a medic and a scout.','Choose one weapon and two extra items.','Read your orders.','Choose a teammate to fix the radio.','Training is coming soon.'],
 teamIntro:['Welcome to Greyhaven. You are our new team leader.','Build your team.','Find an engineer, a medic and a scout.','Then meet your team at the gate.'],
-order:['We cannot contact the North District.','Your team will go to the relay station.','First, check your team in the training area.'],
+order:['We cannot contact the North District.','Your team will go to the relay station.','First, check the radio.'],
 heroes:[{id:'hero1',name:'Alex',label:'Steady and ready.'},{id:'hero2',name:'Morgan',label:'Calm under pressure.'},{id:'hero3',name:'Jordan',label:'Ready to lead.'}],
 items:[
 {id:'rifle',name:'Kestrel R4',type:'light rifle',lines:['This is a light rifle.','It is good for long paths.','It has a slow fire rate.']},
@@ -32,7 +32,7 @@ candidates:[
 {id:'kite',role:'scout',trait:'Patient',items:['map','rope'],lines:['I can find a safe path.','I have a map and a rope.','I wait and watch the road.']}
 ],
 training:[
-{role:'engineer',title:'The radio terminal',message:'The terminal is not working. The radio is off. Who can help?',profiles:{
+{role:'engineer',title:'The radio terminal',message:'The radio is not working. Who can help?',profiles:{
 nova:['I can fix radios.','I work with my team.'],patch:['I can fix radios and doors.','I check my work.'],bolt:['I can fix radios.','I work fast.'],
 sage:['I can help hurt people.','I stay calm.'],pulse:['I can help your team.','I work fast.'],vale:['I can help hurt people.','I listen to my team.'],
 echo:['I can check the road.','I move quietly.'],kite:['I can find a safe path.','I wait and watch.'],rook:['I can check the road.','I watch and listen.']
