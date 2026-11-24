@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Message Board Rescue · Fluent Mind</title>
+<style>
+:root{--bg:#e7ecdf;--ink:#18382e;--paper:#fffdf5;--green:#27694f;--gold:#f1ca69}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 system-ui,sans-serif}header{background:#193e34;color:white;padding:25px max(20px,calc((100vw - 1100px)/2))}h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:6px 0 12px}h2{margin:0 0 12px;font-size:30px}h3{margin:20px 0 10px}p{margin:10px 0}main{max-width:1140px;margin:auto;padding:20px}button,textarea,select{font:inherit}button{cursor:pointer;background:#f7faf0;border:2px solid #486a55;border-radius:7px;padding:10px 15px;color:var(--ink)}button:hover{background:#e0eccb}button.active,button.correct{background:var(--gold)}button:disabled{cursor:default;opacity:.7}button:focus-visible,summary:focus-visible,textarea:focus-visible,select:focus-visible{outline:4px solid #c97c25;outline-offset:3px}nav,.row{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}nav button{flex:1;min-width:135px;font-size:15px}article,.teacher{background:var(--paper);padding:clamp(18px,4vw,32px);border:2px solid #63836b;border-radius:12px;margin:15px 0}.tag{font-size:14px;letter-spacing:.08em;color:#4f6b50}.rule{background:#e5eddc;border-left:5px solid #728a4c;padding:14px;margin:20px 0}.rule summary,details summary{cursor:pointer;font-weight:bold}.question{border-top:2px solid #e0e7d5;margin-top:24px;padding-top:18px}.choices{display:grid;gap:9px}.choices button{text-align:left}.feedback{min-height:28px;color:#216044;font-weight:600}.evidence{border:1px dashed #7d9276;padding:13px;margin-top:12px}.textline{display:block;width:100%;text-align:left;margin:8px 0;background:white}.story{padding:16px;background:#f0eee2;border-radius:8px;font-size:20px}.story p{margin:10px 0}.tokens{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.answerline{min-height:54px;padding:10px;background:#e7edde;border-radius:6px}.talk{background:#eceddc;padding:18px;margin-top:25px;border-radius:9px}.footer{display:flex;gap:10px;justify-content:space-between;margin-top:24px;flex-wrap:wrap}.teacher{border-style:dashed;font-size:16px}.teacher label{display:block;margin:9px 0}.teacher select{max-width:100%}textarea{width:100%;min-height:100px;border:2px solid #80967c;border-radius:6px;padding:12px;background:white;color:#18382e}small{font-size:14px}.status{font-size:14px}.wheelface{background:#f3d97e;border:5px solid #6a8258;border-radius:50%;width:95px;height:95px;display:grid;place-items:center;font-size:36px;transition:transform .5s}progress{width:200px;accent-color:#e3b84c}.tip{font-size:14px;color:#4a6352}@media(prefers-reduced-motion:reduce){.wheelface{transition:none}}@media print{header,nav,.footer,.teacher,button{display:none}body{background:white}article{border:0}details{display:block}}
+
+header{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:center}header>*{min-width:0}.level{font-size:14px;color:#d8e8d5}.cover{margin:0}.cover img{width:100%;height:auto;display:block;border-radius:12px}.cover figcaption{font-size:11px;color:#d8e8d5;margin-top:4px}progress{max-width:100%;vertical-align:middle}#progress p{font-size:14px;margin-top:8px}.lessonArt{margin:16px 0}.lessonArt img{display:block;width:100%;max-height:300px;object-fit:contain;border-radius:10px;background:#e4ead9}.lessonArt figcaption{font-size:12px;color:#4a6352}.answerline{overflow-wrap:anywhere}.tokens button{min-height:44px}.audioPlayer{width:100%;margin:10px 0}.feedback.bad{color:#97342b}.textline[aria-pressed=true]{outline:2px solid #27694f}.textline.wrong{background:#fff0e9;border-color:#97342b}.credits{font-size:13px;text-align:center}.credits a{color:#27694f}#resetPanel{border:2px solid #63836b;border-radius:8px;padding:14px;margin:16px 0}[hidden]{display:none!important}h2:focus{outline:none}.summaryStats{background:#e5eddc;padding:18px;border-radius:9px}.rule p,.story p{overflow-wrap:anywhere}a:focus-visible{outline:4px solid #c97c25;outline-offset:3px}button[aria-pressed=true]{border-color:#c97c25}
+@media(max-width:700px){header{grid-template-columns:1fr;padding:20px;gap:12px}.cover img{max-height:210px;object-fit:contain}main{padding:14px}nav button{min-width:120px}h2{font-size:26px}.story{font-size:18px}.row button,.footer button{max-width:100%;white-space:normal}}
+</style>
+</head><body><header><div class="headerCopy"><small>FLUENT MIND ADVENTURES · READ / THINK / REPLY</small><h1>Message Board Rescue</h1><p>Repair the replies. Find the clues. Tell your own story.</p><p class="level">A2–B1 · about 45 minutes</p><div id="progress"></div></div><figure class="cover"><img src="assets/board.jpg" width="1200" height="800" alt="A garden message board with pictures of a cake, games, a library and a dog"><figcaption>Original illustration · Fluent Mind Adventures</figcaption></figure></header>
+<main><nav id="nav" aria-label="Lesson stations"></nav><article id="app"></article><details class="teacher"><summary>Панель учителя · 45 минут</summary><p>На каждой станции сначала задай 1–2 вопроса без шпаргалки. Затем открой правило и отработайте новую ситуацию. Значки выдаются за проработку станции. Таймера нет.</p><p id="cue"></p><p>Открытые устные и письменные ответы проверяет учитель. Если ошибся, ученик может пробовать снова. В заданиях на доказательство нужно выбрать предложение из текста.</p><div id="ratings"></div><label for="notes">Примеры ответов и заметки</label><textarea id="notes"></textarea><div class="row"><button id="download">Скачать ответы и заметки</button><button id="reset">Начать заново</button></div><div id="resetPanel" hidden><p>Очистить ответы и заметки только этого урока?</p><button id="cancelReset">Сохранить мою работу</button> <button id="confirmReset">Очистить этот урок</button></div></details><p class="status" id="storage" role="status"></p><p class="credits">Fluent Mind Adventures · <a href="assets/SOURCES.md">Art and audio credits</a></p></main>
+<script>
+const zones=[{"title": "Question workshop", "icon": "❔", "minutes": 7, "intro": "The message board has mixed up its replies. Work out what each question asks.", "rule": "<b>Who</b> asks about a person. <b>Where</b> asks about a place. <b>When</b> asks about a time. <b>Why</b> asks for a reason, often with <b>because</b>. <b>How</b> asks about a way or method. <b>How much</b> can ask about a price.", "questions": [{"prompt": "Why do you like this game?", "options": ["Because I can build things.", "With my brother.", "On Saturday."], "correct": 0, "reason": "Why asks for a reason. ‘Because I can build things’ explains the reason."}, {"prompt": "How do you get to school?", "options": ["At eight.", "By bus.", "Because it is near."], "correct": 1, "reason": "How asks about the way you travel. ‘By bus’ gives the method."}, {"prompt": "Who feeds your pet?", "options": ["In the kitchen.", "Every morning.", "My dad."], "correct": 2, "reason": "Who asks about a person. ‘My dad’ names the person."}, {"prompt": "When do you play with friends?", "options": ["After school.", "In my room.", "With Ben."], "correct": 0, "reason": "When asks about a time. ‘After school’ tells us when."}, {"prompt": "Where is the cat?", "options": ["It is sleepy.", "Under the bed.", "It is my cat."], "correct": 1, "reason": "Where asks about a place. ‘Under the bed’ tells us where."}, {"prompt": "How much is the ticket?", "options": ["At five o’clock.", "By train.", "Twenty shekels."], "correct": 2, "reason": "How much asks about the price here."}], "talk": ["Ask your teacher a Why question and a How question.", "Answer both: Why do you play games? How do you play with friends?"], "teacher": "Сначала попроси объяснить разницу Why / How своими словами. После 6 пар предложи новые вопросы без вариантов. Если ответ неверен, спроси, какой тип информации он назвал.", "sort": [["Why", "do", "you", "like", "this", "game?"], ["How", "do", "you", "get", "to", "school?"]]}, {"title": "The game-club invitation", "icon": "✉️", "minutes": 9, "intro": "Read Ben’s invitation. Choose an answer, then click the sentence that proves it.", "rule": "Start by identifying the question word. Find the relevant detail. A short answer can be enough: <i>In the garden.</i> To make a full sentence, add a subject and a verb: <i>The party is in the garden.</i><br><b>Can + base verb</b>: We can play. <b>Bring</b> is an instruction. <b>Don’t bring</b> tells someone what to leave at home.", "sentences": ["Hi, I’m Ben. Please come to my birthday game club!", "We will meet in my garden on Friday at four o’clock.", "We can build a Minecraft village and try a Roblox racing game.", "There will be pizza, apples and a birthday cake.", "Bring a jacket because it will be cool outside.", "Don’t bring pets: my little dog is afraid of other animals."], "questions": [{"prompt": "Who is having a birthday event?", "options": ["Ben.", "Ben’s dog.", "The teacher."], "correct": 0, "reason": "Ben names himself in the first sentence of the invitation."}, {"prompt": "Where will they meet?", "options": ["At school.", "In Ben’s garden.", "In a racing game."], "correct": 1, "reason": "The invitation says ‘in my garden’."}, {"prompt": "What can they do?", "options": ["Only eat cake.", "Take their pets to school.", "Build a village and try a racing game."], "correct": 2, "reason": "Look for the activities after ‘We can’."}, {"prompt": "Why do they need a jacket?", "options": ["Because it will be cool.", "Because it is a birthday.", "Because the dog is afraid."], "correct": 0, "reason": "The reason for the jacket is the cool weather."}, {"prompt": "What must guests leave at home?", "options": ["All friends.", "Pets.", "Ben."], "correct": 1, "reason": "‘Don’t bring pets’ means pets must stay at home."}, {"prompt": "Why is Ben inviting friends?", "options": ["To clean the garden.", "To buy a jacket.", "To celebrate his birthday."], "correct": 2, "reason": "The first sentence calls it a birthday game club."}], "evidence": [0, 1, 2, 4, 5, 0], "talk": ["Change the place, day and activities. Tell your teacher your new invitation.", "Ask one question that the invitation does NOT answer."], "teacher": "9 мин. Имя Бена дано в первой строке приглашения. После выбора ответа ребёнок нажимает фразу-доказательство. Не принимай только совпадение слова jacket: нужна причина."}, {"title": "Can’t wait!", "icon": "🐕", "minutes": 7, "intro": "A visitor has a surprise. Read the diary and trace who visits whom.", "rule": "<b>I can’t wait to see you</b> expresses excitement about seeing someone. It means ‘I really want to see you soon’.<br>Use <b>can’t wait + to + base verb</b>: I can’t wait to play / visit / meet you.<br><b>Visit someone</b> means go to see them. <b>Come to our house</b> means travel to our house.", "sentences": ["Monday: My cousin Ella lives in Haifa.", "She will visit us in Netanya on Saturday.", "I can’t wait to see her!", "Saturday: Ella is here with her new dog, Pixel.", "I have to stop writing now because Ella is waiting at the door.", "We will take Pixel for a walk together."], "questions": [{"prompt": "Who is travelling?", "options": ["Ella.", "The diary writer.", "Pixel’s teacher."], "correct": 0, "reason": "Ella will visit the writer. She is travelling to Netanya."}, {"prompt": "Where does Ella live?", "options": ["Netanya.", "Haifa.", "The text does not say."], "correct": 1, "reason": "The first sentence says Ella lives in Haifa."}, {"prompt": "‘I can’t wait to see her!’ means…", "options": ["I don’t want her to come.", "I must leave before she arrives.", "I am excited about seeing her."], "correct": 2, "reason": "The writer is excited about the visit."}, {"prompt": "Why does the writer stop writing?", "options": ["Because Ella is waiting at the door.", "Because the writer hates diaries.", "Because Pixel is hungry."], "correct": 0, "reason": "The diary gives the reason with ‘because’."}, {"prompt": "What can the writer say to Ella?", "options": ["I enjoyed visiting your home today.", "I’m happy you came to our house.", "Thank you for the birthday cake."], "correct": 1, "reason": "Ella came to the writer’s home. The other details are not in the diary."}], "evidence": [1, 0, 2, 4, 3], "talk": ["Draw or describe the journey: Ella → …", "Finish with your own idea: I can’t wait to…", "What is a kind thing to say when a friend arrives at your house?"], "sort": [["I", "can’t", "wait", "to", "see", "you."], ["I", "have", "to", "stop", "writing", "now."]], "teacher": "7 мин. Уточни, кому принадлежит our house. Сначала выберите место жительства и направление поездки, затем реплику. Have to объясняется как необходимость, а не желание."}, {"title": "Action or reason?", "icon": "🔎", "minutes": 7, "intro": "The reply robot gives true information to the wrong questions. Help it answer precisely.", "rule": "<b>What do you do in the morning?</b> asks about an action in your routine: <i>I feed the dog.</i><br><b>Why do you do it?</b> asks for a reason: <i>Because he is hungry.</i><br><b>I am / he is / they are</b> go with descriptions: <i>They are happy.</i> With a plural subject: <i>Pets are not invited.</i>", "questions": [{"prompt": "Why are you having a party? The robot says ‘We can eat pizza.’ Choose a better reply.", "options": ["Because it’s my birthday.", "In the park.", "We can play games."], "correct": 0, "reason": "Eating pizza is an activity. Having a birthday is the reason for the party."}, {"prompt": "What does Leo do in the morning?", "options": ["Because his cat is hungry.", "He feeds his cat.", "At seven."], "correct": 1, "reason": "What does he do asks for an action. ‘He feeds his cat’ describes an action."}, {"prompt": "Why does Leo feed his cat?", "options": ["In the kitchen.", "He feeds it.", "Because it is hungry."], "correct": 2, "reason": "Why asks for a reason."}, {"prompt": "Choose the full sentence.", "options": ["Baby brothers and sisters are not invited.", "Baby brothers and sisters is not invited.", "Is not invited baby brothers and sisters."], "correct": 0, "reason": "‘Brothers and sisters’ is plural, so use ‘are’. Put the subject first."}, {"prompt": "Who has a birthday party? Choose the complete answer.", "options": ["Birthday is Tali.", "Tali is having a birthday party.", "Tali birthday having."], "correct": 1, "reason": "Start with the person, then add ‘is having a birthday party’."}], "talk": ["Your teacher says an action. Invent a reason for it.", "Now say a reason. Let your teacher invent an action that fits."], "sort": [["Pets", "are", "not", "invited."], ["We", "need", "jackets", "because", "it", "is", "cold."]], "teacher": "7 мин. Дайте по два вопроса к одному событию: What does he do? Why does he do it? В письме используй только короткие конструкции. Объясни have to = нужно и can = могу/можно, если эти формы вызывают трудность."}, {"title": "Time & listening lab", "icon": "🎧", "minutes": 8, "intro": "Listen to your teacher or press Play. Answer before you reveal the script.", "rule": "<b>Usually / every day</b> → Present Simple: <i>I play. She plays.</i> Questions: <i>Do you play? Does she play?</i><br><b>Yesterday</b> → Past Simple: <i>I played. I went.</i> After <b>did</b>, use the base verb: <i>Did you go?</i><br><b>Will + base verb</b> → a prediction or decision: <i>I’ll help.</i><br><b>Now</b> can describe an action in progress: <i>She is waiting.</i>", "listening": "After school, Tom usually walks his dog, Max. Yesterday, he went to the park with his sister. They travelled by bus because the park was far away. Max stayed at home. Tomorrow is Tom’s birthday. His friends will visit him at five o’clock. They will make a game together.", "questions": [{"prompt": "What does Tom usually do after school?", "options": ["He walks Max.", "He goes by bus to every lesson.", "He has a birthday party."], "correct": 0, "reason": "‘Usually walks his dog’ describes his routine."}, {"prompt": "How did they travel yesterday?", "options": ["With Max.", "By bus.", "Because the park was far away."], "correct": 1, "reason": "How asks for the method: by bus."}, {"prompt": "Why did they travel by bus?", "options": ["At five o’clock.", "To walk Max.", "Because the park was far away."], "correct": 2, "reason": "Why asks for the reason."}, {"prompt": "When will his friends visit?", "options": ["At five o’clock tomorrow.", "Yesterday.", "Every day."], "correct": 0, "reason": "They will visit tomorrow at five."}, {"prompt": "Choose the correct past question.", "options": ["Did Tom went to the park?", "Did Tom go to the park?", "Does Tom went to the park?"], "correct": 1, "reason": "Did shows the past. Use the base verb ‘go’ after did."}], "talk": ["Say one true sentence about what you usually do.", "What did you do yesterday?", "Imagine I need help tomorrow. What will you do?"], "teacher": "8 мин. Прочитай текст дважды, пока Script закрыт. Кнопка Play использует голоса браузера. После аудирования задай 3 личных вопроса и запиши реальные фразы. Формы Continuous здесь только кратко узнаём в правиле, основной выход — Simple."}, {"title": "Final message", "icon": "🏁", "minutes": 7, "intro": "A new invitation has arrived. Use your question tools on a fresh text.", "rule": "<b>Answer routine</b><br>1. Identify what the question asks.<br>2. Find the matching information.<br>3. Give a short, clear answer.<br>4. Check: did I answer THIS question?<br>For a reason, <b>because + subject + verb</b>: <i>Because it is cold.</i>", "sentences": ["Hi! I’m Maya. Come to my pet-building club in the library on Sunday at three.", "We can design a home for an imaginary animal.", "Bring coloured pencils because we will draw our plans first.", "Leave real pets at home because the library does not allow animals.", "My brother will come by bike. I will walk because I live near the library."], "questions": [{"prompt": "Where is the club?", "options": ["In the library.", "At Maya’s house.", "In a pet shop."], "correct": 0, "reason": "The first sentence gives the place."}, {"prompt": "Why do you need coloured pencils?", "options": ["Because pets are not allowed.", "Because you will draw plans.", "On Sunday."], "correct": 1, "reason": "The pencils are for drawing the plans."}, {"prompt": "How will Maya get there?", "options": ["By bike.", "With her pet.", "On foot."], "correct": 2, "reason": "‘I will walk’ means she will go on foot."}, {"prompt": "Who will travel by bike?", "options": ["Maya’s brother.", "Maya.", "Every visitor."], "correct": 0, "reason": "The final sentence names her brother."}, {"prompt": "Why must pets stay at home?", "options": ["Because the pencils are coloured.", "Because the library does not allow animals.", "Because Maya lives nearby."], "correct": 1, "reason": "The rule about animals explains why pets stay home."}], "evidence": [0, 2, 4, 4, 3], "talk": ["Ask your teacher a question about this club.", "Invent a club for a hobby you enjoy. Give its place, time and one rule."], "writing": true, "teacher": "7 мин. Попробуйте финал без открытого правила. Новые вопросы показывают перенос, а не память на ответы. Затем 3 короткие письменные фразы. Если хочется сохранить 45 минут, сократи устный творческий ответ: общий запас составляет 45 минут по станциям."}];
+
+const KEY = 'fm-natanel-message-rescue-v1';
+const criteria = ['Why / How','Поиск подтверждения','Причина и действие','Короткий полный ответ','Аудирование','Simple времена устно'];
+const ratingOptions = ['Не проверяли','Самостоятельно','С помощью','Пока трудно'];
+const get = id => document.getElementById(id);
+function freshState() {
+ return { done: [], answers: {}, evidence: {}, ratings: {}, notes: '', writing: {}, repairs: {}, prompts: {}, current: 0, summary: false };
+}
+let state = freshState();
+const isRecord = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+try {
+ const saved = JSON.parse(localStorage.getItem(KEY));
+ if (isRecord(saved)) {
+  if (Array.isArray(saved.done)) state.done = [...new Set(saved.done.filter(i => Number.isInteger(i) && zones[i]))];
+  if (Number.isInteger(saved.current) && zones[saved.current]) state.current = saved.current;
+  state.summary = saved.summary === true;
+  if (typeof saved.notes === 'string') state.notes = saved.notes;
+  for (const name of criteria) if (ratingOptions.includes(saved.ratings?.[name])) state.ratings[name] = saved.ratings[name];
+  for (let i = 0; i < 3; i++) if (typeof saved.writing?.[i] === 'string') state.writing[i] = saved.writing[i];
+  zones.forEach((zone, p) => {
+   zone.questions.forEach((question, i) => {
+    const key = p + '-' + i, answer = saved.answers?.[key], clue = saved.evidence?.[key];
+    if (Number.isInteger(answer) && answer >= 0 && answer < question.options.length) state.answers[key] = answer;
+    if (answer === question.correct && zone.evidence && Number.isInteger(clue) && clue >= 0 && clue < zone.sentences.length) state.evidence[key] = clue;
+   });
+   if (Number.isInteger(saved.prompts?.[p]) && zone.talk[saved.prompts[p]]) state.prompts[p] = saved.prompts[p];
+   if (!zone.sort) return;
+   const old = saved.repairs?.[p];
+   const repair = { round: 0, picks: zone.sort.map(() => []), checked: zone.sort.map(() => false) };
+   if (Number.isInteger(old?.round) && zone.sort[old.round]) repair.round = old.round;
+   zone.sort.forEach((words, round) => {
+    const picks = old?.picks?.[round];
+    if (Array.isArray(picks) && new Set(picks).size === picks.length && picks.every(i => Number.isInteger(i) && i >= 0 && i < words.length)) repair.picks[round] = [...picks];
+    repair.checked[round] = old?.checked?.[round] === true && repair.picks[round].length === words.length && repair.picks[round].every((id, i) => words[id] === words[i]);
+   });
+   state.repairs[p] = repair;
+  });
+ }
+} catch (error) {
+ // Keep the lesson usable with blocked storage or a damaged progress record.
+}
+let current = state.current, turn = 0, activeAudio = null;
+function save() {
+ state.current = current;
+ try {
+  localStorage.setItem(KEY, JSON.stringify(state));
+  get('storage').textContent = 'Ответы сохраняются в этом браузере. Скачайте заметки, чтобы перенести их.';
+ } catch (error) {
+  get('storage').textContent = 'Автосохранение недоступно. Скачайте заметки перед закрытием.';
+ }
+}
+function counts() {
+ let correct = 0, evidence = 0, repaired = 0;
+ zones.forEach((zone, p) => {
+  zone.questions.forEach((q, i) => {
+   const key = p + '-' + i;
+   if (state.answers[key] === q.correct) {
+    correct++;
+    if (zone.evidence && state.evidence[key] === zone.evidence[i]) evidence++;
+   }
+  });
+  if (zone.sort) repaired += zone.sort.filter((_, i) => state.repairs[p]?.checked[i]).length;
+ });
+ return { correct, evidence, repaired };
+}
+function renderNav() {
+ get('nav').innerHTML = '';
+ zones.forEach((zone, i) => {
+  const button = document.createElement('button');
+  button.textContent = zone.icon + ' ' + zone.title + (state.done.includes(i) ? ' ✓' : '');
+  button.classList.toggle('active', !state.summary && current === i);
+  button.setAttribute('aria-current', !state.summary && current === i ? 'step' : 'false');
+  button.onclick = () => { current = i; state.summary = false; render(true); };
+  get('nav').append(button);
+ });
+ const count = counts();
+ get('progress').innerHTML = '<progress aria-label="Stations explored" max="6" value="' + state.done.length + '"></progress> ' + state.done.length + ' / 6 stations explored<p>' + count.correct + ' / 32 correct answers · ' + count.evidence + ' / 16 clues found · ' + count.repaired + ' / 6 sentences repaired</p>';
+}
+function stopAudio() {
+ if (!activeAudio) return;
+ activeAudio.pause();
+ activeAudio.currentTime = 0;
+ activeAudio = null;
+}
+function render(focus = false) {
+ stopAudio();
+ renderNav();
+ const zone = zones[current], app = get('app');
+ get('cue').textContent = zone.teacher;
+ if (state.summary) { renderSummary(); save(); return; }
+ app.innerHTML = '<div class="tag">STATION ' + (current + 1) + ' / 6 · ABOUT ' + zone.minutes + ' MIN</div><h2>' + zone.icon + ' ' + zone.title + '</h2><p>' + zone.intro + '</p><details class="rule"><summary>Rule & examples</summary><p>' + zone.rule + '</p></details>';
+ if (current === 2) app.insertAdjacentHTML('beforeend','<figure class="lessonArt"><img src="assets/visit.jpg" width="1200" height="800" alt="Ella arrives at her cousin’s home with her dog Pixel"><figcaption>Original illustration · Fluent Mind Adventures</figcaption></figure>');
+ if (zone.sentences) {
+  const story = document.createElement('div'); story.className = 'story';
+  zone.sentences.forEach((text, i) => { const line = document.createElement('p'); line.textContent = (i + 1) + '. ' + text; story.append(line); });
+  app.append(story);
+ }
+ if (zone.listening) renderListening(app, zone);
+ zone.questions.forEach((question, i) => renderQuestion(app, question, i, zone));
+ if (zone.sort) renderSort(app, zone.sort);
+ renderSpeaking(app, zone);
+ if (zone.writing) renderWriting(app);
+ const footer = document.createElement('div'); footer.className = 'footer';
+ const badge = document.createElement('button'); badge.dataset.badge = '';
+ badge.textContent = state.done.includes(current) ? '✓ Station explored' : 'Collect station badge';
+ badge.onclick = () => {
+  if (!state.done.includes(current)) state.done.push(current);
+  badge.textContent = '✓ Station explored'; save(); renderNav();
+ };
+ const next = document.createElement('button'); next.dataset.next = '';
+ next.textContent = current === 5 ? 'Review the lesson →' : 'Next station →';
+ next.onclick = () => { if (current === 5) state.summary = true; else current++; render(true); };
+ footer.append(badge, next); app.append(footer);
+ if (focus) focusHeading();
+ save();
+}
+function focusHeading() {
+ const heading = get('app').querySelector('h2'); heading.tabIndex = -1; heading.focus({ preventScroll: true });
+ get('nav').scrollIntoView({ block: 'start' });
+}
+function renderListening(app, zone) {
+ const box = document.createElement('div');
+ box.innerHTML = '<audio class="audioPlayer" id="listeningAudio" controls preload="metadata" src="assets/listening.m4a">Your teacher can read the script below.</audio><div class="row"><button id="play">Play / repeat</button><button id="stop">Stop audio</button></div><p class="tip">You can also listen to your teacher.</p><p class="status" id="audio-status" role="status"></p><details><summary>Script · reveal after listening</summary><p>' + zone.listening + '</p></details>';
+ app.append(box);
+ const audio = get('listeningAudio'), status = get('audio-status'); activeAudio = audio;
+ audio.onplay = () => { status.textContent = 'Playing.'; };
+ audio.onended = () => { status.textContent = 'Finished. You can play it again.'; };
+ audio.onerror = () => { if (status.isConnected) status.textContent = 'Playback is unavailable. Your teacher can read the script.'; };
+ get('play').onclick = async () => {
+  try { audio.currentTime = 0; await audio.play(); }
+  catch (error) { if (status.isConnected) status.textContent = 'Playback is unavailable. Use the audio controls or listen to your teacher.'; }
+ };
+ get('stop').onclick = () => { audio.pause(); audio.currentTime = 0; status.textContent = 'Stopped.'; };
+}
+function renderQuestion(app, question, index, zone) {
+ const key = current + '-' + index;
+ const section = document.createElement('section'); section.className = 'question';
+ const title = document.createElement('p'); const strong = document.createElement('b'); strong.textContent = (index + 1) + '. ' + question.prompt; title.append(strong); section.append(title);
+ const choices = document.createElement('div'); choices.className = 'choices'; section.append(choices);
+ const feedback = document.createElement('p'); feedback.className = 'feedback'; feedback.setAttribute('role', 'status');
+ const evidence = document.createElement('div'); section.append(feedback, evidence);
+ function showEvidence() {
+  if (!zone.evidence) return;
+  evidence.className = 'evidence'; evidence.innerHTML = '<b>Which sentence proves your answer?</b>';
+  const status = document.createElement('p'); status.className = 'feedback'; status.setAttribute('role', 'status');
+  const selected = state.evidence[key];
+  zone.sentences.forEach((line, i) => {
+   const button = document.createElement('button'); button.className = 'textline'; button.textContent = (i + 1) + '. ' + line;
+   button.setAttribute('aria-pressed', String(selected === i));
+   if (selected === i) button.classList.add(i === zone.evidence[index] ? 'correct' : 'wrong');
+   button.onclick = () => { state.evidence[key] = i; save(); showEvidence(); renderNav(); };
+   evidence.append(button);
+  });
+  if (selected !== undefined) status.textContent = selected === zone.evidence[index] ? '✓ This sentence supports your answer.' : 'Look for the exact person, place, action or reason asked for.';
+  evidence.append(status);
+ }
+ question.options.forEach((option, i) => {
+  const button = document.createElement('button'); button.textContent = option;
+  button.setAttribute('aria-pressed', String(state.answers[key] === i));
+  if (state.answers[key] === i) button.classList.add(i === question.correct ? 'correct' : 'active');
+  button.onclick = () => {
+   if (state.answers[key] !== i) delete state.evidence[key];
+   state.answers[key] = i;
+   [...choices.children].forEach(other => { other.classList.remove('active', 'correct'); other.setAttribute('aria-pressed', 'false'); });
+   button.classList.add(i === question.correct ? 'correct' : 'active'); button.setAttribute('aria-pressed', 'true');
+   feedback.textContent = i === question.correct ? '✓ ' + question.reason : 'Try again. ' + (question.prompt.startsWith('Why') ? 'Look for a reason.' : question.prompt.startsWith('How ') ? 'Look for a method or way.' : 'Reread the question and check what information it asks for.');
+   evidence.innerHTML = ''; evidence.className = '';
+   if (i === question.correct) showEvidence();
+   save(); renderNav();
+  };
+  choices.append(button);
+ });
+ const answer = state.answers[key];
+ if (answer !== undefined) {
+  feedback.textContent = answer === question.correct ? '✓ ' + question.reason : 'Try another answer. You can reopen the rule.';
+  if (answer === question.correct) showEvidence();
+ }
+ app.append(section);
+}
+function renderSort(app, sentences) {
+ const section = document.createElement('section'); section.className = 'talk'; app.append(section);
+ const page = current;
+ if (!state.repairs[page]) state.repairs[page] = { round: 0, picks: sentences.map(() => []), checked: sentences.map(() => false) };
+ const repair = state.repairs[page];
+ function draw() {
+  const round = repair.round, words = sentences[round], picked = repair.picks[round];
+  section.innerHTML = '<h3>Sentence repair · ' + (round + 1) + ' / ' + sentences.length + '</h3><p>Tap words in order. Then change one detail and say your own sentence.</p><div class="answerline" aria-live="polite"></div><div class="tokens"></div><div class="row"><button data-action="undo">Undo</button><button data-action="clear">Clear</button><button data-action="check">Check</button><button data-action="other">Other sentence</button></div><p class="feedback" role="status"></p>';
+  section.querySelector('.answerline').textContent = picked.map(i => words[i]).join(' ');
+  [...words.keys()].reverse().forEach(i => {
+   const button = document.createElement('button'); button.textContent = words[i]; button.disabled = picked.includes(i);
+   button.onclick = () => { picked.push(i); repair.checked[round] = false; draw(); save(); renderNav(); };
+   section.querySelector('.tokens').append(button);
+  });
+  const feedback = section.querySelector('[role=status]');
+  if (repair.checked[round]) feedback.textContent = '✓ Correct! Now make it about you or your friend.';
+  section.querySelector('[data-action=undo]').onclick = () => { picked.pop(); repair.checked[round] = false; draw(); save(); renderNav(); };
+  section.querySelector('[data-action=clear]').onclick = () => { repair.picks[round] = []; repair.checked[round] = false; draw(); save(); renderNav(); };
+  section.querySelector('[data-action=other]').onclick = () => { repair.round = (round + 1) % sentences.length; draw(); save(); };
+  section.querySelector('[data-action=check]').onclick = () => {
+   const correct = picked.length === words.length && picked.every((id, i) => words[id] === words[i]);
+   repair.checked[round] = correct;
+   feedback.textContent = picked.length !== words.length ? 'Use all the words.' : correct ? '✓ Correct! Now make it about you or your friend.' : 'Try again. Check the subject and verb, or the question word and helper.';
+   save(); renderNav();
+  };
+ }
+ draw();
+}
+function renderSpeaking(app, zone) {
+ const talk = document.createElement('div'); talk.className = 'talk';
+ talk.innerHTML = '<h3>Talk & transfer</h3><div class="row"><div class="wheelface" aria-hidden="true">?</div><button>Spin a speaking prompt</button></div><p role="status"></p>';
+ let bag = [];
+ talk.querySelector('[role=status]').textContent = zone.talk[state.prompts[current]] || 'Take your time. Give a reason or an example.';
+ talk.querySelector('button').onclick = () => {
+  if (!bag.length) bag = zone.talk.map((_, i) => i);
+  const index = bag.splice(Math.floor(Math.random() * bag.length), 1)[0]; state.prompts[current] = index;
+  talk.querySelector('.wheelface').style.transform = 'rotate(' + (++turn * 440) + 'deg)';
+  talk.querySelector('[role=status]').textContent = zone.talk[index]; save();
+ };
+ const prompts = document.createElement('details'); prompts.innerHTML = '<summary>All speaking prompts</summary>' + zone.talk.map(text => '<p>' + text + '</p>').join('');
+ talk.append(prompts); app.append(talk);
+}
+function renderWriting(app) {
+ const box = document.createElement('section');
+ box.innerHTML = '<h3>Write three short answers</h3><p>You can write on paper or here. Use the library invitation.</p>';
+ ['Where is the club?', 'Why do you need coloured pencils?', 'Who will travel by bike?'].forEach((question, i) => {
+  const label = document.createElement('label'); label.textContent = question;
+  const input = document.createElement('textarea'); input.rows = 2; input.style.minHeight = '65px'; input.value = state.writing[i] || '';
+  input.oninput = () => { state.writing[i] = input.value; save(); };
+  label.append(input); box.append(label);
+ });
+ box.insertAdjacentHTML('beforeend','<details class="rule"><summary>Answer frames · if you need them</summary><p>The club is…<br>We need coloured pencils because…<br>… will travel by bike.</p></details>'); app.append(box);
+}
+function renderSummary() {
+ const count = counts();
+ get('app').innerHTML = '<h2>' + (state.done.length === 6 ? '✓ Lesson explored!' : 'Your lesson review') + '</h2><p>Stations explored: ' + state.done.length + ' / 6.</p><div class="summaryStats"><p>Correct answers: ' + count.correct + ' / 32.</p><p>Text clues found: ' + count.evidence + ' / 16.</p><p>Sentences repaired: ' + count.repaired + ' / 6.</p></div><p>Use the station buttons to review any task. Discuss your speaking and writing with your teacher.</p><button id="summaryDownload">Download answers and notes</button>';
+ get('summaryDownload').onclick = downloadReport; focusHeading();
+}
+function renderRatings() {
+ get('ratings').innerHTML = '';
+ criteria.forEach(name => {
+  const label = document.createElement('label'); label.textContent = name + ' ';
+  const select = document.createElement('select'); ratingOptions.forEach(text => select.add(new Option(text, text)));
+  select.value = state.ratings[name] || ratingOptions[0]; select.onchange = () => { state.ratings[name] = select.value; save(); };
+  label.append(select); get('ratings').append(label);
+ });
+ get('notes').value = state.notes;
+}
+function report() {
+ const count = counts();
+ const lines = ['MESSAGE BOARD RESCUE', 'Fluent Mind Adventures', 'Stations explored: ' + state.done.length + ' / 6', 'Correct answers: ' + count.correct + ' / 32', 'Text clues: ' + count.evidence + ' / 16', 'Sentences repaired: ' + count.repaired + ' / 6', '', ...criteria.map(name => name + ': ' + (state.ratings[name] || ratingOptions[0])), '', 'Заметки', state.notes, '', 'Письмо'];
+ for (let i = 0; i < 3; i++) lines.push((i + 1) + '. ' + (state.writing[i] || '(written on paper or not entered here)'));
+ zones.forEach((zone, p) => {
+  lines.push('', zone.title);
+  zone.questions.forEach((q, i) => {
+   const key = p + '-' + i, answer = state.answers[key], clue = state.evidence[key];
+   lines.push(q.prompt, 'Answer: ' + (q.options[answer] || '(not answered)'));
+   if (zone.evidence) lines.push('Evidence: ' + (zone.sentences[clue] || '(not selected)'));
+  });
+  zone.sort?.forEach((words, i) => lines.push('Sentence repair: ' + (state.repairs[p]?.picks[i].map(id => words[id]).join(' ') || '(not started)') + (state.repairs[p]?.checked[i] ? ' [checked]' : '')));
+  if (state.prompts[p] !== undefined) lines.push('Last speaking prompt: ' + zone.talk[state.prompts[p]]);
+ });
+ return lines.join('\n');
+}
+function downloadReport() {
+ const url = URL.createObjectURL(new Blob([report()], { type: 'text/plain;charset=utf-8' }));
+ const link = document.createElement('a'); link.href = url; link.download = 'message_board_rescue_answers.txt';
+ document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+get('notes').oninput = event => { state.notes = event.target.value; save(); };
+get('download').onclick = downloadReport;
+get('reset').onclick = () => { get('resetPanel').hidden = false; get('cancelReset').focus(); };
+get('cancelReset').onclick = () => { get('resetPanel').hidden = true; get('reset').focus(); };
+get('confirmReset').onclick = () => {
+ state = freshState(); current = 0; get('resetPanel').hidden = true; renderRatings(); render(true);
+};
+renderRatings(); render();
+</script></body></html>
